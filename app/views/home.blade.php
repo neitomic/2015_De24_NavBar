@@ -5,6 +5,7 @@
 	<title>Ltweb2015</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{asset('css/ltweb.css')}}">
+	<link rel="stylesheet" href="{{asset('css/menu-style.css')}}">
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
@@ -96,10 +97,33 @@
 					<button type="button" class="btn btn-primary">CSS</button>
 					<button type="button" class="btn btn-primary">Javascript</button>
 				</div>
-
+				
 				<div id="menu-bar">
-					<h2>Place holder for menu bar</h2>
+					<div id='cssmenu'>
+						<ul>
+							<li class='active'><a href='index.html'>Home</a></li>
+							<li class='has-sub'><a href='#'>Products</a>
+								<ul>
+									<li class='has-sub'><a href='#'>Product 1</a>
+										<ul>
+											<li><a href='#'>Sub Item</a></li>
+											<li><a href='#'>Sub Item</a></li>
+										</ul>
+									</li>
+									<li class='has-sub '><a href='#'>Product 2</a>
+										<ul>
+											<li><a href='#'>Sub Item</a></li>
+											<li><a href='#'>Sub Item</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href='#'>About</a></li>
+							<li><a href='#'>Contact</a></li>
+						</ul>
+					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
