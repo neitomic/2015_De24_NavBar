@@ -25,9 +25,7 @@
 					</span>
 				</div><!-- /input-group -->
 
-				<ol class="sortable" id="struct">
-
-				</ol>
+				<div id="#sortable-list"></div>
 			</div>
 			<div class="col-sm-10" id="content">
 				<div class="row" id="editable">

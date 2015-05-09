@@ -13,7 +13,8 @@ $.get("menu", function(data, status){
 		tolerance: 'pointer',
 		toleranceElement: '> div',
 		maxLevels: 4,
-		change: function(){
+		listType: "ul",
+		relocate: function(){
 			console.log('Relocated item');
 		}
 	});
@@ -21,11 +22,11 @@ $.get("menu", function(data, status){
 
 function printHtml(json, parent){
 	for(var i=0; i<json.length; i++){
-		var html = "<li><div id='"+json[i].id+"' class='menu'>"+json[i].title+"</div></li>";
+		var html = "<li id='"+json[i].id+"'><div class='menu'>"+json[i].title+"</div></li>";
 		parent.append(html);
 
 		if(json[i].sub_menu !== undefined){
-			$("#"+json[i].id).parent().append("<ol id='subitem-"+json[i].id+"'></ol>");
+			$("#"+json[i].id).append("<ul id='subitem-"+json[i].id+"'></ul>");
 			var par = $("#subitem-"+json[i].id);
 			printHtml(json[i].sub_menu, par);
 		}

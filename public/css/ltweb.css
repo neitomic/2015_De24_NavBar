@@ -39,13 +39,13 @@
 #menu-bar{
 	margin-top: 40px;
 }
-#struct{
+#sortable-list{
 	margin-top: 20px;
 }
-.placeholder {
+#sortable-list.placeholder {
 	outline: 1px dashed #4183C4;
 }
-.menu{
+#sortable-list.menu{
 	background-color: #dbdbdb;
 	padding: 5px;
 	width: 100%;
