@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', "HomeController@index");
+Route::group(array("before" => "auth"), function()
+{
+    Route::get('/', "HomeController@index");
+    Route::get('/menu', "MenuController@getMenuHtml");
+});
+
 Route::get('/tiennt', "TienController@tiennt");
-Route::resource('/menu', 'MenuController');
+
+Route::get('/login', "AuthController@getLogin");
+Route::post('/login', "AuthController@postLogin");

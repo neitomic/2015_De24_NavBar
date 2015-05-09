@@ -41,6 +41,11 @@
 }
 #struct{
 	margin-top: 20px;
+    padding-left: 0px ;
+}
+#sidebar ol{
+    list-style-type: none;
+    padding-left: 25px;
 }
 .placeholder {
 	outline: 1px dashed #4183C4;

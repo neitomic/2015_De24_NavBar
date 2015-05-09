@@ -1,6 +1,7 @@
 $.get("menu", function(data, status){
+    console.log(data);
 	var json = data;
-	printHtml(json.menu, $("#struct"));
+	printHtml(json, $("#struct"));
 	$('.sortable').nestedSortable({
 		forcePlaceholderSize: true,
 		handle: 'div',
@@ -24,7 +25,7 @@ function printHtml(json, parent){
 		var html = "<li><div id='"+json[i].id+"' class='menu'>"+json[i].title+"</div></li>";
 		parent.append(html);
 
-		if(json[i].sub_menu !== undefined){
+		if(json[i].sub_menu.length>0){
 			$("#"+json[i].id).parent().append("<ol id='subitem-"+json[i].id+"'></ol>");
 			var par = $("#subitem-"+json[i].id);
 			printHtml(json[i].sub_menu, par);

@@ -90,5 +90,5 @@ Route::filter('csrf', function()
 });
 
 App::error(function(Exception $exception) {
-    return "adas ".$exception->getMessage();
+    return $exception->getMessage();
 });
