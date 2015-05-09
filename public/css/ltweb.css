@@ -39,7 +39,7 @@
 #menu-bar{
 	margin-top: 40px;
 }
-#struct{
+#sortable-list{
 	margin-top: 20px;
     padding-left: 0px ;
 }
@@ -47,10 +47,10 @@
     list-style-type: none;
     padding-left: 25px;
 }
-.placeholder {
+#sortable-list.placeholder {
 	outline: 1px dashed #4183C4;
 }
-.menu{
+#sortable-list.menu{
 	background-color: #dbdbdb;
 	padding: 5px;
 	width: 100%;
