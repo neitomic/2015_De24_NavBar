@@ -88,3 +88,7 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+App::error(function(Exception $exception) {
+    return "adas ".$exception->getMessage();
+});

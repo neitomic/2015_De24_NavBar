@@ -9,7 +9,7 @@ class MenuController extends \BaseController {
 	 */
 	public function index()
 	{
-        return '{ "menu" : [
+        /*return '{ "menu" : [
             {
                 "title" : "Menu 1",
                 "link" : "",
@@ -28,7 +28,9 @@ class MenuController extends \BaseController {
                 "title" : "Menu 2",
                 "link" : "http://google.com"
             }
-        ] }';
+        ] }';*/
+
+        return Menu::where("parent_menu_id", "=", null)->with("sub_menu")->get();
 	}
 
 
