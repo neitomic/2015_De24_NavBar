@@ -30,8 +30,19 @@ class MenuController extends \BaseController {
             }
         ] }';*/
 
-        return Menu::where("parent_menu_id", "=", null)->with("sub_menu")->get();
+        $top_levels = Menu::where("parent_menu_id", "=", null)->get();
+        $this->load_sub_menu($top_levels);
+        return $top_levels;
 	}
+
+    private function load_sub_menu($parents)
+    {
+        foreach ($parents as $menu)
+        {
+            $menu->load('sub_menu');
+            $this->load_sub_menu($menu->sub_menu);
+        }
+    }
 
 
 	/**
