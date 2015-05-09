@@ -13,4 +13,4 @@
 
 Route::get('/', "HomeController@index");
 Route::get('/tiennt', "TienController@tiennt");
-Route::resource('menu', 'MenuController');
+Route::resource('/menu', 'MenuController');
