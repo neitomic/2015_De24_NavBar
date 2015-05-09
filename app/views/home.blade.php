@@ -25,16 +25,9 @@
 					</span>
 				</div><!-- /input-group -->
 
-				<div id="struct">
-					<div class="menu">Menu 1<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="sub1">Sub 1<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="sub1">Sub 2<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="menu">Menu 2<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="menu">Menu 3<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="sub1">Sub 1<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="sub2">Sub sub 1<a href="" class="pull-right"><b>X</b></a></div>
-					<div class="sub2">Sub sub 2<a href="" class="pull-right"><b>X</b></a></div>
-				</div>
+				<ol class="sortable" id="struct">
+
+				</ol>
 			</div>
 			<div class="col-sm-10" id="content">
 				<div class="row" id="editable">
@@ -129,5 +122,8 @@
 	</div>
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+	<script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
+	<script src="{{asset('js/mySortable.js')}}"></script>
 </body>
 </html>
