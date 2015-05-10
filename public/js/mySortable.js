@@ -1,5 +1,6 @@
 $.get("menu", function(data, status){
 	$("#sortable-list").html(data);
+	replace(".sortable","a","div");
 	$('.sortable').nestedSortable({
 		forcePlaceholderSize: true,
 		handle: 'div',
@@ -18,3 +19,13 @@ $.get("menu", function(data, status){
 		}
 	});
 });
+
+function replace(parent, raw, replace){
+	$(""+parent+" "+raw).replaceWith(function() {
+		var replacement = $("<"+replace+">").html($(this).html());
+		for (var i = 0; i < this.attributes.length; i++){
+			replacement.attr(this.attributes[i].name, this.attributes[i].value);
+		}
+		return replacement;
+	});
+};

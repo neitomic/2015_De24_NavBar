@@ -43,14 +43,19 @@
 	margin-top: 20px;
     padding-left: 0px ;
 }
-#sidebar ol{
+#sortable-list ul{
     list-style-type: none;
-    padding-left: 25px;
 }
-#sortable-list.placeholder {
+#sortable-list ul{
+	padding-left: 30px;
+}
+#sortable-list ul.sortable{
+	padding-left: 0px;
+}
+#sortable-list .placeholder {
 	outline: 1px dashed #4183C4;
 }
-#sortable-list.menu{
+#sortable-list .menu{
 	background-color: #dbdbdb;
 	padding: 5px;
 	width: 100%;
