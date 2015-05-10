@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => '2015_de24_navbar',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => '123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
