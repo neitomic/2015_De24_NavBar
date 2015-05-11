@@ -1,0 +1,36 @@
+*{margin:0;padding:0;}
+
+#register{
+  width:400px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+}
+
+#register h1{
+  font-size:100%;
+  text-align:center;
+}
+
+.btn-register {
+  float:right;
+}
+
+#errors {
+  color: red;
+}
+
+.error {
+  margin-left: 20px;
+}
+
+form{
+  padding:6% 4%;
+}
+
+input[type="text"],input[type="password"]{
+    width:100%;
+    margin-bottom:4%;
+}
