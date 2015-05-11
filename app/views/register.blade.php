@@ -18,16 +18,14 @@
          ?>
     </div>
 
-
-
     {{ Form::open(['url' => 'register', 'method' => 'post']) }}
     {{ Form::label('username', 'UserName') }}
-    {{ Form::text('username', $username, ['class' => 'form-control']) }}
+    {{ Form::text('username', $username, ['required' => '','class' => 'form-control']) }}
     {{ Form::label('password', 'Enter Password') }}
-    {{ Form::password('password', ['class' => 'form-control']) }}
+    {{ Form::password('password', ['required' => '','class' => 'form-control']) }}
     {{ Form::label('re-password', 'Re-Enter Password') }}
     {{ Form::password('re-password', ['class' => 'form-control']) }}
-    {{ Form::submit('Register', ['class' => 'btn btn-primary btn-register']) }}
+    {{ Form::submit('Register', ['required' => '','class' => 'btn btn-primary btn-register']) }}
     {{ Form::close() }}
 </div>
 <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>

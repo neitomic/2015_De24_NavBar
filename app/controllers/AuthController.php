@@ -39,17 +39,23 @@ class AuthController extends Controller
 
     public function postRegister()
     {
-        $data = Input::only(['username', 'password', 're-password']);
-        $user = User::where('username', '=', $data['username'])->first();
 
         $errors = array();
+        $data = Input::only(['username', 'password', 're-password']);
+        $username = $data['username'];
+        if(empty($data['username'])){
+            $error = "User name is empty!";
+            array_push($errors, $error);
+        }else{
 
-        if($user !== null) {
-            $username = $data['username'];
-            $error1 = "User $username already exists!";
-            array_push($errors, $error1);
+            $user = User::where('username', '=', $data['username'])->first();
+
+            if($user !== null) {
+                
+                $error1 = "User $username already exists!";
+                array_push($errors, $error1);
+            }
         }
-
         if(empty($data['password'])) {
             $error2 = "Password is empty!";
             array_push($errors, $error2);
@@ -61,7 +67,7 @@ class AuthController extends Controller
         }
 
         if(sizeof($errors) > 0) {
-            return View::make('register', array('errors' => $errors, 'username' => $user->username));
+            return View::make('register', array('errors' => $errors, 'username' => $username));
         }else{
             $user1 = new User;
             $user1->username = $data['username'];
