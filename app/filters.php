@@ -89,6 +89,7 @@ Route::filter('csrf', function()
 	}
 });
 
-App::error(function(Exception $exception) {
+App::error(function(Exception $exception)
+{
     return $exception->getMessage();
 });

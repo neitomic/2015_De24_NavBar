@@ -1,0 +1,24 @@
+#cssmenu > ul > li > a{
+		font-size: 12px;
+	}
+	
+	#cssmenu > ul > li > a{
+		color: #CBCBCB;
+	}
+	
+	#cssmenu ul li:hover > a{
+		color: #ffffff;
+	}	
+	
+	#cssmenu > ul > li >ul >li  a{
+		font-size: 12px;
+	}
+	
+	#cssmenu > ul > li >ul >li  a
+	{
+		color: #CBCBCB;
+	}
+	
+	#cssmenu > ul > li >ul >li:hover  a{
+		color: #ffffff; 
+	}

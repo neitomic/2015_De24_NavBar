@@ -10,12 +10,13 @@ class AuthController extends Controller
 {
     public function getLogin()
     {
-        return View::make("login");
+        return View::make('login');
     }
 
     public function getLogout()
     {
-
+        Auth::logout();
+        return Redirect::guest('login');
     }
 
     public function postLogin()
@@ -29,5 +30,15 @@ class AuthController extends Controller
         {
             return Redirect::guest('login')->withInput();
         }
+    }
+
+    public function getRegister()
+    {
+
+    }
+
+    public function postRegister()
+    {
+
     }
 }

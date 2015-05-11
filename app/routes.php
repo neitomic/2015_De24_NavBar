@@ -14,10 +14,17 @@
 Route::group(array("before" => "auth"), function()
 {
     Route::get('/', "HomeController@index");
-    Route::get('/menu', "MenuController@getMenuHtml");
+
+    Route::get('/menu', "MenuController@getMenu");
+    Route::post('/menu', "MenuController@updateMenu");
+    Route::get('/menu/style', "MenuController@getMenuStyle");
+    Route::post('/menu/style', "MenuController@updateMenuStyle");
+
+    Route::get('/logout', 'AuthController@getLogout');
 });
 
 Route::get('/tiennt', "TienController@tiennt");
 
 Route::get('/login', "AuthController@getLogin");
 Route::post('/login', "AuthController@postLogin");
+Route::get('/register', 'AuthController@register');
