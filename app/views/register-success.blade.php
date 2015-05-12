@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('css/register_style.css')}}" media="screen" type="text/css" />
-</head>
-<body>
+@extends('layout')
 
-<?php echo "User $username registered success!\n" ?>
+@section('title')
+    Ltweb2015 - Register Success
+@stop
 
-<p>Redirect to login page! If it does not redirect automaticaly, click here!</p>
+@section('custom-styles')
+    <link rel="stylesheet" href="{{asset('css/register_style.css')}}">
+@stop
 
-<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        // Handler for .ready() called.
-        window.setTimeout(function () {
-            location.href = "/login";
-        }, 5000);
-    });
-</script>
-</body>
-</html>
+@section('content')
+    <div id="register">
+        <?php echo "<strong>User $username registered success!</strong>\n" ?>
+        <p>Redirect to login page! If it does not redirect automaticaly, {{ HTML::linkAction('AuthController@getLogin', 'click here') }}!</p>
+    </div>
+@stop
+
+@section('custom-scripts')
+    <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            window.setTimeout(function () {
+            location.href = <?php echo "\"$link\"" ?>
+            }, 5000);
+        });
+    </script>
+@stop

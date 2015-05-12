@@ -9,6 +9,16 @@
   -webkit-transition:opacity 1s;
 }
 
+#register-success{
+  width:500px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+  text-align: center;
+}
+
 #register h1{
   font-size:100%;
   text-align:center;
