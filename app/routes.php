@@ -27,7 +27,7 @@ Route::group(['before' => 'guest'], function()
 {
     Route::get('/login', "AuthController@getLogin");
     Route::post('/login', "AuthController@postLogin");
-    
+
     Route::get('/register', 'AuthController@getRegister');
     Route::post('/register', 'AuthController@postRegister');
 });
