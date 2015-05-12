@@ -14,6 +14,7 @@
     {{ Form::label('password', 'Password') }}
     {{ Form::password('password', ['class' => 'form-control']) }}
     {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
+    {{ HTML::link('/register', 'Register', ['class' => 'btn btn-default']) }}
     {{ Form::close() }}
 </div>
 <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
