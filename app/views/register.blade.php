@@ -5,12 +5,13 @@
 @stop
 
 @section('custom-styles')
+    <link rel="stylesheet" href="{{ asset('css/auth_style.css') }}">
     <link rel="stylesheet" href="{{asset('css/register_style.css')}}">
 @stop
 
 @section('content')
-    <div id="register">
-        <h1>Register Information</h1>
+    <div class="content">
+        <div class="title">Register Information</div>
         <div id="errors">
             <?php
             foreach ($errors as $error) {

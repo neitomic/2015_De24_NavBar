@@ -5,12 +5,12 @@
 @stop
 
 @section('custom-styles')
-    <link rel="stylesheet" href="{{ asset('css/login_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth_style.css') }}">
 @stop
 
 @section('content')
-    <div id="login">
-        <h3>Login Required</h3>
+    <div class="content">
+        <div class="title">Login Required</div>
         {{ Form::open(['url' => 'login', 'method' => 'post']) }}
         {{ Form::label('username', 'UserName') }}
         {{ Form::text('username', null, ['class' => 'form-control']) }}

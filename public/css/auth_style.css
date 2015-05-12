@@ -1,7 +1,7 @@
 *{margin:0;padding:0;}
 
-#login{
-  width:400px;
+.content{
+  width:450px;
   margin:0 auto;
   margin-top:8px;
   margin-bottom:2%;
@@ -9,15 +9,16 @@
   -webkit-transition:opacity 1s;
 }
 
-#login h3{
-  text-align:center;
+.title{
+    text-align:center;
+    font-size: 150%;
 }
 
 form{
   padding:6% 4%;
 }
 
-input[type="text"],input[type="password"]{
+input[type="text"], input[type="password"]{
     width:100%;
     margin-bottom:4%;
 }

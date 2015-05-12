@@ -5,11 +5,12 @@
 @stop
 
 @section('custom-styles')
+    <link rel="stylesheet" href="{{ asset('css/auth_style.css') }}">
     <link rel="stylesheet" href="{{asset('css/register_style.css')}}">
 @stop
 
 @section('content')
-    <div id="register">
+    <div class="content">
         <?php echo "<strong>User $username registered success!</strong>\n" ?>
         <p>Redirect to login page! If it does not redirect automaticaly, {{ HTML::linkAction('AuthController@getLogin', 'click here') }}!</p>
     </div>
