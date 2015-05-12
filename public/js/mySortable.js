@@ -19,6 +19,16 @@ $.get("menu", function(data, status){
 			rawHtml = rawHtml.replace("ui-sortable","").replace('style="display: list-item;"','');
 			var converted = replace(rawHtml,"div","a");
 			$("#cssmenu").html(converted);
+
+			$.post(
+				"menu",
+				{
+					"updated_menu": converted
+				},
+				function(data, status){
+					console.log(data);
+				}
+			)
 		}
 	});
 });
