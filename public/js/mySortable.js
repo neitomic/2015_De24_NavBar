@@ -1,5 +1,9 @@
 $.get("menu", function(data, status){
 	$("#demo-container").html(data);
+
+    html_code = document.getElementById("html-code");
+    html_code.textContent=data;
+
 	var convertedHtml = replace(data,"a","div");
 	$("#sortable-list").html(convertedHtml);
 	$('.sortable').nestedSortable({
@@ -54,7 +58,7 @@ function updateMenu(){
 	var rawHtml = $("#sortable-list").html();
 	rawHtml = rawHtml.replace(" ui-sortable","").replace(' style="display: list-item;"','');
 	var converted = replace(rawHtml,"div","a");
-	$("#cssmenu").html(converted);
+	$("#demo-container").html(converted);
 
 	$.post(
 		"menu",

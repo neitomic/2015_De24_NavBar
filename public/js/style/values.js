@@ -5,7 +5,7 @@ $(function() {
 				$id = $(this).attr('id');
 				$id = $id.replace('slider_','');
 				$("#" + $id).text(ui.value);
-				updatemenu();
+				updatePreview();
 			}
 	});	
 	$(".radius").slider({
