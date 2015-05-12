@@ -38,7 +38,7 @@ class MenuController extends \BaseController
         return Response::make($user->css_properties, 200, ['Content-type' => 'application/json']);
     }
 
-    public function updateMenuStyle($updated_style)
+    public function updateMenuStyle()
     {
         $user = Auth::user();
         $user->css_properties = $updated_style;
