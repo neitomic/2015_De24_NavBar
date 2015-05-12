@@ -19,8 +19,9 @@ class MenuController extends \BaseController
         return $user->menu_html;
     }
 
-    public function updateMenu($updated_menu)
+    public function updateMenu()
     {
+        $updated_menu = Input::get('updated_menu');
         $user = Auth::user();
         $user->menu_html = $updated_menu;
         $user->save();
