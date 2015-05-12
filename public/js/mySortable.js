@@ -26,9 +26,33 @@ $("#sortable-list").on("click","a", function(){
 	updateMenu();
 })
 
+$("#sortable-list").on("click",".menu", function(){
+	$("#sortable-list .menu").not(this).removeClass("menu-active");
+	$(this).toggleClass("menu-active");
+})
+
+$("#sidebar .input-group button").click(function(){
+	var newMenu = $("#sidebar .input-group input[type=text]").val();
+	var parent = $("#sortable-list .menu-active");
+	if(parent.length > 0){
+		if(parent.parent().find("ul").length > 0){
+			var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'>X</a></div></li>";
+			parent.parent().find("ul").eq(0).append(html);
+		} else {
+			var html = "<ul><li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'>X</a></div></li></ul>";
+			console.log(html);
+			parent.parent().append(html);
+		}
+	} else {
+		var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'>X</a></div></li>";
+		$("ul.sortable").append(html);
+	}
+	updateMenu();
+})
+
 function updateMenu(){
 	var rawHtml = $("#sortable-list").html();
-	rawHtml = rawHtml.replace("ui-sortable","").replace('style="display: list-item;"','');
+	rawHtml = rawHtml.replace(" ui-sortable","").replace(' style="display: list-item;"','');
 	var converted = replace(rawHtml,"div","a");
 	$("#cssmenu").html(converted);
 
@@ -40,11 +64,12 @@ function updateMenu(){
 		function(data, status){
 			console.log(data);
 		}
-		)
+	);
 }
 
 function replace(html, raw, replace){
 	var tempElement = $(html);
+	tempElement.find(".menu").removeClass("menu-active");
 	tempElement.find(raw).replaceWith(function(){
 		var replacement = $("<"+replace+">").html($(this).html());
 		for (var i = 0; i < this.attributes.length; i++){
@@ -57,5 +82,7 @@ function replace(html, raw, replace){
 	} else {
 		tempElement.find(".menu").append("<a href='#' class='pull-right'>X</a>");
 	}
+	// tempElement.find("li.has-sub").removeClass("has-sub");
+	// tempElement.find("li > ul").parent().addClass("has-sub");
 	return tempElement[0].outerHTML;
 };
