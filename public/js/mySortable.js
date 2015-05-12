@@ -12,9 +12,10 @@ $.get("menu", function(data, status){
 		tabSize: 25,
 		tolerance: 'pointer',
 		toleranceElement: '> div',
-		maxLevels: 4,
+		maxLevels: 3,
 		listType: "ul",
 		relocate: function(){
+			console.log("relocate");
 			var rawHtml = $("#sortable-list").html();
 			rawHtml = rawHtml.replace("ui-sortable","").replace('style="display: list-item;"','');
 			var converted = replace(rawHtml,"div","a");
