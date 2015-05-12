@@ -1,0 +1,121 @@
+{
+	"menu-corner-radius" : 24,
+    "menu-background-mode" : "gradient",
+    "menu-solid-background" : "#8b8b8b",
+    "menu-gradient-background" : 
+    {
+        "start" : "a9a9a9",
+        "end" : "7a7a7a"
+    },
+
+    "menu-bottom-width" : 1,
+    "menu-border-style" : "solid",
+    "menu-border-color" : "#6d6d6d",
+    "menu-height" : 40,
+
+    "menu-shadow-h-length" : 2,
+    "menu-shadow-v-length" : 2,
+    "menu-shadow-blur-radius" : 3,
+    "menu-shadow-color" : "#666666",
+
+    "menu-padding-top" : 6,
+    "menu-padding-right" : 6,
+    "menu-padding-bottom" : 4,
+    "menu-padding-left" : 6,
+
+    "menu-margin-top" : 0,
+    "menu-margin-right" : 0,
+    "menu-margin-bottom" : 0,
+    "menu-margin-left" : 0,
+
+    "top-font" : "Arial",
+    "top-font-style" : "Normal",
+    "top-font-weight" : "Bold",
+    "top-font-size" : 12,
+    "top-font-color" : "#e7e5e5",
+
+    "top-font-shadow-h-length" : 2,
+    "top-font-shadow-v-length" : 2,
+    "top-font-shadow-blur-radius" : 3,
+    "top-font-shadow-color" : "#000000",
+
+    "top-padding-top" : 0,
+    "top-padding-right" : 6,
+    "top-padding-bottom" : 0,
+    "top-padding-left" : 6,
+
+    "top-margin-top" : 0,
+    "top-margin-right" : 0,
+    "top-margin-bottom" : 6,
+    "top-margin-left" : 0,
+
+    "top-corner-radius" : 10,
+
+    "top-hover-text-color" : "#444444",
+    "top-hover-background-mode" : "gradient",
+    "top-hover-solid-color" : "#0399d4",
+    "top-hover-gradient-color" :
+    {
+        "start" : "#ebebeb",
+        "end" : "#a1a1a1"
+    },
+
+    "top-hover-font-shadow-h-length" : 2,
+    "top-hover-font-shadow-v-length" : 2,
+    "top-hover-font-shadow-blur-radius" : 3,
+    "top-hover-font-shadow-color" : "#ffffff",
+
+    "top-hover-padding-top" : 6,
+    "top-hover-padding-right" : 20,
+    "top-hover-padding-bottom" : 6,
+    "top-hover-padding-left" : 20,
+
+    "sub-font" : "Arial",
+    "sub-font-style" : "Normal",
+    "sub-font-weight" : "Bold",
+    "sub-font-size" : 12,
+    "sub-font-color" : "#424242",
+
+    "sub-font-shadow-v-length" : 2,
+    "sub-font-shadow-h-length" : 2,
+    "sub-font-shadow-blur-radius" : 3,
+    "sub-font-shadow-color" : "#ffffff",
+
+    "sub-corner-radius" : 10,
+    "sub-background-mode" : "gradient",
+    "sub-solid-background" : "#dddddd",
+    "sub-gradient-background" :
+    {
+        "start" : "#ffffff",
+        "end" : "#cfcfcf"
+    },
+
+    "sub-border-width" : 1,
+    "sub-border-style" : "Solid",
+    "sub-border-color" : "#b4b4b4",
+    "sub-menu-width" : 185,
+
+    "sub-box-shadow-v-length" : 2,
+    "sub-box-shadow-h-length" : 2,
+    "sub-box-blur-radius" : 3,
+    "sub-box-shadow-color" : "#222222",
+
+    "sub-padding-top" : 10,
+    "sub-padding-right" : 0,
+    "sub-padding-bottom" : 10,
+    "sub-padding-left" : 15,
+
+    "sub-hover-text-color" : "#ffffff",
+    "sub-hover-background-mode" : "gradient",
+    "sub-hover-solid-background" : "#0399d4",
+    "sub-hover-gradient-background" :
+    {
+        "start" : "#04acec",
+        "end" : "#0186ba"
+    },
+
+    "sub-hover-font-shadow-h-length" : 2,
+    "sub-hover-font-shadow-v-length" : 2,
+    "sub-hover-font-shadow-blur-radius" : 3,
+    "sub-hover-font-shadow-color" : "#ffffff"
+}

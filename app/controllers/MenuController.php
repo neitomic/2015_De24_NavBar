@@ -13,7 +13,7 @@ class MenuController extends Controller
         $user = Auth::user();
         if ($user->menu_html == null)
         {
-            $user->menu_html = file_get_contents('../app/default/default.html');
+            $user->menu_html = file_get_contents('../app/default/html.default');
             $user->save();
         }
         return $user->menu_html;
@@ -32,7 +32,7 @@ class MenuController extends Controller
         $user = Auth::user();
         if ($user->css_properties == null)
         {
-            $user->css_properties = file_get_contents('../app/default/default.css');
+            $user->css_properties = file_get_contents('../app/default/css.default');
             $user->save();
         }
         return Response::make($user->css_properties, 200, ['Content-type' => 'application/json']);
