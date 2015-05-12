@@ -12,6 +12,10 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">Lập trình web 2015</a>
 			</div>
+			<div class="pull-right">
+				<p class="navbar-text">Logged in as <b>{{ Auth::user()->username }}</b></p>
+				<a class="navbar-btn btn btn-primary" href="login" style="margin-right:20px;">Logout</a>
+			</div>
 	</nav>
 	<div class="wrapper container-fluid">
 		<div class="row">
