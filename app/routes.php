@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(array("before" => "auth"), function()
+Route::group(["before" => "auth"], function()
 {
     Route::get('/', "HomeController@index");
 
@@ -23,9 +23,11 @@ Route::group(array("before" => "auth"), function()
     Route::get('/logout', 'AuthController@getLogout');
 });
 
-Route::get('/tiennt', "TienController@tiennt");
+Route::group(['before' => 'guest'], function()
+{
+    Route::get('/login', "AuthController@getLogin");
+    Route::post('/login', "AuthController@postLogin");
 
-Route::get('/login', "AuthController@getLogin");
-Route::post('/login', "AuthController@postLogin");
-Route::get('/register', 'AuthController@getRegister');
-Route::post('/register', 'AuthController@postRegister');
+    Route::get('/register', 'AuthController@getRegister');
+    Route::post('/register', 'AuthController@postRegister');
+});

@@ -39,7 +39,6 @@ class AuthController extends Controller
 
     public function postRegister()
     {
-
         $errors = array();
         $data = Input::only(['username', 'password', 're-password']);
         $username = $data['username'];
@@ -51,7 +50,7 @@ class AuthController extends Controller
             $user = User::where('username', '=', $data['username'])->first();
 
             if($user !== null) {
-                
+
                 $error1 = "User $username already exists!";
                 array_push($errors, $error1);
             }
@@ -71,10 +70,10 @@ class AuthController extends Controller
         }else{
             $user1 = new User;
             $user1->username = $data['username'];
-            $user1->password = $data['password'];
-            $user1 -> save();
+            $user1->password = Hash::make($data['password']);
+            $user1->save();
             return View::make('register-success', array('username' => $username));
-        }
 
+        }
     }
 }
