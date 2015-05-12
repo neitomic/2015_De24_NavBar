@@ -16,24 +16,32 @@ $.get("menu", function(data, status){
 		maxLevels: 3,
 		listType: "ul",
 		relocate: function(){
-			console.log("relocate");
-			var rawHtml = $("#sortable-list").html();
-			rawHtml = rawHtml.replace("ui-sortable","").replace('style="display: list-item;"','');
-			var converted = replace(rawHtml,"div","a");
-			$("#cssmenu").html(converted);
-
-			$.post(
-				"menu",
-				{
-					"updated_menu": converted
-				},
-				function(data, status){
-					console.log(data);
-				}
-			)
+			updateMenu();
 		}
 	});
 });
+
+$("#sortable-list").on("click","a", function(){
+	$(this).parent().parent().remove();
+	updateMenu();
+})
+
+function updateMenu(){
+	var rawHtml = $("#sortable-list").html();
+	rawHtml = rawHtml.replace("ui-sortable","").replace('style="display: list-item;"','');
+	var converted = replace(rawHtml,"div","a");
+	$("#cssmenu").html(converted);
+
+	$.post(
+		"menu",
+		{
+			"updated_menu": converted
+		},
+		function(data, status){
+			console.log(data);
+		}
+		)
+}
 
 function replace(html, raw, replace){
 	var tempElement = $(html);
@@ -44,5 +52,10 @@ function replace(html, raw, replace){
 		}
 		return replacement;
 	});
+	if(tempElement.find(".menu a").length > 0){
+		tempElement.find(".menu a").remove();
+	} else {
+		tempElement.find(".menu").append("<a href='#' class='pull-right'>X</a>");
+	}
 	return tempElement[0].outerHTML;
 };
