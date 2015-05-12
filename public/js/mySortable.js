@@ -15,7 +15,10 @@ $.get("menu", function(data, status){
 		maxLevels: 4,
 		listType: "ul",
 		relocate: function(){
-			console.log('Relocated item');
+			var rawHtml = $("#sortable-list").html();
+			rawHtml = rawHtml.replace("ui-sortable","").replace('style="display: list-item;"','');
+			var converted = replace(rawHtml,"div","a");
+			$("#cssmenu").html(converted);
 		}
 	});
 });
