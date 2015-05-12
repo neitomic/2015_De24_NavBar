@@ -40,6 +40,7 @@ class MenuController extends \BaseController
 
     public function updateMenuStyle()
     {
+        $updated_style = Input::get('updated_style');
         $user = Auth::user();
         $user->css_properties = $updated_style;
         $user->save();
