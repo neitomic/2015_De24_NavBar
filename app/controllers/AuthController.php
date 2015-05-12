@@ -72,8 +72,10 @@ class AuthController extends Controller
             $user1->username = $data['username'];
             $user1->password = Hash::make($data['password']);
             $user1->save();
-            return View::make('register-success', array('username' => $username));
+            $link = action('AuthController@getLogin');
+            return View::make('register-success', array('username' => $username, 'link' => $link));
 
         }
     }
+
 }

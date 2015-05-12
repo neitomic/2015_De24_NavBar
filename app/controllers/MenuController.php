@@ -6,7 +6,7 @@
  * Time: 9:11 PM
  */
 
-class MenuController extends \BaseController
+class MenuController extends Controller
 {
     public function getMenu()
     {
