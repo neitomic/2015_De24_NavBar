@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    Ltweb2015
+    Ltweb2015 - Register
 @stop
 
 @section('custom-styles')
