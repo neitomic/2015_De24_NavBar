@@ -73,7 +73,7 @@ class AuthController extends Controller
             $user1->username = $data['username'];
             $user1->password = $data['password'];
             $user1 -> save();
-            return View::make('login');
+            return View::make('register-success', array('username' => $username));
         }
 
     }
