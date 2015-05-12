@@ -1,5 +1,5 @@
 $.get("menu", function(data, status){
-	$("#cssmenu").html(data);
+	$("#demo-container").html(data);
 	var convertedHtml = replace(data,"a","div");
 	$("#sortable-list").html(convertedHtml);
 	$('.sortable').nestedSortable({

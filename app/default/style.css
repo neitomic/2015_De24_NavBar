@@ -65,8 +65,8 @@
     font-size: 12px;
 }
 
-#cssmenu > ul { 
-	/* *display: inline-block;  */
+#cssmenu > ul {
+    /* *display: inline-block;  */
 }
 
 #cssmenu:after, #cssmenu ul:after {
@@ -81,8 +81,8 @@
     padding: 0 20px;
 }
 
-#cssmenu ul { 
-	text-transform: uppercase; 
+#cssmenu ul {
+    text-transform: uppercase;
 }
 
 #cssmenu ul ul {
@@ -119,7 +119,7 @@
 
 #cssmenu ul ul li:last-child > a {
     border-radius: 0 0 3px 3px;
-   /*  box-shadow: 0 1px 0 #1b9bff ; */
+    /*  box-shadow: 0 1px 0 #1b9bff ; */
 }
 #cssmenu ul ul li:last-child:hover > a {
     border-radius: 0 0 0 3px;
@@ -150,6 +150,3 @@
     left: auto;
     right: 99.5%;
 }
-
-
-/* customize  here*/

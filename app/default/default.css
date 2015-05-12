@@ -4,10 +4,14 @@
 	"hover-background" : "#ffffff",
 	"foreground" : "",
 	"hover-foreground" : "",
+	"text-color" :"",
+	"text-hover-color":"",
 	
 	"sub-font-size" : "12px",
 	"sub-background" : "#cbcbcb",
 	"sub-hover-background" : "#ffffff",
 	"sub-foreground" : "",
-	"sub-hover-foreground" : ""
+	"sub-hover-foreground" : "",
+	"sub-text-color" :"",
+	"sub-text-hover-color":"",
 }
