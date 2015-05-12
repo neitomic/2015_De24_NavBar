@@ -27,4 +27,5 @@ Route::get('/tiennt', "TienController@tiennt");
 
 Route::get('/login', "AuthController@getLogin");
 Route::post('/login', "AuthController@postLogin");
-Route::get('/register', 'AuthController@register');
+Route::get('/register', 'AuthController@getRegister');
+Route::post('/register', 'AuthController@postRegister');
