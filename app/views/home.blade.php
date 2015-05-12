@@ -41,9 +41,12 @@
                 <div class="col-sm-1 edit-panel">
                     <h4>Color</h4>
                     <div>
-                        <input type="color" id="color-picker">
+                        <input type="color" id="color-picker-background">
                     </div>
-                </div>
+					<div>
+						<input type="color" id="color-picker-forceground">
+					</div>
+				</div>
                 <div class="col-sm-3 edit-panel">
                     <h4>Menu setting</h4>
                     <div class="form-horizontal">
@@ -100,4 +103,5 @@
 	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 	<script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
 	<script src="{{asset('js/mySortable.js')}}"></script>
+	<script src="{{asset('js/customizeMenu.js')}}"></script>
 @stop
