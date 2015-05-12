@@ -23,16 +23,6 @@ $.get("menu", function(data, status){
 	});
 });
 
-// function replace(parent, raw, replace){
-// 	$(""+parent+" "+raw).replaceWith(function() {
-// 		var replacement = $("<"+replace+">").html($(this).html());
-// 		for (var i = 0; i < this.attributes.length; i++){
-// 			replacement.attr(this.attributes[i].name, this.attributes[i].value);
-// 		}
-// 		return replacement;
-// 	});
-// };
-
 function replace(html, raw, replace){
 	var tempElement = $(html);
 	tempElement.find(raw).replaceWith(function(){
