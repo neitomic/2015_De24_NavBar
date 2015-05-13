@@ -307,8 +307,9 @@ function updatePreview() {
     } else {
         css_code.textContent = this.css.replace(new RegExp('#demo-container', 'g'), '');
     }
-    css_code.className = css_code.className.replace('\bprettyprinted\b', '');
-    prettyPrint();
+    //css_code.className = css_code.className.replace('\bprettyprinted\b', '');
+    //prettyPrint();
+    hljs.highlightBlock(css_code);
 
     $('style').remove();
     $('head').append('<style type="text/css">' + this.css + '</style>');

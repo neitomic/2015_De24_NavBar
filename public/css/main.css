@@ -1,0 +1,70 @@
+#sidebar{
+	background-color: #f8f8f8;
+	border-color: #e7e7e7;
+	min-height: 100vh;
+	padding: 18px;
+}
+.box{
+	border: 1px solid black;
+	padding: 5px;
+	border-radius: 5px;
+}
+#content{
+	background-image: url("../img/grid.gif");
+	background-repeat: repeat;
+	min-height: 100vh;
+	padding: 20px;
+}
+#editable{
+	background-color: #FFFFFF;
+	min-height: 50px;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+.edit-panel{
+	border-right: 1px solid #dedede;
+	margin-left: 15px;
+	height: 125px;
+}
+.edit-panel input[type=text]{
+	width: 130px;
+}
+.edit-panel h4{
+	color: #2f7b94;
+}
+#color-picker{
+	height: 70px;
+	width: 100%;
+}
+#menu-bar{
+	margin-top: 40px;
+}
+#sortable-list{
+	margin-top: 20px;
+    padding-left: 0px ;
+}
+#sortable-list ul{
+    list-style-type: none;
+}
+#sortable-list ul{
+	padding-left: 30px;
+}
+#sortable-list ul.sortable{
+	padding-left: 0px;
+}
+#sortable-list .placeholder {
+	outline: 1px dashed #4183C4;
+}
+#sortable-list .menu{
+	background-color: #dbdbdb;
+	padding: 5px;
+	width: 100%;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	color: #5facbd;
+	cursor: move;
+}
+#sortable-list .menu-active{
+	background-color: #a3a3a3;
+	color: #fff;
+}

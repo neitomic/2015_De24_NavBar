@@ -4,7 +4,9 @@
 		$("#demo-container").html(data);
 
 		var html_code = document.getElementById("html-code");
-		html_code.textContent = data;
+        var formatted_html = html_beautify(data, { indent_size : 2, max_preserve_newlines: -1 });
+        html_code.textContent = formatted_html;
+        hljs.highlightBlock(html_code);
 
 		var convertedHtml = replace(data,"a","div");
 		$("#sortable-list").html(convertedHtml);

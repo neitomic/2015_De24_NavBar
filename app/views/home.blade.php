@@ -6,11 +6,11 @@
 
 @section('custom-styles')
     <link rel="stylesheet" href="{{ asset('css/lib/font-awesome-4.3.0/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/ltweb.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu-editor/fading.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu-editor/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu-editor/jquery-ui.css') }}">
-    <!--<link rel="stylesheet" href="{{ asset('css/menu-editor/prettify.css') }}">-->
+    <link rel="stylesheet" href="{{ asset('css/lib/highlight/default.css') }}">
     <style type="text/css">
         #demo-container #menu-bar {
             width: 95%;
@@ -211,21 +211,21 @@
                 <div class="examples">
                     <div class="topic">Menu Options</div>
                     <!-- Tabs Navigation -->
-                    <ul id="tabs" class="tabs nav nav-tabs">
-                        <li class="active"><a href="#tab1" data-toggle="tab"><i
+                    <ul id="editor-tabs" class="tabs nav nav-tabs">
+                        <li class="active"><a href="#editor-tab1" data-toggle="tab"><i
                                         class="fa fa-pencil-square-o"></i> Menu Bar</a></li>
-                        <li><a href="#tab2" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Top Menu</a>
+                        <li><a href="#editor-tab2" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Top Menu</a>
                         </li>
-                        <li><a href="#tab3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Top Menu
+                        <li><a href="#editor-tab3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Top Menu
                                 Hover</a></li>
-                        <li><a href="#tab4" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Sub Menu</a>
+                        <li><a href="#editor-tab4" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Sub Menu</a>
                         </li>
-                        <li><a href="#tab5" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Sub Menu
+                        <li><a href="#editor-tab5" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Sub Menu
                                 Hover</a></li>
                     </ul>
 
-                    <div id="tabsContent" class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1">
+                    <div id="editor-tab-contents" class="tab-content">
+                        <div class="tab-pane fade in active" id="editor-tab1">
                             <br>
 
                             <div class="row">
@@ -417,7 +417,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="tab2">
+                        <div class="tab-pane fade" id="editor-tab2">
                             <br>
 
                             <div class="row">
@@ -600,7 +600,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="tab3">
+                        <div class="tab-pane fade" id="editor-tab3">
                             <br>
 
                             <div class="row">
@@ -728,7 +728,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="tab4">
+                        <div class="tab-pane fade" id="editor-tab4">
                             <br>
 
                             <div class="row">
@@ -978,7 +978,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="tab5">
+                        <div class="tab-pane fade" id="editor-tab5">
                             <br>
 
                             <div class="row">
@@ -1070,171 +1070,197 @@
                 </div>
 
                 <div class="examples">
-                    <div class="topic">CSS Code</div>
-<pre class="prettyprint lang-css" style="height:300px;overflow:scroll;" id="css-code">
-    #demo-container #menu-bar {
-    margin: 0px 0px 0px 0px;
-    padding: 6px 6px 0px 6px;
-    height: 34px;
-    line-height: 100%;
-    border-radius: 24px;
-    -webkit-border-radius: 24px;
-    -moz-border-radius: 24px;
-    box-shadow: 2px 2px 3px #666666;
-    -webkit-box-shadow: 2px 2px 3px #666666;
-    -moz-box-shadow: 2px 2px 3px #666666;
-    background: #8B8B8B;
-    background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#7A7A7A));
-    background: -moz-linear-gradient(top,  #A9A9A9,  #7A7A7A);
-    border: solid 1px #6D6D6D;
-    }
-    #demo-container #menu-bar li {
-    margin: 0px 6px 0px 6px;
-    padding: 0px 0px 6px 0px;
-    float: left;
-    position: relative;
-    list-style: none;
-    }
-    #demo-container #menu-bar a {
-    font-weight: bold;
-    font-family: arial;
-    font-style: normal;
-    font-size: 12px;
-    color: #E7E5E5;
-    text-decoration: none;
-    display: block;
-    padding: 8px 20px 8px 20px;
-    margin: 0;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    text-shadow: 2px 2px 3px #000000;
-    }
-    #demo-container #menu-bar .active a, #demo-container #menu-bar li:hover &#62; a {
-    background: #0399D4;
-    background: -webkit-gradient(linear, left top, left bottom, from(#EBEBEB), to(#A1A1A1));
-    background: -moz-linear-gradient(top,  #EBEBEB,  #A1A1A1);
-    color: #444444;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-    text-shadow: 2px 2px 3px #FFFFFF;
-    }
-    #demo-container #menu-bar ul li:hover a, #demo-container #menu-bar li:hover li a {
-    background: none;
-    border: none;
-    color: #666;
-    -box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    }
-    #demo-container #menu-bar ul a:hover {
-    background: #0399D4 !important;
-    background: -webkit-gradient(linear, left top, left bottom, from(#04ACEC), to(#0186BA)) !important;
-    background: -moz-linear-gradient(top,  #04ACEC,  #0186BA) !important;
-    color: #FFFFFF !important;
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    text-shadow: 2px 2px 2px #FFFFFF;
-    }
-    #demo-container #menu-bar ul {
-    background: #DDDDDD;
-    background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#CFCFCF));
-    background: -moz-linear-gradient(top,  #FFFFFF,  #CFCFCF);
-    display: none;
-    margin: 0;
-    padding: 0;
-    width: 185px;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    border: solid 1px #B4B4B4;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-box-shadow: 2px 2px 3px #222222;
-    -moz-box-shadow: 2px 2px 3px #222222;
-    box-shadow: 2px 2px 3px #222222;
-    }
-    #demo-container #menu-bar li:hover &#62; ul {
-    display: block;
-    }
-    #demo-container #menu-bar ul li {
-    float: none;
-    margin: 0;
-    padding: 0;
-    }
-    #demo-container #menu-bar ul a {
-    padding:10px 0px 10px 15px;
-    color:#424242 !important;
-    font-size:12px;
-    font-style:normal;
-    font-family:arial;
-    font-weight: normal;
-    text-shadow: 2px 2px 3px #FFFFFF;
-    }
-    #demo-container #menu-bar ul li:first-child &#62; a {
-    border-top-left-radius: 10px;
-    -webkit-border-top-left-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    border-top-right-radius: 10px;
-    -webkit-border-top-right-radius: 10px;
-    -moz-border-radius-topright: 10px;
-    }
-    #demo-container #menu-bar ul li:last-child &#62; a {
-    border-bottom-left-radius: 10px;
-    -webkit-border-bottom-left-radius: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    border-bottom-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px;
-    -moz-border-radius-bottomright: 10px;
-    }
-    #demo-container #menu-bar:after {
-    content: ".";
-    display: block;
-    clear: both;
-    visibility: hidden;
-    line-height: 0;
-    height: 0;
-    }
-    #demo-container #menu-bar {
-    display: inline-block;
-    }
-    html[xmlns] #demo-container #menu-bar {
-    display: block;
-    }
-    * html #demo-container #menu-bar {
-    height: 1%;
-    }
+                    <div class="topic">Source Code</div>
+                    <!-- Tabs Navigation-->
+                    <ul id="code-tabs" class="tabs nav nav-tabs">
+                        <li class="active">
+                            <a href="#code-tab1" data-toggle="tab">
+                                <i class="fa fa-code"></i> HTML
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#code-tab2" data-toggle="tab">
+                                <i class="fa fa-css3"></i> CSS
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div id="code-tab-contents" class="tab-content">
+                        <div class="tab-pane fade in active" id="code-tab1">
+<pre>
+    <code id="html-code" class="html">
+        &lt;ul id="menu-bar"&gt;
+        &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;
+        &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;
+        &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 4&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    </code>
 </pre>
+                        </div>
+
+                        <div class="tab-pane fade" id="code-tab2">
+<pre>
+    <code id="css-code" class="css">
+        #demo-container #menu-bar {
+        margin: 0px 0px 0px 0px;
+        padding: 6px 6px 0px 6px;
+        height: 34px;
+        line-height: 100%;
+        border-radius: 24px;
+        -webkit-border-radius: 24px;
+        -moz-border-radius: 24px;
+        box-shadow: 2px 2px 3px #666666;
+        -webkit-box-shadow: 2px 2px 3px #666666;
+        -moz-box-shadow: 2px 2px 3px #666666;
+        background: #8B8B8B;
+        background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#7A7A7A));
+        background: -moz-linear-gradient(top,  #A9A9A9,  #7A7A7A);
+        border: solid 1px #6D6D6D;
+        }
+        #demo-container #menu-bar li {
+        margin: 0px 6px 0px 6px;
+        padding: 0px 0px 6px 0px;
+        float: left;
+        position: relative;
+        list-style: none;
+        }
+        #demo-container #menu-bar a {
+        font-weight: bold;
+        font-family: arial;
+        font-style: normal;
+        font-size: 12px;
+        color: #E7E5E5;
+        text-decoration: none;
+        display: block;
+        padding: 8px 20px 8px 20px;
+        margin: 0;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        text-shadow: 2px 2px 3px #000000;
+        }
+        #demo-container #menu-bar .active a, #demo-container #menu-bar li:hover &#62; a {
+        background: #0399D4;
+        background: -webkit-gradient(linear, left top, left bottom, from(#EBEBEB), to(#A1A1A1));
+        background: -moz-linear-gradient(top,  #EBEBEB,  #A1A1A1);
+        color: #444444;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        text-shadow: 2px 2px 3px #FFFFFF;
+        }
+        #demo-container #menu-bar ul li:hover a, #demo-container #menu-bar li:hover li a {
+        background: none;
+        border: none;
+        color: #666;
+        -box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        }
+        #demo-container #menu-bar ul a:hover {
+        background: #0399D4 !important;
+        background: -webkit-gradient(linear, left top, left bottom, from(#04ACEC), to(#0186BA)) !important;
+        background: -moz-linear-gradient(top,  #04ACEC,  #0186BA) !important;
+        color: #FFFFFF !important;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        text-shadow: 2px 2px 2px #FFFFFF;
+        }
+        #demo-container #menu-bar ul {
+        background: #DDDDDD;
+        background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#CFCFCF));
+        background: -moz-linear-gradient(top,  #FFFFFF,  #CFCFCF);
+        display: none;
+        margin: 0;
+        padding: 0;
+        width: 185px;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        border: solid 1px #B4B4B4;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-box-shadow: 2px 2px 3px #222222;
+        -moz-box-shadow: 2px 2px 3px #222222;
+        box-shadow: 2px 2px 3px #222222;
+        }
+        #demo-container #menu-bar li:hover &#62; ul {
+        display: block;
+        }
+        #demo-container #menu-bar ul li {
+        float: none;
+        margin: 0;
+        padding: 0;
+        }
+        #demo-container #menu-bar ul a {
+        padding:10px 0px 10px 15px;
+        color:#424242 !important;
+        font-size:12px;
+        font-style:normal;
+        font-family:arial;
+        font-weight: normal;
+        text-shadow: 2px 2px 3px #FFFFFF;
+        }
+        #demo-container #menu-bar ul li:first-child &#62; a {
+        border-top-left-radius: 10px;
+        -webkit-border-top-left-radius: 10px;
+        -moz-border-radius-topleft: 10px;
+        border-top-right-radius: 10px;
+        -webkit-border-top-right-radius: 10px;
+        -moz-border-radius-topright: 10px;
+        }
+        #demo-container #menu-bar ul li:last-child &#62; a {
+        border-bottom-left-radius: 10px;
+        -webkit-border-bottom-left-radius: 10px;
+        -moz-border-radius-bottomleft: 10px;
+        border-bottom-right-radius: 10px;
+        -webkit-border-bottom-right-radius: 10px;
+        -moz-border-radius-bottomright: 10px;
+        }
+        #demo-container #menu-bar:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+        }
+        #demo-container #menu-bar {
+        display: inline-block;
+        }
+        html[xmlns] #demo-container #menu-bar {
+        display: block;
+        }
+        * html #demo-container #menu-bar {
+        height: 1%;
+        }
+    </code>
+</pre>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="examples">
+                <!--<div class="examples">
                     <div class="topic">HTML Code</div>
-<pre class="prettyprint lang-html" style="overflow:auto;" id="html-code">
-    &lt;ul id="menu-bar"&gt;
-    &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;
-    &lt;ul&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 1&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 2&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 3&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 4&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;
-    &lt;ul&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 1&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 2&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 3&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 4&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-</pre>
+
                 </div>
                 <!--End Generator-->
             </section>
@@ -1249,9 +1275,9 @@
     <script src="{{ asset('js/lib/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/lib/modernizr.min.js') }}"></script>
-    <!--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>-->
+    <script src="{{ asset('js/lib/highlight/highlight.pack.js') }}"></script>
+    <script src="{{ asset('js/lib/beautify-html.js')}}"></script>
 
-    <script src="{{ asset('js/menu-editor/prettify.js') }}"></script>
     <script src="{{ asset('js/menu-editor/jscolor/jscolor.js') }}"></script>
     <script src="{{ asset('js/menu-editor/values.js') }}"></script>
     <script src="{{ asset('js/menu-editor/menu.js') }}"></script>
