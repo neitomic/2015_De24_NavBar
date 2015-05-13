@@ -190,7 +190,7 @@
                 <input type="text" class="form-control" placeholder="Add item">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <i class="fa fa-plus"></i>
                     </button>
                 </span>
             </div>

@@ -39,15 +39,15 @@
 		var parent = $("#sortable-list .menu-active");
 		if(parent.length > 0){
 			if(parent.parent().find("ul").length > 0){
-				var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'>X</a></div></li>";
+				var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
 				parent.parent().find("ul").eq(0).append(html);
 			} else {
-				var html = "<ul><li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'>X</a></div></li></ul>";
+				var html = "<ul><li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
 				console.log(html);
 				parent.parent().append(html);
 			}
 		} else {
-			var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'>X</a></div></li>";
+			var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
 			$("ul.sortable").append(html);
 		}
 		updateMenu();
@@ -83,7 +83,7 @@
 		if(tempElement.find(".menu a").length > 0){
 			tempElement.find(".menu a").remove();
 		} else {
-			tempElement.find(".menu").append("<a href='#' class='pull-right'>X</a>");
+			tempElement.find(".menu").append("<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
 		}
 	// tempElement.find("li.has-sub").removeClass("has-sub");
 	// tempElement.find("li > ul").parent().addClass("has-sub");
