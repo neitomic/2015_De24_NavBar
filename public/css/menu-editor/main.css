@@ -1916,12 +1916,17 @@ footer .copyright li:first-child a {
 }
 
 pre {
-    background-color: transparent;
+    background-color: inherit;
     padding: 0;
     border: none;
     height: 400px;
     overflow: auto;
     margin: 0;
+}
+
+pre code {
+    margin-top: -20px;
+    margin-bottom: -20px;
 }
 
 #code-tabs {

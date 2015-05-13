@@ -1,12 +1,7 @@
 (function(){
 
 	$.get("menu", function(data, status){
-		$("#demo-container").html(data);
-
-		var html_code = document.getElementById("html-code");
-        var formatted_html = html_beautify(data, { indent_size : 2, max_preserve_newlines: -1 });
-        html_code.textContent = formatted_html;
-        hljs.highlightBlock(html_code);
+        updateEditor(data);
 
 		var convertedHtml = replace(data,"a","div");
 		$("#sortable-list").html(convertedHtml);
@@ -62,7 +57,7 @@
 		var rawHtml = $("#sortable-list").html();
 		rawHtml = rawHtml.replace(" ui-sortable","").replace(' style="display: list-item;"','');
 		var converted = replace(rawHtml,"div","a");
-		$("#demo-container").html(converted);
+		updateEditor(converted);
 
 		$.post(
 			"menu",
@@ -93,7 +88,16 @@
 	// tempElement.find("li.has-sub").removeClass("has-sub");
 	// tempElement.find("li > ul").parent().addClass("has-sub");
 	return tempElement[0].outerHTML;
-};
+    };
+
+    function updateEditor(html)
+    {
+        $("#demo-container").html(html);
+        var html_code = document.getElementById("html-code");
+        var formatted_html = html_beautify(html, { indent_size : 2, max_preserve_newlines: -1 });
+        html_code.textContent = formatted_html;
+        hljs.highlightBlock(html_code);
+    }
 
 })()
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/menu-editor/fading.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu-editor/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu-editor/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lib/highlight/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lib/highlight/github.css') }}">
     <style type="text/css">
         #demo-container #menu-bar {
             width: 95%;
