@@ -5,12 +5,12 @@
 @stop
 
 @section('custom-styles')
-    <link rel="stylesheet" href="{{asset('css/ltweb.css')}}">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
-    <link rel="stylesheet" href="{{ asset('css/menu/fading.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/menu/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/menu/jquery-ui.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/lib/font-awesome-4.3.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ltweb.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu-editor/fading.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu-editor/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/menu-editor/jquery-ui.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('css/menu-editor/prettify.css') }}">-->
     <style type="text/css">
         #demo-container #menu-bar {
             width: 95%;
@@ -1246,23 +1246,27 @@
 @stop
 
 @section('custom-scripts')
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script src="{{ asset('js/lib/jquery-1.11.3.min.js') }}"></script>
+    <script src="{{ asset('js/lib/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/lib/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('js/lib/modernizr.min.js') }}"></script>
+    <!--<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>-->
 
-    <script src="{{ asset('js/style/jscolor/jscolor.js') }}"></script>
-    <script src="{{ asset('js/style/values.js') }}"></script>
-    <script src="{{ asset('js/style/menu.js') }}"></script>
-    <script src="{{ asset('js/style/plugins.js') }}"></script>
-    <script src="{{ asset('js/style/main.js') }}"></script>
+    <script src="{{ asset('js/menu-editor/prettify.js') }}"></script>
+    <script src="{{ asset('js/menu-editor/jscolor/jscolor.js') }}"></script>
+    <script src="{{ asset('js/menu-editor/values.js') }}"></script>
+    <script src="{{ asset('js/menu-editor/menu.js') }}"></script>
+    <script src="{{ asset('js/menu-editor/plugins.js') }}"></script>
+    <script src="{{ asset('js/menu-editor/main.js') }}"></script>
 
     <script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
     <script src="{{asset('js/mySortable.js')}}"></script>
     <!--<script src="{{asset('js/customizeMenu.js')}}"></script>-->
 
     <script>
-        $(document).ready(updatePreview);
+        $(document).ready(function()
+        {
+            updatePreview();
+        });
     </script>
 @stop
