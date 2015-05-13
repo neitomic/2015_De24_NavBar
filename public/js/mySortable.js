@@ -21,7 +21,7 @@
 			toleranceElement: 'div',
 			maxLevels: 3,
 			listType: "ul",
-			relocate: function(){
+			stop: function(){
 				updateMenu();
 			}
 		});
