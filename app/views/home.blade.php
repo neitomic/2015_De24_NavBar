@@ -213,17 +213,16 @@
                     <!-- Tabs Navigation -->
                     <ul id="tabs" class="tabs nav nav-tabs">
                         <li class="active"><a href="#tab1" data-toggle="tab"><i
-                                        class="icon-edit"></i> Menu Bar</a></li>
-                        <li><a href="#tab2" data-toggle="tab"><i class="icon-edit"></i> Top Menu</a>
+                                        class="fa fa-pencil-square-o"></i> Menu Bar</a></li>
+                        <li><a href="#tab2" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Top Menu</a>
                         </li>
-                        <li><a href="#tab3" data-toggle="tab"><i class="icon-edit"></i> Top Menu
+                        <li><a href="#tab3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Top Menu
                                 Hover</a></li>
-                        <li><a href="#tab4" data-toggle="tab"><i class="icon-edit"></i> Sub Menu</a>
+                        <li><a href="#tab4" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Sub Menu</a>
                         </li>
-                        <li><a href="#tab5" data-toggle="tab"><i class="icon-edit"></i> Sub Menu
+                        <li><a href="#tab5" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Sub Menu
                                 Hover</a></li>
                     </ul>
-
 
                     <div id="tabsContent" class="tab-content">
                         <div class="tab-pane fade in active" id="tab1">
