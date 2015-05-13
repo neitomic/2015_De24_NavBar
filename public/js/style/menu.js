@@ -8,8 +8,6 @@
 
 function updatePreview() {
 
-//demoContainerDiv = document.getElementById("demo-container");
-//demoBackgroundColor = document.getElementById("cont-color").value;
     mbHeight = document.getElementById("mb-height").innerHTML + "px";
 //MENU BAR COLORS AND BORDERS	
     borderWidth = document.getElementById("border-width").innerHTML + "px";
@@ -303,11 +301,11 @@ function updatePreview() {
     this.css += '  height: 1%;\n';
     this.css += '}';
 
-    html_code = document.getElementById("newcode");
-    if (html_code.innerText) {
-        html_code.innerText = this.css
+    var css_code = document.getElementById("css-code");
+    if (css_code.innerText) {
+        css_code.innerText = this.css.replace(new RegExp('#demo-container', 'g'), '');
     } else {
-        html_code.textContent = this.css
+        css_code.textContent = this.css.replace(new RegExp('#demo-container', 'g'), '');
     }
 
     $('style').remove();

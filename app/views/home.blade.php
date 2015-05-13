@@ -1072,7 +1072,7 @@
 
                 <div class="examples">
                     <div class="topic">CSS Code</div>
-<pre class="prettyprint lang-css" style="height:300px;overflow:scroll;" id="newcode">
+<pre class="prettyprint lang-css" style="height:300px;overflow:scroll;" id="css-code">
     #demo-container #menu-bar {
     margin: 0px 0px 0px 0px;
     padding: 6px 6px 0px 6px;

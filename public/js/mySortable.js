@@ -1,8 +1,8 @@
 $.get("menu", function(data, status){
 	$("#demo-container").html(data);
 
-    html_code = document.getElementById("html-code");
-    html_code.textContent=data;
+    var html_code = document.getElementById("html-code");
+    html_code.textContent = data;
 
 	var convertedHtml = replace(data,"a","div");
 	$("#sortable-list").html(convertedHtml);
