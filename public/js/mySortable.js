@@ -55,7 +55,7 @@
 
 	function updateMenu(){
 		var rawHtml = $("#sortable-list").html();
-		rawHtml = rawHtml.replace(" ui-sortable","").replace(' style="display: list-item;"','');
+		rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
 		var converted = replace(rawHtml,"div","a");
 		updateEditor(converted);
 
