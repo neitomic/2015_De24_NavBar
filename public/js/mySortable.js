@@ -1,9 +1,10 @@
 (function(){
 
-	$.get("menu", function(data, status){
-        updateEditor(data);
+	$.get("menu", function(json, status){
+        var data = $.parseJSON(json);
+        updateEditor(data.html);
 
-		var convertedHtml = replace(data,"a","div");
+		var convertedHtml = replace(data.html,"a","div");
 		$("#sortable-list").html(convertedHtml);
 		$('.sortable').nestedSortable({
 			forcePlaceholderSize: true,
@@ -19,50 +20,50 @@
 			maxLevels: 3,
 			listType: "ul",
 			stop: function(){
-				updateMenu();
+				updateHtml();
 			}
 		});
 	});
 
 	$("#sortable-list").on("click","a", function(){
 		$(this).parent().parent().remove();
-		updateMenu();
-	})
+        updateHtml();
+	});
 
 	$("#sortable-list").on("click",".menu", function(){
 		$("#sortable-list .menu").not(this).removeClass("menu-active");
 		$(this).toggleClass("menu-active");
-	})
+	});
 
 	$("#sidebar .input-group button").click(function(){
 		var newMenu = $("#sidebar .input-group input[type=text]").val();
 		var parent = $("#sortable-list .menu-active");
 		if(parent.length > 0){
 			if(parent.parent().find("ul").length > 0){
-				var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+				var html = "<li><div class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
 				parent.parent().find("ul").eq(0).append(html);
 			} else {
-				var html = "<ul><li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
+				var html = "<ul><li><div class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
 				console.log(html);
 				parent.parent().append(html);
 			}
 		} else {
-			var html = "<li><div href='#' class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+			var html = "<li><div class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
 			$("ul.sortable").append(html);
 		}
-		updateMenu();
-	})
+		updateHtml();
+	});
 
-	function updateMenu(){
+	function updateHtml(){
 		var rawHtml = $("#sortable-list").html();
 		rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
 		var converted = replace(rawHtml,"div","a");
 		updateEditor(converted);
 
 		$.post(
-			"menu",
+			"menu/html",
 			{
-				"updated_menu": converted
+				"updated_html": converted
 			},
 			function(data, status){
 				console.log(data);
@@ -88,7 +89,7 @@
 	// tempElement.find("li.has-sub").removeClass("has-sub");
 	// tempElement.find("li > ul").parent().addClass("has-sub");
 	return tempElement[0].outerHTML;
-    };
+    }
 
     function updateEditor(html)
     {
@@ -99,5 +100,5 @@
         hljs.highlightBlock(html_code);
     }
 
-})()
+})();
 

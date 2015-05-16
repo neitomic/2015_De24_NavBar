@@ -1282,7 +1282,7 @@
     <script src="{{ asset('js/menu-editor/values.js') }}"></script>
     <script src="{{ asset('js/menu-editor/menu.js') }}"></script>
     <script src="{{ asset('js/menu-editor/plugins.js') }}"></script>
-    <script src="{{ asset('js/menu-editor/main.js') }}"></script>
+    <!--<script src="{{ asset('js/menu-editor/main.js') }}"></script>-->
 
     <script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
     <script src="{{asset('js/mySortable.js')}}"></script>

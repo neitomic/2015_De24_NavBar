@@ -16,12 +16,17 @@ class MenuController extends Controller
             $user->menu_html = file_get_contents('../app/default/html');
             $user->save();
         }
-        return $user->menu_html;
+        if ($user->css_properties == null)
+        {
+            $user->css_properties = file_get_contents('../app/default/css');
+            $user->save();
+        }
+        return json_encode(['html' => $user->menu_html, 'style' => $user->css_properties]);
     }
 
-    public function updateMenu()
+    public function updateHtml()
     {
-        $updated_menu = Input::get('updated_menu');
+        $updated_menu = Input::get('updated_html');
         $user = Auth::user();
         $user->menu_html = $updated_menu;
         $user->save();
@@ -38,7 +43,7 @@ class MenuController extends Controller
         return Response::make($user->css_properties, 200, ['Content-type' => 'application/json']);
     }
 
-    public function updateMenuStyle()
+    public function updateStyle()
     {
         $updated_style = Input::get('updated_style');
         $user = Auth::user();
