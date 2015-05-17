@@ -72,6 +72,8 @@
         $("#demo-container").html(html);
         var html_code = document.getElementById("html-code");
         var formatted_html = html_beautify(html, { indent_size : 2, max_preserve_newlines: -1 });
+        formatted_html = formatted_html.split(' class="menu"').join("");
+        formatted_html = formatted_html.split(' class="sortable"').join("");
         html_code.textContent = formatted_html;
         hljs.highlightBlock(html_code);
     }
