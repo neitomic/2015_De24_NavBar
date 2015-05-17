@@ -84,7 +84,7 @@ function updatePreview() {
         updateStyle();
         updateCSS();
 
-        $.post("/menu/style",
+        $.post("menu/style",
             {
                 "updated_style" : JSON.stringify(menu_style)
             },
