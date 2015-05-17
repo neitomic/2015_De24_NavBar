@@ -1,39 +1,85 @@
 var menu_style;
 var first_run = true;
 
-$("#sortable-list").on("click", "a", function () {
-    $(this).parent().parent().remove();
-    updateHtml();
-});
+(function() {
+    $.get("menu", function(json, status){
+        var data = $.parseJSON(json);
+        menu_style = $.parseJSON(data.style);
+        updateEditor(data.html);
+        updateUI();
+        updateCSS();
 
-$("#sortable-list").on("click", ".menu", function () {
-    $("#sortable-list .menu").not(this).removeClass("menu-active");
-    $(this).toggleClass("menu-active");
-});
+        var convertedHtml = replace(data.html,"a","div");
+        $("#sortable-list").html(convertedHtml);
+        $('.sortable').nestedSortable({
+            forcePlaceholderSize: true,
+            handle: 'div',
+            helper: 'clone',
+            items: 'li',
+            opacity: .6,
+            placeholder: 'placeholder',
+            revert: 250,
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: 'div',
+            maxLevels: 3,
+            listType: "ul",
+            stop: function(){
+                updateHtml();
+            }
+        });
+    });
 
-$("#sidebar .input-group button").click(function () {
-    var newMenu = $("#sidebar .input-group input[type=text]").val();
-    var parent = $("#sortable-list .menu-active");
-    if (parent.length > 0) {
-        if (parent.parent().find("ul").length > 0) {
-            var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-            parent.parent().find("ul").eq(0).append(html);
+    $("#sortable-list").on("click", "a", function () {
+        $(this).parent().parent().remove();
+        updateHtml();
+    });
+
+    $("#sortable-list").on("click", ".menu", function () {
+        $("#sortable-list .menu").not(this).removeClass("menu-active");
+        $(this).toggleClass("menu-active");
+    });
+
+    $("#sidebar .input-group button").click(function () {
+        var newMenu = $("#sidebar .input-group input[type=text]").val();
+        var parent = $("#sortable-list .menu-active");
+        if (parent.length > 0) {
+            if (parent.parent().find("ul").length > 0) {
+                var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+                parent.parent().find("ul").eq(0).append(html);
+            } else {
+                var html = "<ul><li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
+                console.log(html);
+                parent.parent().append(html);
+            }
         } else {
-            var html = "<ul><li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
-            console.log(html);
-            parent.parent().append(html);
+            var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+            $("ul.sortable").append(html);
         }
-    } else {
-        var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-        $("ul.sortable").append(html);
-    }
-    updateHtml();
-});
+        updateHtml();
+    });
+
+    $(".slider").slider({
+        range: "min",
+        slide: function(event, ui) {
+            $id = $(this).attr('id');
+            $id = $id.replace('slider_','');
+            $("#" + $id).text(ui.value);
+            //updatePreview();
+        },
+        change: function (event, ui) {
+            $id = $(this).attr('id');
+            $id = $id.replace('slider_','');
+            $("#" + $id).text(ui.value);
+            updatePreview();
+        }
+    });
+})();
 
 function updateHtml() {
     $("ul:not(:has(li))").remove();
     $(".has-sub").removeClass("has-sub");
-    $("li:has(> ul)").addClass("has-sub");
+    $("li:has(ul)").addClass("has-sub");
     var rawHtml = $("#sortable-list").html();
     rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
     var converted = replace(rawHtml, "div", "a");
@@ -46,8 +92,7 @@ function updateHtml() {
         },
         function (data, status) {
             console.log(data);
-        }
-    );
+        });
 }
 
 function replace(html, raw, replace) {
@@ -69,14 +114,6 @@ function replace(html, raw, replace) {
     // tempElement.find("li > ul").parent().addClass("has-sub");
     return tempElement[0].outerHTML;
 }
-
-/*function updateEditor(html) {
- $("#demo-container").html(html);
- var html_code = document.getElementById("html-code");
- var formatted_html = html_beautify(html, {indent_size: 2, max_preserve_newlines: -1});
- html_code.textContent = formatted_html;
- hljs.highlightBlock(html_code);
- }*/
 
 function updatePreview() {
     if (!first_run)
@@ -100,12 +137,12 @@ function updateEditor(html) {
     var formatted_html = html_beautify(html, {indent_size: 2, max_preserve_newlines: -1});
     formatted_html = formatted_html.split(' class="menu"').join("");
     formatted_html = formatted_html.split(' class="sortable"').join("");
+    formatted_html = formatted_html.split(' class=""').join("");
     html_code.textContent = formatted_html;
     hljs.highlightBlock(html_code);
 }
 
 function updateUI() {
-
     mbHeight = menu_style["menu-height"];
     //MENU BAR COLORS AND BORDERS
     borderWidth = menu_style["menu-border-width"];
@@ -554,7 +591,7 @@ function updateCSS() {
         this.css += '  background: -moz-linear-gradient(top,  ' + gradientStarthover + ',  ' + gradientEndhover + ') !important;\n';
     }
     this.css += '  color: ' + textColorhover + ' !important;\n';
-    this.css += '  border-radius: 0;\n'
+    this.css += '  border-radius: 0;\n';
     this.css += '  -webkit-border-radius: 0;\n';
     this.css += '  -moz-border-radius: 0;\n';
     this.css += '  text-shadow: ' + fontHhover + ' ' + fontVhover + ' ' + fontBhover + ' ' + fontShadowhover + ';\n';

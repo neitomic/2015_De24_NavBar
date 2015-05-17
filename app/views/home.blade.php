@@ -1277,52 +1277,10 @@
     <script src="{{ asset('js/lib/modernizr.min.js') }}"></script>
     <script src="{{ asset('js/lib/highlight/highlight.pack.js') }}"></script>
     <script src="{{ asset('js/lib/beautify-html.js')}}"></script>
+    <script src="{{ asset('js/lib/jquery.mjs.nestedSortable.js') }}"></script>
+    <script src="{{ asset('js/lib/jscolor/jscolor.js') }}"></script>
 
-    <script src="{{ asset('js/menu-editor/jscolor/jscolor.js') }}"></script>
-    <!--<script src="{{ asset('js/menu-editor/menu.js') }}"></script>-->
-    <script src="{{ asset('js/menu-editor/plugins.js') }}"></script>
-    <!--<script src="{{ asset('js/menu-editor/main.js') }}"></script>-->
-
-    <script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
-    <script src="{{ asset('js/menu-editor/values.js') }}"></script>
-    <!--<script src="{{asset('js/customizeMenu.js')}}"></script>-->
-
-    <script>
-
-
-        $(document).ready(function()
-        {
-
-            $.get("menu", function(json, status){
-                var data = $.parseJSON(json);
-                menu_style = $.parseJSON(data.style);
-                updateEditor(data.html);
-
-                updateUI();
-                updateCSS();
-
-                var convertedHtml = replace(data.html,"a","div");
-                $("#sortable-list").html(convertedHtml);
-                $('.sortable').nestedSortable({
-                    forcePlaceholderSize: true,
-                    handle: 'div',
-                    helper: 'clone',
-                    items: 'li',
-                    opacity: .6,
-                    placeholder: 'placeholder',
-                    revert: 250,
-                    tabSize: 25,
-                    tolerance: 'pointer',
-                    toleranceElement: 'div',
-                    maxLevels: 3,
-                    listType: "ul",
-                    stop: function(){
-                        updateHtml();
-                    }
-                });
-            });
-
-        });
-    </script>
+    <script src="{{ asset('js/plugins.js') }}"></script>
+    <script src="{{ asset('js/values.js') }}"></script>>
+    <script src="{{ asset('js/main.js') }}"></script>
 @stop

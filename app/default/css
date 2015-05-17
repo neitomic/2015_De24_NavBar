@@ -6,7 +6,7 @@
     "menu-gradient-end" : "#7a7a7a",
 
     "menu-border-width" : 1,
-    "menu-border-style" : "dotted",
+    "menu-border-style" : "solid",
     "menu-border-color" : "#6d6d6d",
     "menu-height" : 40,
 
@@ -82,7 +82,7 @@
     "sub-gradient-end" : "#cfcfcf",
 
     "sub-border-width" : 1,
-    "sub-border-style" : "Solid",
+    "sub-border-style" : "solid",
     "sub-border-color" : "#b4b4b4",
     "sub-menu-width" : 185,
 
