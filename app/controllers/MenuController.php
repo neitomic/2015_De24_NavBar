@@ -32,17 +32,6 @@ class MenuController extends Controller
         $user->save();
     }
 
-    public function getMenuStyle()
-    {
-        $user = Auth::user();
-        if ($user->css_properties == null)
-        {
-            $user->css_properties = file_get_contents('../app/default/css');
-            $user->save();
-        }
-        return Response::make($user->css_properties, 200, ['Content-type' => 'application/json']);
-    }
-
     public function updateStyle()
     {
         $updated_style = Input::get('updated_style');

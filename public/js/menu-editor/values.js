@@ -6,7 +6,13 @@ $(function() {
 				$id = $id.replace('slider_','');
 				$("#" + $id).text(ui.value);
 				updatePreview();
-			}
+			},
+            change: function (event, ui) {
+                $id = $(this).attr('id');
+                $id = $id.replace('slider_','');
+                $("#" + $id).text(ui.value);
+                updatePreview();
+            }
 	});	
 	$(".radius").slider({
 		min: 0,
