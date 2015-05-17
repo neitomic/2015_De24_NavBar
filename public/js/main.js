@@ -66,17 +66,28 @@ function replace(html, raw, replace) {
     return tempElement[0].outerHTML;
 }
 
-function updateEditor(html) {
+/*function updateEditor(html) {
     $("#demo-container").html(html);
     var html_code = document.getElementById("html-code");
     var formatted_html = html_beautify(html, {indent_size: 2, max_preserve_newlines: -1});
     html_code.textContent = formatted_html;
     hljs.highlightBlock(html_code);
-}
+}*/
 
 function updatePreview() {
     updateStyle();
     updateCSS();
+}
+
+function updateEditor(html)
+{
+    $("#demo-container").html(html);
+    var html_code = document.getElementById("html-code");
+    var formatted_html = html_beautify(html, { indent_size : 2, max_preserve_newlines: -1 });
+    formatted_html = formatted_html.split(' class="menu"').join("");
+    formatted_html = formatted_html.split(' class="sortable"').join("");
+    html_code.textContent = formatted_html;
+    hljs.highlightBlock(html_code);
 }
 
 function updateUI() {
@@ -205,12 +216,6 @@ function updateUI() {
 //MENU BAR CORNERS
     allRadius = +document.getElementById("radius-value").innerHTML;
 //MENU BAR BACKGROUND
-    if (document.getElementById("solid-back-sub").checked == true) {
-        backgroundMode = "solid";
-    } else {
-        backgroundMode = "gradient";
-    }
-
     backgroundColor = document.getElementById("back-color").value;
     gradientStart = document.getElementById("start-color").value;
     gradientEnd = document.getElementById("end-color").value;
@@ -640,12 +645,6 @@ function updateStyle() {
 //MENU BAR CORNERS
     allRadius = +document.getElementById("radius-value").innerHTML;
 //MENU BAR BACKGROUND
-    if (document.getElementById("solid-back-sub").checked == true) {
-        backgroundMode = "solid";
-    } else {
-        backgroundMode = "gradient";
-    }
-
     backgroundColor = document.getElementById("back-color").value;
     gradientStart = document.getElementById("start-color").value;
     gradientEnd = document.getElementById("end-color").value;
