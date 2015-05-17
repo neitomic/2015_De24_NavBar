@@ -31,6 +31,9 @@ $("#sidebar .input-group button").click(function () {
 });
 
 function updateHtml() {
+    $("ul:not(:has(li))").remove();
+    $(".has-sub").removeClass("has-sub");
+    $("li:has(> ul)").addClass("has-sub");
     var rawHtml = $("#sortable-list").html();
     rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
     var converted = replace(rawHtml, "div", "a");
