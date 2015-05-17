@@ -79,113 +79,114 @@
 
 function updatePreview() {
 
+    mbHeight = style["menu-height"];
     //MENU BAR COLORS AND BORDERS	
-    borderWidth = style.border-width;
-    borderColor = style.bc-color;
-    borderStyle = style.border-style;
+    borderWidth = style["menu-border-width"];
+    borderColor = style["menu-border-color"];
+    borderStyle = style["menu-border-style"];
 //MENU BAR CORNERS
-    allRadius = style.radius-value;
+    allRadius = style["menu-corner-radius"];
 //MENU BAR BACKGROUND
-    backgroundColor = style.back-color;
-    gradientStart = style.start-color;
-    gradientEnd = style.end-color;
+    backgroundColor = style["menu-solid-background"];
+    gradientStart = style["menu-gradient-start"];
+    gradientEnd = style["menu-gradient-end"];
 //MENU BAR BOX SHADOWS	
-    shadowHOffset = style.h-length-value;
-    shadowVOffset = style.v-length-value;
-    shadowBlur = style.b-length-value;
-    shadowColor = style.s-color;
+    shadowHOffset = style["menu-shadow-h-length"];
+    shadowVOffset = style["menu-shadow-v-length"];
+    shadowBlur = style["menu-shadow-blur-radius"];
+    shadowColor = style["menu-shadow-color"];
 //MENU BAR MARGINS PADDING
-    Margintop = style.margin-top;
-    Marginright = style.margin-right;
-    Marginbottom = style.margin-bottom;
-    Marginleft = style.margin-left;
-    Paddingtop = style.padding-top;
-    Paddingright = style.padding-right;
-    Paddingbottom = style.padding-bottom;
-    Paddingleft = style.padding-left;
+    Margintop = style["menu-margin-top"];
+    Marginright = style["menu-margin-right"];
+    Marginbottom = style["menu-margin-bottom"];
+    Marginleft = style["menu-margin-left"];
+    Paddingtop = style["menu-padding-top"];
+    Paddingright = style["menu-padding-right"];
+    Paddingbottom = style["menu-padding-bottom"];
+    Paddingleft = style["menu-padding-left"];
 //TOP MENU CORNERS
-    topBRadius = style.radius-top;
+    topBRadius = style["top-corner-radius"];
 //TOP MENU FONTS
-    fontColortop = style.font-color-top;
-    fontSizetop = style.font-size-top;
-    fontWeighttop = style.font-weight-top;
-    fontStyletop = style.font-style-top;
-    fontNametop = style.font-name-top;
+    fontColortop = style["top-font-color"];
+    fontSizetop = style["top-font-size"];
+    fontWeighttop = style["top-font-weight"];
+    fontStyletop = style["top-font-style"];
+    fontNametop = style["top-font"];
 //TOP MENU SHADOWS
-    fontHtop = style.h-length-top;
-    fontVtop = style.v-length-top;
-    fontBtop = style.b-length-top;
-    fontShadowtop = style.shadow-color-top;
+    fontHtop = style["top-font-shadow-h-length"];
+    fontVtop = style["top-font-shadow-v-length"];
+    fontBtop = style["top-font-shadow-blur-radius"];
+    fontShadowtop = style["top-font-shadow-color"];
 //TOP MENU MARGINS PADDING
-    topMargintop = style.top-margin-top;
-    topMarginright = style.top-margin-right;
-    topMarginbottom = style.top-margin-bottom;
-    topMarginleft = style.top-margin-left;
-    topPaddingtop = style.top-padding-top;
-    topPaddingright = style.top-padding-right;
-    topPaddingbottom = style.top-padding-bottom;
-    topPaddingleft = style.top-padding-left;
+    topMargintop = style["top-margin-top"];
+    topMarginright = style["top-margin-right"];
+    topMarginbottom = style["top-margin-bottom"];
+    topMarginleft = style["top-margin-left"];
+    topPaddingtop = style["top-padding-top"];
+    topPaddingright = style["top-padding-right"];
+    topPaddingbottom = style["top-padding-bottom"];
+    topPaddingleft = style["top-padding-left"];
 //SUB MENU BORDERS	
-    borderWidthsub = style.border-width-sub;
-    borderColorsub = style.bc-color-sub;
-    borderStylesub = style.border-style-sub;
-    submenuWidth = style.width-sub;
+    borderWidthsub = style["sub-border-width"];
+    borderColorsub = style["sub-border-color"];
+    borderStylesub = style["sub-border-style"];
+    submenuWidth = style["sub-menu-width"];
 //SUB BAR CORNERS
-    allRadiussub = style.radius-sub;
+    allRadiussub = style["sub-corner-radius"];
 //SUB MENU BACKGROUND
-    backgroundColorsub = style.back-color-sub;
-    gradientStartsub = style.start-color-sub;
-    gradientEndsub = style.end-color-sub;
+    backgroundColorsub = style["sub-solid-background"];
+    gradientStartsub = style["sub-gradient-start"];
+    gradientEndsub = style["sub-gradient-end"];
 //SUB MENU SHADOWS BOX
-    hShadowsub = style.h-shadow-sub;
-    vShadowsub = style.v-shadow-sub;
-    bShadowsub = style.b-shadow-sub;
-    colorShadowsub = style.s-color-sub;
+    hShadowsub = style["sub-box-shadow-h-length"];
+    vShadowsub = style["sub-box-shadow-v-length"];
+    bShadowsub = style["sub-box-blur-radius"];
+    colorShadowsub = style["sub-box-shadow-color"];
 //SUB MENU FONTS
-    fontColorsub = style.font-color-sub;
-    fontSizesub = style.font-size-sub;
-    fontWeightsub = style.font-weight-sub;
-    fontStylesub = style.font-style-sub;
-    fontNamesub = style.font-name-sub;
+    fontColorsub = style["sub-font-color"];
+    fontSizesub = style["sub-font-size"];
+    fontWeightsub = style["sub-font-weight"];
+    fontStylesub = style["sub-font-style"];
+    fontNamesub = style["sub-font"];
 //SUB MENU SHADOWS
-    fontHsub = style.h-length-sub;
-    fontVsub = style.v-length-sub;
-    fontBsub = style.b-length-sub;
-    fontShadowsub = style.shadow-color-sub;
+    fontHsub = style["sub-font-shadow-h-length"];
+    fontVsub = style["sub-font-shadow-v-length"];
+    fontBsub = style["sub-font-shadow-blur-radius"];
+    fontShadowsub = style["sub-font-shadow-color"];
 //HOVER MENU SUB MENU
-    textColorhover = style.text-color-hover;
-    backgroundColorhover = style.back-color-hover;
-    gradientStarthover = style.start-color-hover;
-    gradientEndhover = style.end-color-hover;
-    fontHhover = style.h-shadow-hover;
-    fontVhover = style.v-shadow-hover;
-    fontBhover = style.b-shadow-hover;
-    fontShadowhover = style.s-color-hover;
+    textColorhover = style["sub-hover-text-color"];
+    backgroundColorhover = style["sub-hover-solid-background"];
+    gradientStarthover = style["sub-hover-gradient-start"];
+    gradientEndhover = style["sub-hover-gradient-end"];
+    fontHhover = style["sub-hover-font-shadow-h-length"];
+    fontVhover = style["sub-hover-font-shadow-v-length"];
+    fontBhover = style["sub-hover-font-shadow-blur-radius"];
+    fontShadowhover = style["sub-hover-font-shadow-color"];
 //HOVER MENU TOP MENU
-    textColorhovertop = style.text-color-hover-top;
-    backgroundColorhovertop = style.back-color-hover-top;
-    gradientStarthovertop = style.start-color-hover-top;
-    gradientEndhovertop = style.end-color-hover-top;
-    fontHhovertop = style.h-shadow-hover-top;
-    fontVhovertop = style.v-shadow-hover-top;
-    fontBhovertop = style.b-shadow-hover-top;
-    fontShadowhovertop = style.s-color-hover-top;
+    textColorhovertop = style["top-hover-text-color"];
+    backgroundColorhovertop = style["top-hover-solid-color"];
+    gradientStarthovertop = style["top-hover-gradient-start"];
+    gradientEndhovertop = style["top-hover-gradient-end"];
+    fontHhovertop = style[ "top-hover-font-shadow-h-length"];
+    fontVhovertop = style["top-hover-font-shadow-v-length"];
+    fontBhovertop = style["top-hover-font-shadow-blur-radius"];
+    fontShadowhovertop = style["top-hover-font-shadow-color"];
 //TOP HOVER BAR CORNERS
-    Paddingtophover = style.padding-top-hover;
-    Paddingrighthover = style.padding-right-hover;
-    Paddingbottomhover = style.padding-bottom-hover;
-    Paddinglefthover = style.padding-left-hover;
+    Paddingtophover = style["top-hover-padding-top"];
+    Paddingrighthover = style["top-hover-padding-right"];
+    Paddingbottomhover = style["top-hover-padding-bottom"];
+    Paddinglefthover = style["top-hover-padding-left"];
 //SUB MENU PADDING
-    subPaddingtop = style.sub-padding-top;
-    subPaddingright = style.sub-padding-right;
-    subPaddingbottom = style.sub-padding-bottom;
-    subPaddingleft = style.sub-padding-left;
+    subPaddingtop = style["sub-padding-top"];
+    subPaddingright = style["sub-padding-right"];
+    subPaddingbottom = style["sub-padding-bottom"];
+    subPaddingleft = style["sub-padding-left"];
 //STYLE CHANGE
 //demoContainerDiv.style.backgroundColor=demoBackgroundColor;
 //DROP-DOWN
-    dropDownAdd = style.top-padding-top;
-    dropDownAddHover = style.padding-top-hover;
-    dropDownMinusHover = style.padding-bottom-hover;
+    dropDownAdd = style["top-padding-top"];
+    dropDownAddHover = style["top-hover-padding-top"];
+    dropDownMinusHover = style["top-hover-padding-bottom"];
 
     defaultDrop = "18";
     newTop = +defaultDrop + +dropDownAdd + +dropDownAddHover + +dropDownMinusHover;
@@ -505,8 +506,8 @@ function updateStyle () {
     dropDownMinusHover = document.getElementById("padding-bottom-hover").innerHTML;
 
 	//MENU BAR COLORS AND BORDERS	 = ;
-	style.border-width = borderWidth;
-	style.bc-color = borderColor;
+	style["menu-border-width"] = borderWidth;
+	style["menu-border-color"] = borderColor;
 	style.border-style = borderStyle;
 	//MENU BAR CORNERS = ;
 	style.radius-value = allRadius;
