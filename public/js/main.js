@@ -1,196 +1,433 @@
+var menu_style;
 
+$("#sortable-list").on("click", "a", function () {
+    $(this).parent().parent().remove();
+    updateHtml();
+});
 
+$("#sortable-list").on("click", ".menu", function () {
+    $("#sortable-list .menu").not(this).removeClass("menu-active");
+    $(this).toggleClass("menu-active");
+});
 
-	$("#sortable-list").on("click","a", function(){
-		$(this).parent().parent().remove();
-        updateHtml();
-	});
-
-	$("#sortable-list").on("click",".menu", function(){
-		$("#sortable-list .menu").not(this).removeClass("menu-active");
-		$(this).toggleClass("menu-active");
-	});
-
-	$("#sidebar .input-group button").click(function(){
-		var newMenu = $("#sidebar .input-group input[type=text]").val();
-		var parent = $("#sortable-list .menu-active");
-		if(parent.length > 0){
-			if(parent.parent().find("ul").length > 0){
-				var html = "<li><div class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-				parent.parent().find("ul").eq(0).append(html);
-			} else {
-				var html = "<ul><li><div class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
-				console.log(html);
-				parent.parent().append(html);
-			}
-		} else {
-			var html = "<li><div class='menu'>"+newMenu+"<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-			$("ul.sortable").append(html);
-		}
-		updateHtml();
-	});
-
-	function updateHtml(){
-		var rawHtml = $("#sortable-list").html();
-		rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
-		var converted = replace(rawHtml,"div","a");
-		updateEditor(converted);
-
-		$.post(
-			"menu/html",
-			{
-				"updated_html": converted
-			},
-			function(data, status){
-				console.log(data);
-			}
-			);
-	}
-
-	function replace(html, raw, replace){
-		var tempElement = $(html);
-		tempElement.find(".menu").removeClass("menu-active");
-		tempElement.find(raw).replaceWith(function(){
-			var replacement = $("<"+replace+">").html($(this).html());
-			for (var i = 0; i < this.attributes.length; i++){
-				replacement.attr(this.attributes[i].name, this.attributes[i].value);
-			}
-			return replacement;
-		});
-		if(tempElement.find(".menu a").length > 0){
-			tempElement.find(".menu a").remove();
-		} else {
-			tempElement.find(".menu").append("<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
-		}
-	// tempElement.find("li.has-sub").removeClass("has-sub");
-	// tempElement.find("li > ul").parent().addClass("has-sub");
-	return tempElement[0].outerHTML;
+$("#sidebar .input-group button").click(function () {
+    var newMenu = $("#sidebar .input-group input[type=text]").val();
+    var parent = $("#sortable-list .menu-active");
+    if (parent.length > 0) {
+        if (parent.parent().find("ul").length > 0) {
+            var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+            parent.parent().find("ul").eq(0).append(html);
+        } else {
+            var html = "<ul><li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
+            console.log(html);
+            parent.parent().append(html);
+        }
+    } else {
+        var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+        $("ul.sortable").append(html);
     }
+    updateHtml();
+});
 
-    function updateEditor(html)
-    {
-        $("#demo-container").html(html);
-        var html_code = document.getElementById("html-code");
-        var formatted_html = html_beautify(html, { indent_size : 2, max_preserve_newlines: -1 });
-        html_code.textContent = formatted_html;
-        hljs.highlightBlock(html_code);
+function updateHtml() {
+    var rawHtml = $("#sortable-list").html();
+    rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
+    var converted = replace(rawHtml, "div", "a");
+    updateEditor(converted);
+
+    $.post(
+        "menu/html",
+        {
+            "updated_html": converted
+        },
+        function (data, status) {
+            console.log(data);
+        }
+    );
+}
+
+function replace(html, raw, replace) {
+    var tempElement = $(html);
+    tempElement.find(".menu").removeClass("menu-active");
+    tempElement.find(raw).replaceWith(function () {
+        var replacement = $("<" + replace + ">").html($(this).html());
+        for (var i = 0; i < this.attributes.length; i++) {
+            replacement.attr(this.attributes[i].name, this.attributes[i].value);
+        }
+        return replacement;
+    });
+    if (tempElement.find(".menu a").length > 0) {
+        tempElement.find(".menu a").remove();
+    } else {
+        tempElement.find(".menu").append("<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
     }
+    // tempElement.find("li.has-sub").removeClass("has-sub");
+    // tempElement.find("li > ul").parent().addClass("has-sub");
+    return tempElement[0].outerHTML;
+}
 
+function updateEditor(html) {
+    $("#demo-container").html(html);
+    var html_code = document.getElementById("html-code");
+    var formatted_html = html_beautify(html, {indent_size: 2, max_preserve_newlines: -1});
+    html_code.textContent = formatted_html;
+    hljs.highlightBlock(html_code);
+}
 
-function updatePreview(style) {
+function updatePreview() {
+    updateStyle();
+    updateCSS();
+}
 
-    mbHeight = style["menu-height"];
-    //MENU BAR COLORS AND BORDERS	
-    borderWidth = style["menu-border-width"];
-    borderColor = style["menu-border-color"];
-    borderStyle = style["menu-border-style"];
+function updateUI() {
+    mbHeight = menu_style["menu-height"] + "px";
+    //MENU BAR COLORS AND BORDERS
+    borderWidth = menu_style["menu-border-width"] + "px";
+    borderColor = menu_style["menu-border-color"];
+    borderStyle = menu_style["menu-border-style"];
 //MENU BAR CORNERS
-    allRadius = style["menu-corner-radius"];
+    allRadius = menu_style["menu-corner-radius"] + "px";
 //MENU BAR BACKGROUND
-    backgroundColor = style["menu-solid-background"];
-    gradientStart = style["menu-gradient-start"];
-    gradientEnd = style["menu-gradient-end"];
-//MENU BAR BOX SHADOWS	
-    shadowHOffset = style["menu-shadow-h-length"];
-    shadowVOffset = style["menu-shadow-v-length"];
-    shadowBlur = style["menu-shadow-blur-radius"];
-    shadowColor = style["menu-shadow-color"];
+    backgroundColor = menu_style["menu-solid-background"];
+    gradientStart = menu_style["menu-gradient-start"];
+    gradientEnd = menu_style["menu-gradient-end"];
+//MENU BAR BOX SHADOWS
+    shadowHOffset = menu_style["menu-shadow-h-length"] + "px";
+    shadowVOffset = menu_style["menu-shadow-v-length"] + "px";
+    shadowBlur = menu_style["menu-shadow-blur-radius"] + "px";
+    shadowColor = menu_style["menu-shadow-color"];
 //MENU BAR MARGINS PADDING
-    Margintop = style["menu-margin-top"];
-    Marginright = style["menu-margin-right"];
-    Marginbottom = style["menu-margin-bottom"];
-    Marginleft = style["menu-margin-left"];
-    Paddingtop = style["menu-padding-top"];
-    Paddingright = style["menu-padding-right"];
-    Paddingbottom = style["menu-padding-bottom"];
-    Paddingleft = style["menu-padding-left"];
+    Margintop = menu_style["menu-margin-top"] + "px";
+    Marginright = menu_style["menu-margin-right"] + "px";
+    Marginbottom = menu_style["menu-margin-bottom"] + "px";
+    Marginleft = menu_style["menu-margin-left"] + "px";
+    Paddingtop = menu_style["menu-padding-top"] + "px";
+    Paddingright = menu_style["menu-padding-right"] + "px";
+    Paddingbottom = menu_style["menu-padding-bottom"] + "px";
+    Paddingleft = menu_style["menu-padding-left"] + "px";
 //TOP MENU CORNERS
-    topBRadius = style["top-corner-radius"];
+    topBRadius = menu_style["top-corner-radius"] + "px";
 //TOP MENU FONTS
-    fontColortop = style["top-font-color"];
-    fontSizetop = style["top-font-size"];
-    fontWeighttop = style["top-font-weight"];
-    fontStyletop = style["top-font-style"];
-    fontNametop = style["top-font"];
+    fontColortop = menu_style["top-font-color"];
+    fontSizetop = menu_style["top-font-size"] + "px";
+    fontWeighttop = menu_style["top-font-weight"];
+    fontStyletop = menu_style["top-font-style"];
+    fontNametop = menu_style["top-font"];
 //TOP MENU SHADOWS
-    fontHtop = style["top-font-shadow-h-length"];
-    fontVtop = style["top-font-shadow-v-length"];
-    fontBtop = style["top-font-shadow-blur-radius"];
-    fontShadowtop = style["top-font-shadow-color"];
+    fontHtop = menu_style["top-font-shadow-h-length"] + "px";
+    fontVtop = menu_style["top-font-shadow-v-length"] + "px";
+    fontBtop = menu_style["top-font-shadow-blur-radius"] + "px";
+    fontShadowtop = menu_style["top-font-shadow-color"];
 //TOP MENU MARGINS PADDING
-    topMargintop = style["top-margin-top"];
-    topMarginright = style["top-margin-right"];
-    topMarginbottom = style["top-margin-bottom"];
-    topMarginleft = style["top-margin-left"];
-    topPaddingtop = style["top-padding-top"];
-    topPaddingright = style["top-padding-right"];
-    topPaddingbottom = style["top-padding-bottom"];
-    topPaddingleft = style["top-padding-left"];
-//SUB MENU BORDERS	
-    borderWidthsub = style["sub-border-width"];
-    borderColorsub = style["sub-border-color"];
-    borderStylesub = style["sub-border-style"];
-    submenuWidth = style["sub-menu-width"];
+    topMargintop = menu_style["top-margin-top"] + "px";
+    topMarginright = menu_style["top-margin-right"] + "px";
+    topMarginbottom = menu_style["top-margin-bottom"] + "px";
+    topMarginleft = menu_style["top-margin-left"] + "px";
+    topPaddingtop = menu_style["top-padding-top"] + "px";
+    topPaddingright = menu_style["top-padding-right"] + "px";
+    topPaddingbottom = menu_style["top-padding-bottom"] + "px";
+    topPaddingleft = menu_style["top-padding-left"] + "px";
+//SUB MENU BORDERS
+    borderWidthsub = menu_style["sub-border-width"] + "px";
+    borderColorsub = menu_style["sub-border-color"];
+    borderStylesub = menu_style["sub-border-style"];
+    submenuWidth = menu_style["sub-menu-width"] + "px";
 //SUB BAR CORNERS
-    allRadiussub = style["sub-corner-radius"];
+    allRadiussub = menu_style["sub-corner-radius"] + "px";
 //SUB MENU BACKGROUND
-    backgroundColorsub = style["sub-solid-background"];
-    gradientStartsub = style["sub-gradient-start"];
-    gradientEndsub = style["sub-gradient-end"];
+    backgroundColorsub = menu_style["sub-solid-background"];
+    gradientStartsub = menu_style["sub-gradient-start"];
+    gradientEndsub = menu_style["sub-gradient-end"];
 //SUB MENU SHADOWS BOX
-    hShadowsub = style["sub-box-shadow-h-length"];
-    vShadowsub = style["sub-box-shadow-v-length"];
-    bShadowsub = style["sub-box-blur-radius"];
-    colorShadowsub = style["sub-box-shadow-color"];
+    hShadowsub = menu_style["sub-box-shadow-h-length"] + "px";
+    vShadowsub = menu_style["sub-box-shadow-v-length"] + "px";
+    bShadowsub = menu_style["sub-box-blur-radius"] + "px";
+    colorShadowsub = menu_style["sub-box-shadow-color"];
 //SUB MENU FONTS
-    fontColorsub = style["sub-font-color"];
-    fontSizesub = style["sub-font-size"];
-    fontWeightsub = style["sub-font-weight"];
-    fontStylesub = style["sub-font-style"];
-    fontNamesub = style["sub-font"];
+    fontColorsub = menu_style["sub-font-color"];
+    fontSizesub = menu_style["sub-font-size"] + "px";
+    fontWeightsub = menu_style["sub-font-weight"];
+    fontStylesub = menu_style["sub-font-style"];
+    fontNamesub = menu_style["sub-font"];
 //SUB MENU SHADOWS
-    fontHsub = style["sub-font-shadow-h-length"];
-    fontVsub = style["sub-font-shadow-v-length"];
-    fontBsub = style["sub-font-shadow-blur-radius"];
-    fontShadowsub = style["sub-font-shadow-color"];
+    fontHsub = menu_style["sub-font-shadow-h-length"] + "px";
+    fontVsub = menu_style["sub-font-shadow-v-length"] + "px";
+    fontBsub = menu_style["sub-font-shadow-blur-radius"] + "px";
+    fontShadowsub = menu_style["sub-font-shadow-color"];
 //HOVER MENU SUB MENU
-    textColorhover = style["sub-hover-text-color"];
-    backgroundColorhover = style["sub-hover-solid-background"];
-    gradientStarthover = style["sub-hover-gradient-start"];
-    gradientEndhover = style["sub-hover-gradient-end"];
-    fontHhover = style["sub-hover-font-shadow-h-length"];
-    fontVhover = style["sub-hover-font-shadow-v-length"];
-    fontBhover = style["sub-hover-font-shadow-blur-radius"];
-    fontShadowhover = style["sub-hover-font-shadow-color"];
+    textColorhover = menu_style["sub-hover-text-color"];
+    backgroundColorhover = menu_style["sub-hover-solid-background"];
+    gradientStarthover = menu_style["sub-hover-gradient-start"];
+    gradientEndhover = menu_style["sub-hover-gradient-end"];
+    fontHhover = menu_style["sub-hover-font-shadow-h-length"] + "px";
+    fontVhover = menu_style["sub-hover-font-shadow-v-length"] + "px";
+    fontBhover = menu_style["sub-hover-font-shadow-blur-radius"] + "px";
+    fontShadowhover = menu_style["sub-hover-font-shadow-color"];
 //HOVER MENU TOP MENU
-    textColorhovertop = style["top-hover-text-color"];
-    backgroundColorhovertop = style["top-hover-solid-color"];
-    gradientStarthovertop = style["top-hover-gradient-start"];
-    gradientEndhovertop = style["top-hover-gradient-end"];
-    fontHhovertop = style[ "top-hover-font-shadow-h-length"];
-    fontVhovertop = style["top-hover-font-shadow-v-length"];
-    fontBhovertop = style["top-hover-font-shadow-blur-radius"];
-    fontShadowhovertop = style["top-hover-font-shadow-color"];
+    textColorhovertop = menu_style["top-hover-text-color"];
+    backgroundColorhovertop = menu_style["top-hover-solid-color"];
+    gradientStarthovertop = menu_style["top-hover-gradient-start"];
+    gradientEndhovertop = menu_style["top-hover-gradient-end"];
+    fontHhovertop = menu_style["top-hover-font-shadow-h-length"] + "px";
+    fontVhovertop = menu_style["top-hover-font-shadow-v-length"] + "px";
+    fontBhovertop = menu_style["top-hover-font-shadow-blur-radius"] + "px";
+    fontShadowhovertop = menu_style["top-hover-font-shadow-color"];
 //TOP HOVER BAR CORNERS
-    Paddingtophover = style["top-hover-padding-top"];
-    Paddingrighthover = style["top-hover-padding-right"];
-    Paddingbottomhover = style["top-hover-padding-bottom"];
-    Paddinglefthover = style["top-hover-padding-left"];
+    Paddingtophover = menu_style["top-hover-padding-top"] + "px";
+    Paddingrighthover = menu_style["top-hover-padding-right"] + "px";
+    Paddingbottomhover = menu_style["top-hover-padding-bottom"] + "px";
+    Paddinglefthover = menu_style["top-hover-padding-left"] + "px";
 //SUB MENU PADDING
-    subPaddingtop = style["sub-padding-top"];
-    subPaddingright = style["sub-padding-right"];
-    subPaddingbottom = style["sub-padding-bottom"];
-    subPaddingleft = style["sub-padding-left"];
+    subPaddingtop = menu_style["sub-padding-top"] + "px";
+    subPaddingright = menu_style["sub-padding-right"] + "px";
+    subPaddingbottom = menu_style["sub-padding-bottom"] + "px";
+    subPaddingleft = menu_style["sub-padding-left"] + "px";
 //STYLE CHANGE
 //demoContainerDiv.style.backgroundColor=demoBackgroundColor;
 //DROP-DOWN
-    dropDownAdd = style["top-padding-top"];
-    dropDownAddHover = style["top-hover-padding-top"];
-    dropDownMinusHover = style["top-hover-padding-bottom"];
+    dropDownAdd = menu_style["top-padding-top"] + "px";
+    dropDownAddHover = menu_style["top-hover-padding-top"] + "px";
+    dropDownMinusHover = menu_style["top-hover-padding-bottom"] + "px";
 
     defaultDrop = "18";
     newTop = +defaultDrop + +dropDownAdd + +dropDownAddHover + +dropDownMinusHover;
 
+    menuBgMode = menu_style["menu-background-mode"];
+    topHoverBgMode = menu_style["top-hover-background-mode"];
+    subBgMode = menu_style["sub-background-mode"];
+    subHoverBgMode = menu_style["sub-hover-background-mode"];
+
+    mbHeight = +document.getElementById("mb-height").innerHTML;
+//MENU BAR COLORS AND BORDERS
+    borderWidth = +document.getElementById("border-width").innerHTML;
+    borderColor = document.getElementById("bc-color").value;
+    borderStyle = document.getElementById("border-style").value;
+//MENU BAR CORNERS
+    allRadius = +document.getElementById("radius-value").innerHTML;
+//MENU BAR BACKGROUND
+    if (document.getElementById("solid-back-sub").checked == true) {
+        backgroundMode = "solid";
+    } else {
+        backgroundMode = "gradient";
+    }
+
+    backgroundColor = document.getElementById("back-color").value;
+    gradientStart = document.getElementById("start-color").value;
+    gradientEnd = document.getElementById("end-color").value;
+//MENU BAR BOX SHADOWS
+    shadowHOffset = +document.getElementById("h-length-value").innerHTML;
+    shadowVOffset = +document.getElementById("v-length-value").innerHTML;
+    shadowBlur = +document.getElementById("b-length-value").innerHTML;
+    shadowColor = document.getElementById("s-color").value;
+//MENU BAR MARGINS PADDING
+    Margintop = +document.getElementById("margin-top").innerHTML;
+    Marginright = +document.getElementById("margin-right").innerHTML;
+    Marginbottom = +document.getElementById("margin-bottom").innerHTML;
+    Marginleft = +document.getElementById("margin-left").innerHTML;
+    Paddingtop = +document.getElementById("padding-top").innerHTML;
+    Paddingright = +document.getElementById("padding-right").innerHTML;
+    Paddingbottom = +document.getElementById("padding-bottom").innerHTML;
+    Paddingleft = +document.getElementById("padding-left").innerHTML;
+//TOP MENU CORNERS
+    topBRadius = +document.getElementById("radius-top").innerHTML;
+//TOP MENU FONTS
+    fontColortop = document.getElementById("font-color-top").value;
+    fontSizetop = +document.getElementById("font-size-top").innerHTML;
+    fontWeighttop = document.getElementById("font-weight-top").value;
+    fontStyletop = document.getElementById("font-style-top").value;
+    fontNametop = document.getElementById("font-name-top").value;
+//TOP MENU SHADOWS
+    fontHtop = +document.getElementById("h-length-top").innerHTML;
+    fontVtop = +document.getElementById("v-length-top").innerHTML;
+    fontBtop = +document.getElementById("b-length-top").innerHTML;
+    fontShadowtop = document.getElementById("shadow-color-top").value;
+//TOP MENU MARGINS PADDING
+    topMargintop = +document.getElementById("top-margin-top").innerHTML;
+    topMarginright = +document.getElementById("top-margin-right").innerHTML;
+    topMarginbottom = +document.getElementById("top-margin-bottom").innerHTML;
+    topMarginleft = +document.getElementById("top-margin-left").innerHTML;
+    topPaddingtop = +document.getElementById("top-padding-top").innerHTML;
+    topPaddingright = +document.getElementById("top-padding-right").innerHTML;
+    topPaddingbottom = +document.getElementById("top-padding-bottom").innerHTML;
+    topPaddingleft = +document.getElementById("top-padding-left").innerHTML;
+//SUB MENU BORDERS
+    borderWidthsub = +document.getElementById("border-width-sub").innerHTML;
+    borderColorsub = document.getElementById("bc-color-sub").value;
+    borderStylesub = document.getElementById("border-style-sub").value;
+    submenuWidth = +document.getElementById("width-sub").innerHTML;
+//SUB BAR CORNERS
+    allRadiussub = +document.getElementById("radius-sub").innerHTML;
+//SUB MENU BACKGROUND
+    backgroundColorsub = document.getElementById("back-color-sub").value;
+    gradientStartsub = document.getElementById("start-color-sub").value;
+    gradientEndsub = document.getElementById("end-color-sub").value;
+//SUB MENU SHADOWS BOX
+    hShadowsub = +document.getElementById("h-shadow-sub").innerHTML;
+    vShadowsub = +document.getElementById("v-shadow-sub").innerHTML;
+    bShadowsub = +document.getElementById("b-shadow-sub").innerHTML;
+    colorShadowsub = document.getElementById("s-color-sub").value;
+//SUB MENU FONTS
+    fontColorsub = document.getElementById("font-color-sub").value;
+    fontSizesub = +document.getElementById("font-size-sub").innerHTML;
+    fontWeightsub = document.getElementById("font-weight-sub").value;
+    fontStylesub = document.getElementById("font-style-sub").value;
+    fontNamesub = document.getElementById("font-name-sub").value;
+//SUB MENU SHADOWS
+    fontHsub = +document.getElementById("h-length-sub").innerHTML;
+    fontVsub = +document.getElementById("v-length-sub").innerHTML;
+    fontBsub = +document.getElementById("b-length-sub").innerHTML;
+    fontShadowsub = document.getElementById("shadow-color-sub").value;
+//HOVER MENU SUB MENU
+    textColorhover = document.getElementById("text-color-hover").value;
+    backgroundColorhover = document.getElementById("back-color-hover").value;
+    gradientStarthover = document.getElementById("start-color-hover").value;
+    gradientEndhover = document.getElementById("end-color-hover").value;
+    fontHhover = +document.getElementById("h-shadow-hover").innerHTML;
+    fontVhover = +document.getElementById("v-shadow-hover").innerHTML;
+    fontBhover = +document.getElementById("b-shadow-hover").innerHTML;
+    fontShadowhover = document.getElementById("s-color-hover").value;
+//HOVER MENU TOP MENU
+    textColorhovertop = document.getElementById("text-color-hover-top").value;
+    backgroundColorhovertop = document.getElementById("back-color-hover-top").value;
+    gradientStarthovertop = document.getElementById("start-color-hover-top").value;
+    gradientEndhovertop = document.getElementById("end-color-hover-top").value;
+    fontHhovertop = +document.getElementById("h-shadow-hover-top").innerHTML;
+    fontVhovertop = +document.getElementById("v-shadow-hover-top").innerHTML;
+    fontBhovertop = +document.getElementById("b-shadow-hover-top").innerHTML;
+    fontShadowhovertop = document.getElementById("s-color-hover-top").value;
+//TOP HOVER BAR CORNERS
+    Paddingtophover = +document.getElementById("padding-top-hover").innerHTML;
+    Paddingrighthover = +document.getElementById("padding-right-hover").innerHTML;
+    Paddingbottomhover = +document.getElementById("padding-bottom-hover").innerHTML;
+    Paddinglefthover = +document.getElementById("padding-left-hover").innerHTML;
+//SUB MENU PADDING
+    subPaddingtop = +document.getElementById("sub-padding-top").innerHTML;
+    subPaddingright = +document.getElementById("sub-padding-right").innerHTML;
+    subPaddingbottom = +document.getElementById("sub-padding-bottom").innerHTML;
+    subPaddingleft = +document.getElementById("sub-padding-left").innerHTML;
+}
+
+function updateCSS() {
+
+    if (typeof menu_style == "undefined")
+        return;
+
+    mbHeight = menu_style["menu-height"] + "px";
+    //MENU BAR COLORS AND BORDERS	
+    borderWidth = menu_style["menu-border-width"] + "px";
+    borderColor = menu_style["menu-border-color"];
+    borderStyle = menu_style["menu-border-style"];
+//MENU BAR CORNERS
+    allRadius = menu_style["menu-corner-radius"] + "px";
+//MENU BAR BACKGROUND
+    backgroundColor = menu_style["menu-solid-background"];
+    gradientStart = menu_style["menu-gradient-start"];
+    gradientEnd = menu_style["menu-gradient-end"];
+//MENU BAR BOX SHADOWS	
+    shadowHOffset = menu_style["menu-shadow-h-length"] + "px";
+    shadowVOffset = menu_style["menu-shadow-v-length"] + "px";
+    shadowBlur = menu_style["menu-shadow-blur-radius"] + "px";
+    shadowColor = menu_style["menu-shadow-color"];
+//MENU BAR MARGINS PADDING
+    Margintop = menu_style["menu-margin-top"] + "px";
+    Marginright = menu_style["menu-margin-right"] + "px";
+    Marginbottom = menu_style["menu-margin-bottom"] + "px";
+    Marginleft = menu_style["menu-margin-left"] + "px";
+    Paddingtop = menu_style["menu-padding-top"] + "px";
+    Paddingright = menu_style["menu-padding-right"] + "px";
+    Paddingbottom = menu_style["menu-padding-bottom"] + "px";
+    Paddingleft = menu_style["menu-padding-left"] + "px";
+//TOP MENU CORNERS
+    topBRadius = menu_style["top-corner-radius"] + "px";
+//TOP MENU FONTS
+    fontColortop = menu_style["top-font-color"];
+    fontSizetop = menu_style["top-font-size"] + "px";
+    fontWeighttop = menu_style["top-font-weight"];
+    fontStyletop = menu_style["top-font-style"];
+    fontNametop = menu_style["top-font"];
+//TOP MENU SHADOWS
+    fontHtop = menu_style["top-font-shadow-h-length"] + "px";
+    fontVtop = menu_style["top-font-shadow-v-length"] + "px";
+    fontBtop = menu_style["top-font-shadow-blur-radius"] + "px";
+    fontShadowtop = menu_style["top-font-shadow-color"];
+//TOP MENU MARGINS PADDING
+    topMargintop = menu_style["top-margin-top"] + "px";
+    topMarginright = menu_style["top-margin-right"] + "px";
+    topMarginbottom = menu_style["top-margin-bottom"] + "px";
+    topMarginleft = menu_style["top-margin-left"] + "px";
+    topPaddingtop = menu_style["top-padding-top"] + "px";
+    topPaddingright = menu_style["top-padding-right"] + "px";
+    topPaddingbottom = menu_style["top-padding-bottom"] + "px";
+    topPaddingleft = menu_style["top-padding-left"] + "px";
+//SUB MENU BORDERS	
+    borderWidthsub = menu_style["sub-border-width"] + "px";
+    borderColorsub = menu_style["sub-border-color"];
+    borderStylesub = menu_style["sub-border-style"];
+    submenuWidth = menu_style["sub-menu-width"] + "px";
+//SUB BAR CORNERS
+    allRadiussub = menu_style["sub-corner-radius"] + "px";
+//SUB MENU BACKGROUND
+    backgroundColorsub = menu_style["sub-solid-background"];
+    gradientStartsub = menu_style["sub-gradient-start"];
+    gradientEndsub = menu_style["sub-gradient-end"];
+//SUB MENU SHADOWS BOX
+    hShadowsub = menu_style["sub-box-shadow-h-length"] + "px";
+    vShadowsub = menu_style["sub-box-shadow-v-length"] + "px";
+    bShadowsub = menu_style["sub-box-blur-radius"] + "px";
+    colorShadowsub = menu_style["sub-box-shadow-color"];
+//SUB MENU FONTS
+    fontColorsub = menu_style["sub-font-color"];
+    fontSizesub = menu_style["sub-font-size"] + "px";
+    fontWeightsub = menu_style["sub-font-weight"];
+    fontStylesub = menu_style["sub-font-style"];
+    fontNamesub = menu_style["sub-font"];
+//SUB MENU SHADOWS
+    fontHsub = menu_style["sub-font-shadow-h-length"] + "px";
+    fontVsub = menu_style["sub-font-shadow-v-length"] + "px";
+    fontBsub = menu_style["sub-font-shadow-blur-radius"] + "px";
+    fontShadowsub = menu_style["sub-font-shadow-color"];
+//HOVER MENU SUB MENU
+    textColorhover = menu_style["sub-hover-text-color"];
+    backgroundColorhover = menu_style["sub-hover-solid-background"];
+    gradientStarthover = menu_style["sub-hover-gradient-start"];
+    gradientEndhover = menu_style["sub-hover-gradient-end"];
+    fontHhover = menu_style["sub-hover-font-shadow-h-length"] + "px";
+    fontVhover = menu_style["sub-hover-font-shadow-v-length"] + "px";
+    fontBhover = menu_style["sub-hover-font-shadow-blur-radius"] + "px";
+    fontShadowhover = menu_style["sub-hover-font-shadow-color"];
+//HOVER MENU TOP MENU
+    textColorhovertop = menu_style["top-hover-text-color"];
+    backgroundColorhovertop = menu_style["top-hover-solid-color"];
+    gradientStarthovertop = menu_style["top-hover-gradient-start"];
+    gradientEndhovertop = menu_style["top-hover-gradient-end"];
+    fontHhovertop = menu_style["top-hover-font-shadow-h-length"] + "px";
+    fontVhovertop = menu_style["top-hover-font-shadow-v-length"] + "px";
+    fontBhovertop = menu_style["top-hover-font-shadow-blur-radius"] + "px";
+    fontShadowhovertop = menu_style["top-hover-font-shadow-color"];
+//TOP HOVER BAR CORNERS
+    Paddingtophover = menu_style["top-hover-padding-top"] + "px";
+    Paddingrighthover = menu_style["top-hover-padding-right"] + "px";
+    Paddingbottomhover = menu_style["top-hover-padding-bottom"] + "px";
+    Paddinglefthover = menu_style["top-hover-padding-left"] + "px";
+//SUB MENU PADDING
+    subPaddingtop = menu_style["sub-padding-top"] + "px";
+    subPaddingright = menu_style["sub-padding-right"] + "px";
+    subPaddingbottom = menu_style["sub-padding-bottom"] + "px";
+    subPaddingleft = menu_style["sub-padding-left"] + "px";
+//STYLE CHANGE
+//demoContainerDiv.style.backgroundColor=demoBackgroundColor;
+//DROP-DOWN
+    dropDownAdd = menu_style["top-padding-top"] + "px";
+    dropDownAddHover = menu_style["top-hover-padding-top"] + "px";
+    dropDownMinusHover = menu_style["top-hover-padding-bottom"] + "px";
+
+    defaultDrop = "18";
+    newTop = +defaultDrop + +dropDownAdd + +dropDownAddHover + +dropDownMinusHover;
+
+    menuBgMode = menu_style["menu-background-mode"];
+    topHoverBgMode = menu_style["top-hover-background-mode"];
+    subBgMode = menu_style["sub-background-mode"];
+    subHoverBgMode = menu_style["sub-hover-background-mode"];
 
     this.css = '#demo-container #menu-bar {\n';
     this.css += '  width: 95%;\n';
@@ -204,7 +441,7 @@ function updatePreview(style) {
     this.css += '  box-shadow: ' + shadowHOffset + ' ' + shadowVOffset + ' ' + shadowBlur + ' ' + shadowColor + ';\n';
     this.css += '  -webkit-box-shadow: ' + shadowHOffset + ' ' + shadowVOffset + ' ' + shadowBlur + ' ' + shadowColor + ';\n';
     this.css += '  -moz-box-shadow: ' + shadowHOffset + ' ' + shadowVOffset + ' ' + shadowBlur + ' ' + shadowColor + ';\n';
-    if (document.getElementById("solid-back").checked == true) {
+    if (menuBgMode == "solid") {
         this.css += '  background: ' + backgroundColor + ';\n';
     } else {
         this.css += '  background: ' + backgroundColor + ';\n';
@@ -248,7 +485,7 @@ function updatePreview(style) {
 
 // main level link hover
     this.css += '#demo-container #menu-bar .active a, #demo-container #menu-bar li:hover > a {\n';
-    if (document.getElementById("solid-back-hover-top").checked == true) {
+    if (topHoverBgMode == "solid") {
         this.css += '  background: ' + backgroundColorhovertop + ';\n';
     } else {
         this.css += '  background: ' + backgroundColorhovertop + ';\n';
@@ -273,7 +510,7 @@ function updatePreview(style) {
     this.css += '  -moz-box-shadow: none;\n';
     this.css += '}\n';
     this.css += '#demo-container #menu-bar ul a:hover {\n';
-    if (document.getElementById("solid-back-hover").checked == true) {
+    if (subHoverBgMode == "solid") {
         this.css += '  background: ' + backgroundColorhover + ' !important;\n';
     } else {
         this.css += '  background: ' + backgroundColorhover + ' !important;\n';
@@ -293,7 +530,7 @@ function updatePreview(style) {
     this.css += '  display: block;\n';
     this.css += '}\n';
     this.css += '#demo-container #menu-bar ul {\n';
-    if (document.getElementById("solid-back-sub").checked == true) {
+    if (subBgMode == "solid") {
         this.css += '  background: ' + backgroundColorsub + ';\n';
     } else {
         this.css += '  background: ' + backgroundColorsub + ';\n';
@@ -390,228 +627,242 @@ function updatePreview(style) {
 
 }
 
-function updateStyle (style) {
-//MENU BAR COLORS AND BORDERS	
-    borderWidth = document.getElementById("border-width").innerHTML + "px";
+function updateStyle() {
+
+    if (typeof menu_style == "undefined")
+        return;
+
+    mbHeight = +document.getElementById("mb-height").innerHTML;
+//MENU BAR COLORS AND BORDERS
+    borderWidth = +document.getElementById("border-width").innerHTML;
     borderColor = document.getElementById("bc-color").value;
     borderStyle = document.getElementById("border-style").value;
 //MENU BAR CORNERS
-    allRadius = document.getElementById("radius-value").innerHTML + "px";
+    allRadius = +document.getElementById("radius-value").innerHTML;
 //MENU BAR BACKGROUND
-	if(document.getElementById("solid-back-sub").checked == true){
-		backgroundMode = "solid";
-	}else{
-		backgroundMode = "gradient";
-	}
+    if (document.getElementById("solid-back-sub").checked == true) {
+        backgroundMode = "solid";
+    } else {
+        backgroundMode = "gradient";
+    }
 
     backgroundColor = document.getElementById("back-color").value;
     gradientStart = document.getElementById("start-color").value;
     gradientEnd = document.getElementById("end-color").value;
-//MENU BAR BOX SHADOWS	
-    shadowHOffset = document.getElementById("h-length-value").innerHTML + "px";
-    shadowVOffset = document.getElementById("v-length-value").innerHTML + "px";
-    shadowBlur = document.getElementById("b-length-value").innerHTML + "px";
+//MENU BAR BOX SHADOWS
+    shadowHOffset = +document.getElementById("h-length-value").innerHTML;
+    shadowVOffset = +document.getElementById("v-length-value").innerHTML;
+    shadowBlur = +document.getElementById("b-length-value").innerHTML;
     shadowColor = document.getElementById("s-color").value;
 //MENU BAR MARGINS PADDING
-    Margintop = document.getElementById("margin-top").innerHTML + "px";
-    Marginright = document.getElementById("margin-right").innerHTML + "px";
-    Marginbottom = document.getElementById("margin-bottom").innerHTML + "px";
-    Marginleft = document.getElementById("margin-left").innerHTML + "px";
-    Paddingtop = document.getElementById("padding-top").innerHTML + "px";
-    Paddingright = document.getElementById("padding-right").innerHTML + "px";
-    Paddingbottom = document.getElementById("padding-bottom").innerHTML + "px";
-    Paddingleft = document.getElementById("padding-left").innerHTML + "px";
+    Margintop = +document.getElementById("margin-top").innerHTML;
+    Marginright = +document.getElementById("margin-right").innerHTML;
+    Marginbottom = +document.getElementById("margin-bottom").innerHTML;
+    Marginleft = +document.getElementById("margin-left").innerHTML;
+    Paddingtop = +document.getElementById("padding-top").innerHTML;
+    Paddingright = +document.getElementById("padding-right").innerHTML;
+    Paddingbottom = +document.getElementById("padding-bottom").innerHTML;
+    Paddingleft = +document.getElementById("padding-left").innerHTML;
 //TOP MENU CORNERS
-    topBRadius = document.getElementById("radius-top").innerHTML + "px";
+    topBRadius = +document.getElementById("radius-top").innerHTML;
 //TOP MENU FONTS
     fontColortop = document.getElementById("font-color-top").value;
-    fontSizetop = document.getElementById("font-size-top").innerHTML + "px";
+    fontSizetop = +document.getElementById("font-size-top").innerHTML;
     fontWeighttop = document.getElementById("font-weight-top").value;
     fontStyletop = document.getElementById("font-style-top").value;
     fontNametop = document.getElementById("font-name-top").value;
 //TOP MENU SHADOWS
-    fontHtop = document.getElementById("h-length-top").innerHTML + "px";
-    fontVtop = document.getElementById("v-length-top").innerHTML + "px";
-    fontBtop = document.getElementById("b-length-top").innerHTML + "px";
+    fontHtop = +document.getElementById("h-length-top").innerHTML;
+    fontVtop = +document.getElementById("v-length-top").innerHTML;
+    fontBtop = +document.getElementById("b-length-top").innerHTML;
     fontShadowtop = document.getElementById("shadow-color-top").value;
 //TOP MENU MARGINS PADDING
-    topMargintop = document.getElementById("top-margin-top").innerHTML + "px";
-    topMarginright = document.getElementById("top-margin-right").innerHTML + "px";
-    topMarginbottom = document.getElementById("top-margin-bottom").innerHTML + "px";
-    topMarginleft = document.getElementById("top-margin-left").innerHTML + "px";
-    topPaddingtop = document.getElementById("top-padding-top").innerHTML + "px";
-    topPaddingright = document.getElementById("top-padding-right").innerHTML + "px";
-    topPaddingbottom = document.getElementById("top-padding-bottom").innerHTML + "px";
-    topPaddingleft = document.getElementById("top-padding-left").innerHTML + "px";
-//SUB MENU BORDERS	
-    borderWidthsub = document.getElementById("border-width-sub").innerHTML + "px";
+    topMargintop = +document.getElementById("top-margin-top").innerHTML;
+    topMarginright = +document.getElementById("top-margin-right").innerHTML;
+    topMarginbottom = +document.getElementById("top-margin-bottom").innerHTML;
+    topMarginleft = +document.getElementById("top-margin-left").innerHTML;
+    topPaddingtop = +document.getElementById("top-padding-top").innerHTML;
+    topPaddingright = +document.getElementById("top-padding-right").innerHTML;
+    topPaddingbottom = +document.getElementById("top-padding-bottom").innerHTML;
+    topPaddingleft = +document.getElementById("top-padding-left").innerHTML;
+//SUB MENU BORDERS
+    borderWidthsub = +document.getElementById("border-width-sub").innerHTML;
     borderColorsub = document.getElementById("bc-color-sub").value;
     borderStylesub = document.getElementById("border-style-sub").value;
-    submenuWidth = document.getElementById("width-sub").innerHTML + "px";
+    submenuWidth = +document.getElementById("width-sub").innerHTML;
 //SUB BAR CORNERS
-    allRadiussub = document.getElementById("radius-sub").innerHTML + "px";
+    allRadiussub = +document.getElementById("radius-sub").innerHTML;
 //SUB MENU BACKGROUND
     backgroundColorsub = document.getElementById("back-color-sub").value;
     gradientStartsub = document.getElementById("start-color-sub").value;
     gradientEndsub = document.getElementById("end-color-sub").value;
 //SUB MENU SHADOWS BOX
-    hShadowsub = document.getElementById("h-shadow-sub").innerHTML + "px";
-    vShadowsub = document.getElementById("v-shadow-sub").innerHTML + "px";
-    bShadowsub = document.getElementById("b-shadow-sub").innerHTML + "px";
+    hShadowsub = +document.getElementById("h-shadow-sub").innerHTML;
+    vShadowsub = +document.getElementById("v-shadow-sub").innerHTML;
+    bShadowsub = +document.getElementById("b-shadow-sub").innerHTML;
     colorShadowsub = document.getElementById("s-color-sub").value;
 //SUB MENU FONTS
     fontColorsub = document.getElementById("font-color-sub").value;
-    fontSizesub = document.getElementById("font-size-sub").innerHTML + "px";
+    fontSizesub = +document.getElementById("font-size-sub").innerHTML;
     fontWeightsub = document.getElementById("font-weight-sub").value;
     fontStylesub = document.getElementById("font-style-sub").value;
     fontNamesub = document.getElementById("font-name-sub").value;
 //SUB MENU SHADOWS
-    fontHsub = document.getElementById("h-length-sub").innerHTML + "px";
-    fontVsub = document.getElementById("v-length-sub").innerHTML + "px";
-    fontBsub = document.getElementById("b-length-sub").innerHTML + "px";
+    fontHsub = +document.getElementById("h-length-sub").innerHTML;
+    fontVsub = +document.getElementById("v-length-sub").innerHTML;
+    fontBsub = +document.getElementById("b-length-sub").innerHTML;
     fontShadowsub = document.getElementById("shadow-color-sub").value;
 //HOVER MENU SUB MENU
     textColorhover = document.getElementById("text-color-hover").value;
     backgroundColorhover = document.getElementById("back-color-hover").value;
     gradientStarthover = document.getElementById("start-color-hover").value;
     gradientEndhover = document.getElementById("end-color-hover").value;
-    fontHhover = document.getElementById("h-shadow-hover").innerHTML + "px";
-    fontVhover = document.getElementById("v-shadow-hover").innerHTML + "px";
-    fontBhover = document.getElementById("b-shadow-hover").innerHTML + "px";
+    fontHhover = +document.getElementById("h-shadow-hover").innerHTML;
+    fontVhover = +document.getElementById("v-shadow-hover").innerHTML;
+    fontBhover = +document.getElementById("b-shadow-hover").innerHTML;
     fontShadowhover = document.getElementById("s-color-hover").value;
 //HOVER MENU TOP MENU
     textColorhovertop = document.getElementById("text-color-hover-top").value;
     backgroundColorhovertop = document.getElementById("back-color-hover-top").value;
     gradientStarthovertop = document.getElementById("start-color-hover-top").value;
     gradientEndhovertop = document.getElementById("end-color-hover-top").value;
-    fontHhovertop = document.getElementById("h-shadow-hover-top").innerHTML + "px";
-    fontVhovertop = document.getElementById("v-shadow-hover-top").innerHTML + "px";
-    fontBhovertop = document.getElementById("b-shadow-hover-top").innerHTML + "px";
+    fontHhovertop = +document.getElementById("h-shadow-hover-top").innerHTML;
+    fontVhovertop = +document.getElementById("v-shadow-hover-top").innerHTML;
+    fontBhovertop = +document.getElementById("b-shadow-hover-top").innerHTML;
     fontShadowhovertop = document.getElementById("s-color-hover-top").value;
 //TOP HOVER BAR CORNERS
-    Paddingtophover = document.getElementById("padding-top-hover").innerHTML + "px";
-    Paddingrighthover = document.getElementById("padding-right-hover").innerHTML + "px";
-    Paddingbottomhover = document.getElementById("padding-bottom-hover").innerHTML + "px";
-    Paddinglefthover = document.getElementById("padding-left-hover").innerHTML + "px";
+    Paddingtophover = +document.getElementById("padding-top-hover").innerHTML;
+    Paddingrighthover = +document.getElementById("padding-right-hover").innerHTML;
+    Paddingbottomhover = +document.getElementById("padding-bottom-hover").innerHTML;
+    Paddinglefthover = +document.getElementById("padding-left-hover").innerHTML;
 //SUB MENU PADDING
-    subPaddingtop = document.getElementById("sub-padding-top").innerHTML + "px";
-    subPaddingright = document.getElementById("sub-padding-right").innerHTML + "px";
-    subPaddingbottom = document.getElementById("sub-padding-bottom").innerHTML + "px";
-    subPaddingleft = document.getElementById("sub-padding-left").innerHTML + "px";
+    subPaddingtop = +document.getElementById("sub-padding-top").innerHTML;
+    subPaddingright = +document.getElementById("sub-padding-right").innerHTML;
+    subPaddingbottom = +document.getElementById("sub-padding-bottom").innerHTML;
+    subPaddingleft = +document.getElementById("sub-padding-left").innerHTML;
 //STYLE CHANGE
 //demoContainerDiv.style.backgroundColor=demoBackgroundColor;
 //DROP-DOWN
-    dropDownAdd = document.getElementById("top-padding-top").innerHTML;
-    dropDownAddHover = document.getElementById("padding-top-hover").innerHTML;
-    dropDownMinusHover = document.getElementById("padding-bottom-hover").innerHTML;
+//    dropDownAdd = +document.getElementById("top-padding-top").innerHTML;
+//    dropDownAddHover = +document.getElementById("padding-top-hover").innerHTML;
+//    dropDownMinusHover = +document.getElementById("padding-bottom-hover").innerHTML;
 
-	style["menu-height"] = mbHeight ;
-	//MENU BAR COLORS AND BORDERS	
-	 style["menu-border-width"] = borderWidth ;
-	 style["menu-border-color"] = borderColor ;
-	 style["menu-border-style"] = borderStyle ;
-	//MENU BAR CORNERS
-	 style["menu-corner-radius"] = allRadius ;
-	//MENU BAR BACKGROUND
-	 style["menu-solid-background"] = backgroundColor ;
-	 style["menu-gradient-start"] = gradientStart ;
-	 style["menu-gradient-end"] = gradientEnd ;
-	//MENU BAR BOX SHADOWS	
-	 style["menu-shadow-h-length"] = shadowHOffset ;
-	 style["menu-shadow-v-length"] = shadowVOffset ;
-	 style["menu-shadow-blur-radius"] = shadowBlur ;
-	 style["menu-shadow-color"] = shadowColor ;
-	//MENU BAR MARGINS PADDING
-	 style["menu-margin-top"] = Margintop ;
-	 style["menu-margin-right"] = Marginright ;
-	 style["menu-margin-bottom"] = Marginbottom ;
-	 style["menu-margin-left"] = Marginleft ;
-	 style["menu-padding-top"] = Paddingtop ;
-	 style["menu-padding-right"] = Paddingright ;
-	 style["menu-padding-bottom"] = Paddingbottom ;
-	 style["menu-padding-left"] = Paddingleft ;
-	//TOP MENU CORNERS
-	 style["top-corner-radius"] = topBRadius ;
-	//TOP MENU FONTS
-	 style["top-font-color"] = fontColortop ;
-	 style["top-font-size"] = fontSizetop ;
-	 style["top-font-weight"] = fontWeighttop ;
-	 style["top-font-style"] = fontStyletop ;
-	 style["top-font"] = fontNametop ;
-	//TOP MENU SHADOWS
-	 style["top-font-shadow-h-length"] = fontHtop ;
-	 style["top-font-shadow-v-length"] = fontVtop ;
-	 style["top-font-shadow-blur-radius"] = fontBtop ;
-	 style["top-font-shadow-color"] = fontShadowtop ;
-	//TOP MENU MARGINS PADDING
-	 style["top-margin-top"] = topMargintop ;
-	 style["top-margin-right"] = topMarginright ;
-	 style["top-margin-bottom"] = topMarginbottom ;
-	 style["top-margin-left"] = topMarginleft ;
-	 style["top-padding-top"] = topPaddingtop ;
-	 style["top-padding-right"] = topPaddingright ;
-	 style["top-padding-bottom"] = topPaddingbottom ;
-	 style["top-padding-left"] = topPaddingleft ;
-	//SUB MENU BORDERS	
-	 style["sub-border-width"] = borderWidthsub ;
-	 style["sub-border-color"] = borderColorsub ;
-	 style["sub-border-style"] = borderStylesub ;
-	 style["sub-menu-width"] = submenuWidth ;
-	//SUB BAR CORNERS
-	 style["sub-corner-radius"] = allRadiussub ;
-	//SUB MENU BACKGROUND
-	 style["sub-solid-background"] = backgroundColorsub ;
-	 style["sub-gradient-start"] = gradientStartsub ;
-	 style["sub-gradient-end"] = gradientEndsub ;
-	//SUB MENU SHADOWS BOX
-	 style["sub-box-shadow-h-length"] = hShadowsub ;
-	 style["sub-box-shadow-v-length"] = vShadowsub ;
-	 style["sub-box-blur-radius"] = bShadowsub ;
-	 style["sub-box-shadow-color"] = colorShadowsub ;
-	//SUB MENU FONTS
-	 style["sub-font-color"] = fontColorsub ;
-	 style["sub-font-size"] = fontSizesub ;
-	 style["sub-font-weight"] = fontWeightsub ;
-	 style["sub-font-style"] = fontStylesub ;
-	 style["sub-font"] = fontNamesub ;
-	//SUB MENU SHADOWS
-	 style["sub-font-shadow-h-length"] = fontHsub ;
-	 style["sub-font-shadow-v-length"] = fontVsub ;
-	 style["sub-font-shadow-blur-radius"] = fontBsub ;
-	 style["sub-font-shadow-color"] = fontShadowsub ;
-	//HOVER MENU SUB MENU
-	 style["sub-hover-text-color"] = textColorhover ;
-	 style["sub-hover-solid-background"] = backgroundColorhover ;
-	 style["sub-hover-gradient-start"] = gradientStarthover ;
-	 style["sub-hover-gradient-end"] = gradientEndhover ;
-	 style["sub-hover-font-shadow-h-length"] = fontHhover ;
-	 style["sub-hover-font-shadow-v-length"] = fontVhover ;
-	 style["sub-hover-font-shadow-blur-radius"] = fontBhover ;
-	 style["sub-hover-font-shadow-color"] = fontShadowhover ;
-	//HOVER MENU TOP MENU
-	 style["top-hover-text-color"] = textColorhovertop ;
-	 style["top-hover-solid-color"] = backgroundColorhovertop ;
-	 style["top-hover-gradient-start"] = gradientStarthovertop ;
-	 style["top-hover-gradient-end"] = gradientEndhovertop ;
-	 style[ "top-hover-font-shadow-h-length"] = fontHhovertop ;
-	 style["top-hover-font-shadow-v-length"] = fontVhovertop ;
-	 style["top-hover-font-shadow-blur-radius"] = fontBhovertop ;
-	 style["top-hover-font-shadow-color"] = fontShadowhovertop ;
-	//TOP HOVER BAR CORNERS
-	 style["top-hover-padding-top"] = Paddingtophover ;
-	 style["top-hover-padding-right"] = Paddingrighthover ;
-	 style["top-hover-padding-bottom"] = Paddingbottomhover ;
-	 style["top-hover-padding-left"] = Paddinglefthover ;
-	//SUB MENU PADDING
-	 style["sub-padding-top"] = subPaddingtop ;
-	 style["sub-padding-right"] = subPaddingright ;
-	 style["sub-padding-bottom"] = subPaddingbottom ;
-	 style["sub-padding-left"] = subPaddingleft ;
-	//STYLE CHANGE
-	//demoBackgroundColor = demoContainerDiv.style.backgroundColor;
-	//DROP-DOWN
-	 style["top-padding-top"] = dropDownAdd ;
-	 style["top-hover-padding-top"] = dropDownAddHover ;
-	 style["top-hover-padding-bottom"] = dropDownMinusHover ;
+    menuBgMode = document.getElementById("solid-back").checked == true ? "solid" : "gradient";
+    topHoverBgMode = document.getElementById("solid-back-hover-top").checked ? "solid" : "gradient";
+    subBgMode = document.getElementById("solid-back-sub").checked ? "solid" : "gradient";
+    subHoverBgMode = document.getElementById("solid-back-hover").checked ? "solid" : "gradient";
 
+    menu_style["menu-height"] = mbHeight;
+    //MENU BAR COLORS AND BORDERS
+    menu_style["menu-border-width"] = borderWidth;
+    menu_style["menu-border-color"] = borderColor;
+    menu_style["menu-border-style"] = borderStyle;
+    //MENU BAR CORNERS
+    menu_style["menu-corner-radius"] = allRadius;
+    //MENU BAR BACKGROUND
+    menu_style["menu-solid-background"] = backgroundColor;
+    menu_style["menu-gradient-start"] = gradientStart;
+    menu_style["menu-gradient-end"] = gradientEnd;
+    //MENU BAR BOX SHADOWS
+    menu_style["menu-shadow-h-length"] = shadowHOffset;
+    menu_style["menu-shadow-v-length"] = shadowVOffset;
+    menu_style["menu-shadow-blur-radius"] = shadowBlur;
+    menu_style["menu-shadow-color"] = shadowColor;
+    //MENU BAR MARGINS PADDING
+    menu_style["menu-margin-top"] = Margintop;
+    menu_style["menu-margin-right"] = Marginright;
+    menu_style["menu-margin-bottom"] = Marginbottom;
+    menu_style["menu-margin-left"] = Marginleft;
+    menu_style["menu-padding-top"] = Paddingtop;
+    menu_style["menu-padding-right"] = Paddingright;
+    menu_style["menu-padding-bottom"] = Paddingbottom;
+    menu_style["menu-padding-left"] = Paddingleft;
+    //TOP MENU CORNERS
+    menu_style["top-corner-radius"] = topBRadius;
+    //TOP MENU FONTS
+    menu_style["top-font-color"] = fontColortop;
+    menu_style["top-font-size"] = fontSizetop;
+    menu_style["top-font-weight"] = fontWeighttop;
+    menu_style["top-font-style"] = fontStyletop;
+    menu_style["top-font"] = fontNametop;
+    //TOP MENU SHADOWS
+    menu_style["top-font-shadow-h-length"] = fontHtop;
+    menu_style["top-font-shadow-v-length"] = fontVtop;
+    menu_style["top-font-shadow-blur-radius"] = fontBtop;
+    menu_style["top-font-shadow-color"] = fontShadowtop;
+    //TOP MENU MARGINS PADDING
+    menu_style["top-margin-top"] = topMargintop;
+    menu_style["top-margin-right"] = topMarginright;
+    menu_style["top-margin-bottom"] = topMarginbottom;
+    menu_style["top-margin-left"] = topMarginleft;
+    menu_style["top-padding-top"] = topPaddingtop;
+    menu_style["top-padding-right"] = topPaddingright;
+    menu_style["top-padding-bottom"] = topPaddingbottom;
+    menu_style["top-padding-left"] = topPaddingleft;
+    //SUB MENU BORDERS
+    menu_style["sub-border-width"] = borderWidthsub;
+    menu_style["sub-border-color"] = borderColorsub;
+    menu_style["sub-border-style"] = borderStylesub;
+    menu_style["sub-menu-width"] = submenuWidth;
+    //SUB BAR CORNERS
+    menu_style["sub-corner-radius"] = allRadiussub;
+    //SUB MENU BACKGROUND
+    menu_style["sub-solid-background"] = backgroundColorsub;
+    menu_style["sub-gradient-start"] = gradientStartsub;
+    menu_style["sub-gradient-end"] = gradientEndsub;
+    //SUB MENU SHADOWS BOX
+    menu_style["sub-box-shadow-h-length"] = hShadowsub;
+    menu_style["sub-box-shadow-v-length"] = vShadowsub;
+    menu_style["sub-box-blur-radius"] = bShadowsub;
+    menu_style["sub-box-shadow-color"] = colorShadowsub;
+    //SUB MENU FONTS
+    menu_style["sub-font-color"] = fontColorsub;
+    menu_style["sub-font-size"] = fontSizesub;
+    menu_style["sub-font-weight"] = fontWeightsub;
+    menu_style["sub-font-style"] = fontStylesub;
+    menu_style["sub-font"] = fontNamesub;
+    //SUB MENU SHADOWS
+    menu_style["sub-font-shadow-h-length"] = fontHsub;
+    menu_style["sub-font-shadow-v-length"] = fontVsub;
+    menu_style["sub-font-shadow-blur-radius"] = fontBsub;
+    menu_style["sub-font-shadow-color"] = fontShadowsub;
+    //HOVER MENU SUB MENU
+    menu_style["sub-hover-text-color"] = textColorhover;
+    menu_style["sub-hover-solid-background"] = backgroundColorhover;
+    menu_style["sub-hover-gradient-start"] = gradientStarthover;
+    menu_style["sub-hover-gradient-end"] = gradientEndhover;
+    menu_style["sub-hover-font-shadow-h-length"] = fontHhover;
+    menu_style["sub-hover-font-shadow-v-length"] = fontVhover;
+    menu_style["sub-hover-font-shadow-blur-radius"] = fontBhover;
+    menu_style["sub-hover-font-shadow-color"] = fontShadowhover;
+    //HOVER MENU TOP MENU
+    menu_style["top-hover-text-color"] = textColorhovertop;
+    menu_style["top-hover-solid-color"] = backgroundColorhovertop;
+    menu_style["top-hover-gradient-start"] = gradientStarthovertop;
+    menu_style["top-hover-gradient-end"] = gradientEndhovertop;
+    menu_style["top-hover-font-shadow-h-length"] = fontHhovertop;
+    menu_style["top-hover-font-shadow-v-length"] = fontVhovertop;
+    menu_style["top-hover-font-shadow-blur-radius"] = fontBhovertop;
+    menu_style["top-hover-font-shadow-color"] = fontShadowhovertop;
+    //TOP HOVER BAR CORNERS
+    menu_style["top-hover-padding-top"] = Paddingtophover;
+    menu_style["top-hover-padding-right"] = Paddingrighthover;
+    menu_style["top-hover-padding-bottom"] = Paddingbottomhover;
+    menu_style["top-hover-padding-left"] = Paddinglefthover;
+    //SUB MENU PADDING
+    menu_style["sub-padding-top"] = subPaddingtop;
+    menu_style["sub-padding-right"] = subPaddingright;
+    menu_style["sub-padding-bottom"] = subPaddingbottom;
+    menu_style["sub-padding-left"] = subPaddingleft;
+    //STYLE CHANGE
+    //demoBackgroundColor = demoContainerDiv.style.backgroundColor;
+    //DROP-DOWN
+    // menu_style["top-padding-top"] = dropDownAdd ;
+    // menu_style["top-hover-padding-top"] = dropDownAddHover ;
+    // menu_style["top-hover-padding-bottom"] = dropDownMinusHover ;
+
+    menu_style["menu-background-mode"] = menuBgMode;
+    menu_style["top-hover-background-mode"] = topHoverBgMode;
+    menu_style["sub-background-mode"] = subBgMode;
+    menu_style["sub-hover-background-mode"] = subHoverBgMode;
 }

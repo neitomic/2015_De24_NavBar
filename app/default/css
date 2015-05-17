@@ -6,7 +6,7 @@
     "menu-gradient-end" : "#7a7a7a",
 
     "menu-border-width" : 1,
-    "menu-border-style" : "solid",
+    "menu-border-style" : "Dashed",
     "menu-border-color" : "#6d6d6d",
     "menu-height" : 40,
 

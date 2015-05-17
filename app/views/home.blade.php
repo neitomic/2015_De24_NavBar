@@ -1285,11 +1285,10 @@
     <!--<script src="{{ asset('js/menu-editor/main.js') }}"></script>-->
 
     <script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
-    <script src="{{asset('js/mySortable.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
     <!--<script src="{{asset('js/customizeMenu.js')}}"></script>-->
 
     <script>
-
 
 
         $(document).ready(function()
@@ -1297,7 +1296,9 @@
 
             $.get("menu", function(json, status){
                 var data = $.parseJSON(json);
+                menu_style = $.parseJSON(data.style);
                 updateEditor(data.html);
+                updatePreview();
 
                 var convertedHtml = replace(data.html,"a","div");
                 $("#sortable-list").html(convertedHtml);
@@ -1318,12 +1319,8 @@
                         updateHtml();
                     }
                 });
-
-                updatePreview(data.style);
-
             });
 
-            
         });
     </script>
 @stop
