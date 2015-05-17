@@ -1279,13 +1279,13 @@
     <script src="{{ asset('js/lib/beautify-html.js')}}"></script>
 
     <script src="{{ asset('js/menu-editor/jscolor/jscolor.js') }}"></script>
-    <script src="{{ asset('js/menu-editor/values.js') }}"></script>
     <script src="{{ asset('js/menu-editor/menu.js') }}"></script>
     <script src="{{ asset('js/menu-editor/plugins.js') }}"></script>
     <!--<script src="{{ asset('js/menu-editor/main.js') }}"></script>-->
 
     <script src="{{asset('js/jquery.mjs.nestedSortable.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{ asset('js/menu-editor/values.js') }}"></script>
     <!--<script src="{{asset('js/customizeMenu.js')}}"></script>-->
 
     <script>
@@ -1298,7 +1298,9 @@
                 var data = $.parseJSON(json);
                 menu_style = $.parseJSON(data.style);
                 updateEditor(data.html);
-                updatePreview();
+
+                updateUI();
+                updateCSS();
 
                 var convertedHtml = replace(data.html,"a","div");
                 $("#sortable-list").html(convertedHtml);

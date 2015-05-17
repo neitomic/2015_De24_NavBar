@@ -11,12 +11,12 @@ class MenuController extends Controller
     public function getMenu()
     {
         $user = Auth::user();
-        //if ($user->menu_html == null)
+        if ($user->menu_html == null)
         {
             $user->menu_html = file_get_contents('../app/default/html');
             $user->save();
         }
-        //if ($user->css_properties == null)
+        if ($user->css_properties == null)
         {
             $user->css_properties = file_get_contents('../app/default/css');
             $user->save();

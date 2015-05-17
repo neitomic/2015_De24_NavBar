@@ -1,12 +1,12 @@
 {
 	"menu-corner-radius" : 24,
-    "menu-background-mode" : "gradient",
+    "menu-background-mode" : "solid",
     "menu-solid-background" : "#8b8b8b",
     "menu-gradient-start" :  "#a9a9a9",
     "menu-gradient-end" : "#7a7a7a",
 
     "menu-border-width" : 1,
-    "menu-border-style" : "Dashed",
+    "menu-border-style" : "dotted",
     "menu-border-color" : "#6d6d6d",
     "menu-height" : 40,
 
