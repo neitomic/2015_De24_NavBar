@@ -1,5 +1,5 @@
 <ul class='sortable' id='menu-bar'>
-     <li class='active'><a href='#' class='menu'>Home</a></li>
+     <li><a href='#' class='menu'>Home</a></li>
      <li class='has-sub'><a href='#' class='menu'>Products</a>
         <ul>
            <li class='has-sub'><a href='#' class='menu'>Product 1</a>

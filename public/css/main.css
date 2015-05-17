@@ -68,3 +68,19 @@
 	background-color: #a3a3a3;
 	color: #fff;
 }
+#item-options {
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+#item-options .col-md-8 {
+    padding-left: 0;
+}
+#item-options .col-md-4 {
+    padding-left: 0;
+}
+#item-options .form-group {
+    margin-bottom: 0;
+}
+#item-options label {
+    font-weight: bold;
+}

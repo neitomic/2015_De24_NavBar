@@ -38,6 +38,17 @@ var first_run = true;
     $("#sortable-list").on("click", ".menu", function () {
         $("#sortable-list .menu").not(this).removeClass("menu-active");
         $(this).toggleClass("menu-active");
+
+        if ($(this).hasClass("menu-active"))
+        {
+            $("#item-title").val($(this).text());
+            $("#item-link").val($(this).attr("href"));
+        }
+        else
+        {
+            $("#item-title").val("");
+            $("#item-link").val("");
+        }
     });
 
     $("#sidebar .input-group button").click(function () {
@@ -45,15 +56,15 @@ var first_run = true;
         var parent = $("#sortable-list .menu-active");
         if (parent.length > 0) {
             if (parent.parent().find("ul").length > 0) {
-                var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+                var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
                 parent.parent().find("ul").eq(0).append(html);
             } else {
-                var html = "<ul><li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
+                var html = "<ul><li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
                 console.log(html);
                 parent.parent().append(html);
             }
         } else {
-            var html = "<li><div class='menu'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+            var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
             $("ul.sortable").append(html);
         }
         updateHtml();
@@ -73,6 +84,20 @@ var first_run = true;
             $("#" + $id).text(ui.value);
             updatePreview();
         }
+    });
+
+    $("#item-title,#item-link").change(function()
+    {
+        var active_menu = $("#sortable-list .menu-active").first();
+        var link = $("#item-link").val();
+        if (link != "") {
+            active_menu.attr("href", link);
+        }else {
+            active_menu.attr("href", "#");
+            $("#item-link").val("#");
+        }
+        active_menu.html($("#item-title").val() + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
+        updateHtml();
     });
 })();
 

@@ -208,8 +208,41 @@
                     <div id="demo-container"></div>
                 </div>
 
+                <!--<div class="examples">
+                    <div class="topic">Item Options</div>
+                    <div class="container" id="item-options">
+                        <div class="form-group col-md-8">
+                            <label for="item-title" class="col-md-4">Title</label>
+                            <label for="item-link" class="col-md-4">Link</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <div class="col-md-4">
+                                <input id="item-title" class="form-control" type="text">
+                            </div>
+                            <div class="col-md-4">
+                                <input id="item-link" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
                 <div class="examples">
                     <div class="topic">Menu Options</div>
+                    <!-- Item editor -->
+                    <div class="container" id="item-options">
+                        <div class="form-group col-md-8">
+                            <label for="item-title" class="col-md-4">Title</label>
+                            <label for="item-link" class="col-md-4">Link</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <div class="col-md-4">
+                                <input id="item-title" class="form-control" type="text">
+                            </div>
+                            <div class="col-md-4">
+                                <input id="item-link" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
                     <!-- Tabs Navigation -->
                     <ul id="editor-tabs" class="tabs nav nav-tabs">
                         <li class="active"><a href="#editor-tab1" data-toggle="tab"><i
@@ -1087,173 +1120,17 @@
 
                     <div id="code-tab-contents" class="tab-content">
                         <div class="tab-pane fade in active" id="code-tab1">
-<pre>
-    <code id="html-code" class="html">
-        &lt;ul id="menu-bar"&gt;
-        &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;
-        &lt;ul&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 1&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 2&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 3&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Products Sub Menu 4&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;
-        &lt;ul&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 1&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 2&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 3&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Services Sub Menu 4&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    </code>
-</pre>
+                            <pre>
+                                <code id="html-code" class="html">
+                                </code>
+                            </pre>
                         </div>
 
                         <div class="tab-pane fade" id="code-tab2">
-<pre>
-    <code id="css-code" class="css">
-        #demo-container #menu-bar {
-        margin: 0px 0px 0px 0px;
-        padding: 6px 6px 0px 6px;
-        height: 34px;
-        line-height: 100%;
-        border-radius: 24px;
-        -webkit-border-radius: 24px;
-        -moz-border-radius: 24px;
-        box-shadow: 2px 2px 3px #666666;
-        -webkit-box-shadow: 2px 2px 3px #666666;
-        -moz-box-shadow: 2px 2px 3px #666666;
-        background: #8B8B8B;
-        background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#7A7A7A));
-        background: -moz-linear-gradient(top,  #A9A9A9,  #7A7A7A);
-        border: solid 1px #6D6D6D;
-        }
-        #demo-container #menu-bar li {
-        margin: 0px 6px 0px 6px;
-        padding: 0px 0px 6px 0px;
-        float: left;
-        position: relative;
-        list-style: none;
-        }
-        #demo-container #menu-bar a {
-        font-weight: bold;
-        font-family: arial;
-        font-style: normal;
-        font-size: 12px;
-        color: #E7E5E5;
-        text-decoration: none;
-        display: block;
-        padding: 8px 20px 8px 20px;
-        margin: 0;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        text-shadow: 2px 2px 3px #000000;
-        }
-        #demo-container #menu-bar .active a, #demo-container #menu-bar li:hover &#62; a {
-        background: #0399D4;
-        background: -webkit-gradient(linear, left top, left bottom, from(#EBEBEB), to(#A1A1A1));
-        background: -moz-linear-gradient(top,  #EBEBEB,  #A1A1A1);
-        color: #444444;
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-        -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-        box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-        text-shadow: 2px 2px 3px #FFFFFF;
-        }
-        #demo-container #menu-bar ul li:hover a, #demo-container #menu-bar li:hover li a {
-        background: none;
-        border: none;
-        color: #666;
-        -box-shadow: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        }
-        #demo-container #menu-bar ul a:hover {
-        background: #0399D4 !important;
-        background: -webkit-gradient(linear, left top, left bottom, from(#04ACEC), to(#0186BA)) !important;
-        background: -moz-linear-gradient(top,  #04ACEC,  #0186BA) !important;
-        color: #FFFFFF !important;
-        border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        text-shadow: 2px 2px 2px #FFFFFF;
-        }
-        #demo-container #menu-bar ul {
-        background: #DDDDDD;
-        background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#CFCFCF));
-        background: -moz-linear-gradient(top,  #FFFFFF,  #CFCFCF);
-        display: none;
-        margin: 0;
-        padding: 0;
-        width: 185px;
-        position: absolute;
-        top: 30px;
-        left: 0;
-        border: solid 1px #B4B4B4;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -webkit-box-shadow: 2px 2px 3px #222222;
-        -moz-box-shadow: 2px 2px 3px #222222;
-        box-shadow: 2px 2px 3px #222222;
-        }
-        #demo-container #menu-bar li:hover &#62; ul {
-        display: block;
-        }
-        #demo-container #menu-bar ul li {
-        float: none;
-        margin: 0;
-        padding: 0;
-        }
-        #demo-container #menu-bar ul a {
-        padding:10px 0px 10px 15px;
-        color:#424242 !important;
-        font-size:12px;
-        font-style:normal;
-        font-family:arial;
-        font-weight: normal;
-        text-shadow: 2px 2px 3px #FFFFFF;
-        }
-        #demo-container #menu-bar ul li:first-child &#62; a {
-        border-top-left-radius: 10px;
-        -webkit-border-top-left-radius: 10px;
-        -moz-border-radius-topleft: 10px;
-        border-top-right-radius: 10px;
-        -webkit-border-top-right-radius: 10px;
-        -moz-border-radius-topright: 10px;
-        }
-        #demo-container #menu-bar ul li:last-child &#62; a {
-        border-bottom-left-radius: 10px;
-        -webkit-border-bottom-left-radius: 10px;
-        -moz-border-radius-bottomleft: 10px;
-        border-bottom-right-radius: 10px;
-        -webkit-border-bottom-right-radius: 10px;
-        -moz-border-radius-bottomright: 10px;
-        }
-        #demo-container #menu-bar:after {
-        content: ".";
-        display: block;
-        clear: both;
-        visibility: hidden;
-        line-height: 0;
-        height: 0;
-        }
-        #demo-container #menu-bar {
-        display: inline-block;
-        }
-        html[xmlns] #demo-container #menu-bar {
-        display: block;
-        }
-        * html #demo-container #menu-bar {
-        height: 1%;
-        }
-    </code>
-</pre>
+                            <pre>
+                                <code id="css-code" class="css">
+                                </code>
+                            </pre>
                         </div>
                     </div>
                 </div>
