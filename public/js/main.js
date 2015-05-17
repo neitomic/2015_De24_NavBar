@@ -77,7 +77,7 @@
     }
 
 
-function updatePreview() {
+function updatePreview(style) {
 
     mbHeight = style["menu-height"];
     //MENU BAR COLORS AND BORDERS	
@@ -390,7 +390,7 @@ function updatePreview() {
 
 }
 
-function updateStyle () {
+function updateStyle (style) {
 //MENU BAR COLORS AND BORDERS	
     borderWidth = document.getElementById("border-width").innerHTML + "px";
     borderColor = document.getElementById("bc-color").value;
@@ -505,112 +505,113 @@ function updateStyle () {
     dropDownAddHover = document.getElementById("padding-top-hover").innerHTML;
     dropDownMinusHover = document.getElementById("padding-bottom-hover").innerHTML;
 
-	//MENU BAR COLORS AND BORDERS	 = ;
-	style["menu-border-width"] = borderWidth;
-	style["menu-border-color"] = borderColor;
-	style.border-style = borderStyle;
-	//MENU BAR CORNERS = ;
-	style.radius-value = allRadius;
-	//MENU BAR BACKGROUND = ;
-	style.back-color = backgroundColor;
-	style.start-color = gradientStart;
-	style.end-color = gradientEnd;
-	//MENU BAR BOX SHADOWS	 = ;
-	style.h-length-value = shadowHOffset;
-	style.v-length-value = shadowVOffset;
-	style.b-length-value = shadowBlur;
-	style.s-color = shadowColor;
-	//MENU BAR MARGINS PADDING = ;
-	style.margin-top = Margintop;
-	style.margin-right = Marginright;
-	style.margin-bottom = Marginbottom;
-	style.margin-left = Marginleft;
-	style.padding-top = Paddingtop;
-	style.padding-right = Paddingright;
-	style.padding-bottom = Paddingbottom;
-	style.padding-left = Paddingleft;
-	//TOP MENU CORNERS = ;
-	style.radius-top = topBRadius;
-	//TOP MENU FONTS = ;
-	style.font-color-top = fontColortop;
-	style.font-size-top = fontSizetop;
-	style.font-weight-top = fontWeighttop;
-	style.font-style-top = fontStyletop;
-	style.font-name-top = fontNametop;
-	//TOP MENU SHADOWS = ;
-	style.h-length-top = fontHtop;
-	style.v-length-top = fontVtop;
-	style.b-length-top = fontBtop;
-	style.shadow-color-top = fontShadowtop;
-	//TOP MENU MARGINS PADDING = ;
-	style.top-margin-top = topMargintop;
-	style.top-margin-right = topMarginright;
-	style.top-margin-bottom = topMarginbottom;
-	style.top-margin-left = topMarginleft;
-	style.top-padding-top = topPaddingtop;
-	style.top-padding-right = topPaddingright;
-	style.top-padding-bottom = topPaddingbottom;
-	style.top-padding-left = topPaddingleft;
-	//SUB MENU BORDERS	 = ;
-	style.border-width-sub = borderWidthsub;
-	style.bc-color-sub = borderColorsub;
-	style.border-style-sub = borderStylesub;
-	style.width-sub = submenuWidth;
-	//SUB BAR CORNERS = ;
-	style.radius-sub = allRadiussub;
-	//SUB MENU BACKGROUND = ;
-	style.back-color-sub = backgroundColorsub;
-	style.start-color-sub = gradientStartsub;
-	style.end-color-sub = gradientEndsub;
-	//SUB MENU SHADOWS BOX = ;
-	style.h-shadow-sub = hShadowsub;
-	style.v-shadow-sub = vShadowsub;
-	style.b-shadow-sub = bShadowsub;
-	style.s-color-sub = colorShadowsub;
-	//SUB MENU FONTS = ;
-	style.font-color-sub = fontColorsub;
-	style.font-size-sub = fontSizesub;
-	style.font-weight-sub = fontWeightsub;
-	style.font-style-sub = fontStylesub;
-	style.font-name-sub = fontNamesub;
-	//SUB MENU SHADOWS = ;
-	style.h-length-sub = fontHsub;
-	style.v-length-sub = fontVsub;
-	style.b-length-sub = fontBsub;
-	style.shadow-color-sub = fontShadowsub;
-	//HOVER MENU SUB MENU = ;
-	style.text-color-hover = textColorhover;
-	style.back-color-hover = backgroundColorhover;
-	style.start-color-hover = gradientStarthover;
-	style.end-color-hover = gradientEndhover;
-	style.h-shadow-hover = fontHhover;
-	style.v-shadow-hover = fontVhover;
-	style.b-shadow-hover = fontBhover;
-	style.s-color-hover = fontShadowhover;
-	//HOVER MENU TOP MENU = ;
-	style.text-color-hover-top = textColorhovertop;
-	style.back-color-hover-top = backgroundColorhovertop;
-	style.start-color-hover-top = gradientStarthovertop;
-	style.end-color-hover-top = gradientEndhovertop;
-	style.h-shadow-hover-top = fontHhovertop;
-	style.v-shadow-hover-top = fontVhovertop;
-	style.b-shadow-hover-top = fontBhovertop;
-	style.s-color-hover-top = fontShadowhovertop;
-	//TOP HOVER BAR CORNERS = ;
-	style.padding-top-hover = Paddingtophover;
-	style.padding-right-hover = Paddingrighthover;
-	style.padding-bottom-hover = Paddingbottomhover;
-	style.padding-left-hover = Paddinglefthover;
-	//SUB MENU PADDING = ;
-	style.sub-padding-top = subPaddingtop;
-	style.sub-padding-right = subPaddingright;
-	style.sub-padding-bottom = subPaddingbottom;
-	style.sub-padding-left = subPaddingleft;
-	//STYLE CHANGE = ;
-	//demoContainerDiv.style.backgroundColor=demoBackgroundColor; = ;
-	//DROP-DOWN = ;
-	style.top-padding-top = dropDownAdd;
-	style.padding-top-hover = dropDownAddHover;
-	style.padding-bottom-hover = dropDownMinusHover;
+	style["menu-height"] = mbHeight ;
+	//MENU BAR COLORS AND BORDERS	
+	 style["menu-border-width"] = borderWidth ;
+	 style["menu-border-color"] = borderColor ;
+	 style["menu-border-style"] = borderStyle ;
+	//MENU BAR CORNERS
+	 style["menu-corner-radius"] = allRadius ;
+	//MENU BAR BACKGROUND
+	 style["menu-solid-background"] = backgroundColor ;
+	 style["menu-gradient-start"] = gradientStart ;
+	 style["menu-gradient-end"] = gradientEnd ;
+	//MENU BAR BOX SHADOWS	
+	 style["menu-shadow-h-length"] = shadowHOffset ;
+	 style["menu-shadow-v-length"] = shadowVOffset ;
+	 style["menu-shadow-blur-radius"] = shadowBlur ;
+	 style["menu-shadow-color"] = shadowColor ;
+	//MENU BAR MARGINS PADDING
+	 style["menu-margin-top"] = Margintop ;
+	 style["menu-margin-right"] = Marginright ;
+	 style["menu-margin-bottom"] = Marginbottom ;
+	 style["menu-margin-left"] = Marginleft ;
+	 style["menu-padding-top"] = Paddingtop ;
+	 style["menu-padding-right"] = Paddingright ;
+	 style["menu-padding-bottom"] = Paddingbottom ;
+	 style["menu-padding-left"] = Paddingleft ;
+	//TOP MENU CORNERS
+	 style["top-corner-radius"] = topBRadius ;
+	//TOP MENU FONTS
+	 style["top-font-color"] = fontColortop ;
+	 style["top-font-size"] = fontSizetop ;
+	 style["top-font-weight"] = fontWeighttop ;
+	 style["top-font-style"] = fontStyletop ;
+	 style["top-font"] = fontNametop ;
+	//TOP MENU SHADOWS
+	 style["top-font-shadow-h-length"] = fontHtop ;
+	 style["top-font-shadow-v-length"] = fontVtop ;
+	 style["top-font-shadow-blur-radius"] = fontBtop ;
+	 style["top-font-shadow-color"] = fontShadowtop ;
+	//TOP MENU MARGINS PADDING
+	 style["top-margin-top"] = topMargintop ;
+	 style["top-margin-right"] = topMarginright ;
+	 style["top-margin-bottom"] = topMarginbottom ;
+	 style["top-margin-left"] = topMarginleft ;
+	 style["top-padding-top"] = topPaddingtop ;
+	 style["top-padding-right"] = topPaddingright ;
+	 style["top-padding-bottom"] = topPaddingbottom ;
+	 style["top-padding-left"] = topPaddingleft ;
+	//SUB MENU BORDERS	
+	 style["sub-border-width"] = borderWidthsub ;
+	 style["sub-border-color"] = borderColorsub ;
+	 style["sub-border-style"] = borderStylesub ;
+	 style["sub-menu-width"] = submenuWidth ;
+	//SUB BAR CORNERS
+	 style["sub-corner-radius"] = allRadiussub ;
+	//SUB MENU BACKGROUND
+	 style["sub-solid-background"] = backgroundColorsub ;
+	 style["sub-gradient-start"] = gradientStartsub ;
+	 style["sub-gradient-end"] = gradientEndsub ;
+	//SUB MENU SHADOWS BOX
+	 style["sub-box-shadow-h-length"] = hShadowsub ;
+	 style["sub-box-shadow-v-length"] = vShadowsub ;
+	 style["sub-box-blur-radius"] = bShadowsub ;
+	 style["sub-box-shadow-color"] = colorShadowsub ;
+	//SUB MENU FONTS
+	 style["sub-font-color"] = fontColorsub ;
+	 style["sub-font-size"] = fontSizesub ;
+	 style["sub-font-weight"] = fontWeightsub ;
+	 style["sub-font-style"] = fontStylesub ;
+	 style["sub-font"] = fontNamesub ;
+	//SUB MENU SHADOWS
+	 style["sub-font-shadow-h-length"] = fontHsub ;
+	 style["sub-font-shadow-v-length"] = fontVsub ;
+	 style["sub-font-shadow-blur-radius"] = fontBsub ;
+	 style["sub-font-shadow-color"] = fontShadowsub ;
+	//HOVER MENU SUB MENU
+	 style["sub-hover-text-color"] = textColorhover ;
+	 style["sub-hover-solid-background"] = backgroundColorhover ;
+	 style["sub-hover-gradient-start"] = gradientStarthover ;
+	 style["sub-hover-gradient-end"] = gradientEndhover ;
+	 style["sub-hover-font-shadow-h-length"] = fontHhover ;
+	 style["sub-hover-font-shadow-v-length"] = fontVhover ;
+	 style["sub-hover-font-shadow-blur-radius"] = fontBhover ;
+	 style["sub-hover-font-shadow-color"] = fontShadowhover ;
+	//HOVER MENU TOP MENU
+	 style["top-hover-text-color"] = textColorhovertop ;
+	 style["top-hover-solid-color"] = backgroundColorhovertop ;
+	 style["top-hover-gradient-start"] = gradientStarthovertop ;
+	 style["top-hover-gradient-end"] = gradientEndhovertop ;
+	 style[ "top-hover-font-shadow-h-length"] = fontHhovertop ;
+	 style["top-hover-font-shadow-v-length"] = fontVhovertop ;
+	 style["top-hover-font-shadow-blur-radius"] = fontBhovertop ;
+	 style["top-hover-font-shadow-color"] = fontShadowhovertop ;
+	//TOP HOVER BAR CORNERS
+	 style["top-hover-padding-top"] = Paddingtophover ;
+	 style["top-hover-padding-right"] = Paddingrighthover ;
+	 style["top-hover-padding-bottom"] = Paddingbottomhover ;
+	 style["top-hover-padding-left"] = Paddinglefthover ;
+	//SUB MENU PADDING
+	 style["sub-padding-top"] = subPaddingtop ;
+	 style["sub-padding-right"] = subPaddingright ;
+	 style["sub-padding-bottom"] = subPaddingbottom ;
+	 style["sub-padding-left"] = subPaddingleft ;
+	//STYLE CHANGE
+	//demoBackgroundColor = demoContainerDiv.style.backgroundColor;
+	//DROP-DOWN
+	 style["top-padding-top"] = dropDownAdd ;
+	 style["top-hover-padding-top"] = dropDownAddHover ;
+	 style["top-hover-padding-bottom"] = dropDownMinusHover ;
 
 }
