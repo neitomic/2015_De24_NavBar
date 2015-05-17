@@ -1289,9 +1289,41 @@
     <!--<script src="{{asset('js/customizeMenu.js')}}"></script>-->
 
     <script>
+
+    
+
         $(document).ready(function()
         {
-            updatePreview();
+
+            $.get("menu", function(json, status){
+                var data = $.parseJSON(json);
+                updateEditor(data.html);
+
+                var convertedHtml = replace(data.html,"a","div");
+                $("#sortable-list").html(convertedHtml);
+                $('.sortable').nestedSortable({
+                    forcePlaceholderSize: true,
+                    handle: 'div',
+                    helper: 'clone',
+                    items: 'li',
+                    opacity: .6,
+                    placeholder: 'placeholder',
+                    revert: 250,
+                    tabSize: 25,
+                    tolerance: 'pointer',
+                    toleranceElement: 'div',
+                    maxLevels: 3,
+                    listType: "ul",
+                    stop: function(){
+                        updateHtml();
+                    }
+                });
+
+                updatePreview(data.style);
+
+            });
+
+            
         });
     </script>
 @stop
