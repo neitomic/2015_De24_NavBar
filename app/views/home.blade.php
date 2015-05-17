@@ -1279,7 +1279,7 @@
     <script src="{{ asset('js/lib/beautify-html.js')}}"></script>
 
     <script src="{{ asset('js/menu-editor/jscolor/jscolor.js') }}"></script>
-    <script src="{{ asset('js/menu-editor/menu.js') }}"></script>
+    <!--<script src="{{ asset('js/menu-editor/menu.js') }}"></script>-->
     <script src="{{ asset('js/menu-editor/plugins.js') }}"></script>
     <!--<script src="{{ asset('js/menu-editor/main.js') }}"></script>-->
 
