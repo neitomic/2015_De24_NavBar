@@ -1,6 +1,6 @@
 {
 	"menu-corner-radius" : 24,
-    "menu-background-mode" : "solid",
+    "menu-background-mode" : "gradient",
     "menu-solid-background" : "#8b8b8b",
     "menu-gradient-start" :  "#a9a9a9",
     "menu-gradient-end" : "#7a7a7a",

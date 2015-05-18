@@ -52,22 +52,27 @@ var first_run = true;
     });
 
     $("#sidebar .input-group button").click(function () {
-        var newMenu = $("#sidebar .input-group input[type=text]").val();
-        var parent = $("#sortable-list .menu-active");
-        if (parent.length > 0) {
-            if (parent.parent().find("ul").length > 0) {
-                var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-                parent.parent().find("ul").eq(0).append(html);
+        var textBox = $("#sidebar .input-group input[type=text]");
+        var newMenu = textBox.val();
+        if (newMenu.trim())
+        {
+            var parent = $("#sortable-list .menu-active");
+            if (parent.length > 0) {
+                if (parent.parent().find("ul").length > 0) {
+                    var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+                    parent.parent().find("ul").eq(0).append(html);
+                } else {
+                    var html = "<ul><li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
+                    console.log(html);
+                    parent.parent().append(html);
+                }
             } else {
-                var html = "<ul><li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
-                console.log(html);
-                parent.parent().append(html);
+                var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+                $("ul.sortable").append(html);
             }
-        } else {
-            var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-            $("ul.sortable").append(html);
+            updateHtml();
         }
-        updateHtml();
+        textBox.val("");
     });
 
     $(".slider").slider({
@@ -89,14 +94,23 @@ var first_run = true;
     $("#item-title,#item-link").change(function()
     {
         var active_menu = $("#sortable-list .menu-active").first();
-        var link = $("#item-link").val();
-        if (link != "") {
-            active_menu.attr("href", link);
-        }else {
-            active_menu.attr("href", "#");
-            $("#item-link").val("#");
+        var textBox = $(this);
+        var id = textBox.attr("id");
+        var value = textBox.val().trim();
+        if (id === "item-title") {
+            if (value) {
+                active_menu.html(value + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
+            }
+            textBox.val(value);
+        }else if (id === "item-link") {
+            if (value) {
+                active_menu.attr("href", value);
+                textBox.val(value);
+            }else {
+                active_menu.attr("href", "#");
+                textBox.val("#");
+            }
         }
-        active_menu.html($("#item-title").val() + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
         updateHtml();
     });
 })();
