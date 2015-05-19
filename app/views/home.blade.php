@@ -208,6 +208,8 @@
                     <div id="demo-container"></div>
                 </div>
 
+                <button class="btn btn-danger" onclick="resetMenu()">RESET MENU</button>
+
                 <!--<div class="examples">
                     <div class="topic">Item Options</div>
                     <div class="container" id="item-options">

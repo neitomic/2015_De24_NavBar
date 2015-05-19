@@ -974,3 +974,33 @@ function updateStyle() {
     menu_style["sub-background-mode"] = subBgMode;
     menu_style["sub-hover-background-mode"] = subHoverBgMode;
 }
+function resetMenu(){
+    $.get("defaultMenu", function(json, status){
+        var data = $.parseJSON(json);
+        menu_style = $.parseJSON(data.style);
+        first_run = true;
+        updateEditor(data.html);
+        updateUI();
+        updateCSS();
+
+        var convertedHtml = replace(data.html,"a","div");
+        $("#sortable-list").html(convertedHtml);
+        $('.sortable').nestedSortable({
+            forcePlaceholderSize: true,
+            handle: 'div',
+            helper: 'clone',
+            items: 'li',
+            opacity: .6,
+            placeholder: 'placeholder',
+            revert: 250,
+            tabSize: 25,
+            tolerance: 'pointer',
+            toleranceElement: 'div',
+            maxLevels: 3,
+            listType: "ul",
+            stop: function(){
+                updateHtml();
+            }
+        });
+    });
+}
