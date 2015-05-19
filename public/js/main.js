@@ -2,6 +2,10 @@ var menu_style;
 var first_run = true;
 
 (function() {
+    $("#demo-container").on("click", "a", function(e){
+        e.preventDefault();
+    });
+
     $.get("menu", function(json, status){
         var data = $.parseJSON(json);
         menu_style = $.parseJSON(data.style);
