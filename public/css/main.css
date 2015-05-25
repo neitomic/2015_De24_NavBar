@@ -36,9 +36,9 @@
 	height: 70px;
 	width: 100%;
 }
-#menu-bar{
+/*#menu-bar{
 	margin-top: 40px;
-}
+}*/
 #sortable-list{
 	margin-top: 20px;
     padding-left: 0px ;
@@ -83,4 +83,15 @@
 }
 #item-options label {
     font-weight: bold;
+}
+#save-buttons {
+    margin-top: 10px;
+}
+#btn-save {
+    width: 49%;
+    position: relative;
+}
+#btn-reset {
+    width: 49%;
+    position: relative;
 }

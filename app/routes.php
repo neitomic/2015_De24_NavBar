@@ -16,7 +16,9 @@ Route::group(["before" => "auth"], function()
     Route::get('/', "HomeController@index");
 
     Route::get('/menu', "MenuController@getMenu");
-    Route::get('/defaultMenu', "MenuController@getDefaultMenu");
+    Route::get('/menu/default', "MenuController@getDefaultMenu");
+
+    Route::post('/menu', "MenuController@updateMenu");
     Route::post('/menu/html', "MenuController@updateHtml");
     Route::post('/menu/style', "MenuController@updateStyle");
 

@@ -22,6 +22,16 @@ class MenuController extends Controller
         return json_encode(['html' => $user->menu_html, 'style' => $user->css_properties]);
     }
 
+    public function updateMenu()
+    {
+        $updated_menu = Input::get('updated_html');
+        $updated_style = Input::get('updated_style');
+        $user = Auth::user();
+        $user->menu_html = $updated_menu;
+        $user->css_properties = $updated_style;
+        $user->save();
+    }
+
     public function updateHtml()
     {
         $updated_menu = Input::get('updated_html');

@@ -1,141 +1,194 @@
 var menu_style;
-var first_run = true;
+var from_server = true;
+var last_saved_html, last_saved_style;
 
-(function() {
-    $("#demo-container").on("click", "a", function(e){
-        e.preventDefault();
-    });
+PNotify.prototype.options.styling = "fontawesome";
+PNotify.prototype.options.delay = 3000;
 
-    $.get("menu", function(json, status){
-        var data = $.parseJSON(json);
-        menu_style = $.parseJSON(data.style);
-        updateEditor(data.html);
-        updateUI();
-        updateCSS();
+$("#demo-container").on("click", "a", function (e) {
+    e.preventDefault();
+});
 
-        var convertedHtml = replace(data.html,"a","div");
-        $("#sortable-list").html(convertedHtml);
-        $('.sortable').nestedSortable({
-            forcePlaceholderSize: true,
-            handle: 'div',
-            helper: 'clone',
-            items: 'li',
-            opacity: .6,
-            placeholder: 'placeholder',
-            revert: 250,
-            tabSize: 25,
-            tolerance: 'pointer',
-            toleranceElement: 'div',
-            maxLevels: 3,
-            listType: "ul",
-            stop: function(){
-                updateHtml();
-            }
-        });
-    });
+$.get("menu", function (json, status) {
+    var data = $.parseJSON(json);
+    menu_style = $.parseJSON(data.style);
 
-    $("#sortable-list").on("click", "a", function () {
-        $(this).parent().parent().remove();
-        updateHtml();
-    });
+    //last_saved_html = beautify(data.html);
+    //last_saved_style = data.style;
+    //updateEditor(data.html);
 
-    $("#sortable-list").on("click", ".menu", function () {
-        $("#sortable-list .menu").not(this).removeClass("menu-active");
-        $(this).toggleClass("menu-active");
+    var convertedHtml = replace(data.html, "a", "div");
+    $("#sortable-list").html(convertedHtml);
 
-        if ($(this).hasClass("menu-active"))
-        {
-            $("#item-title").val($(this).text());
-            $("#item-link").val($(this).attr("href"));
-        }
-        else
-        {
-            $("#item-title").val("");
-            $("#item-link").val("");
-        }
-    });
+    updateHtml();
+    updateUI();
 
-    $("#sidebar .input-group button").click(function () {
-        var textBox = $("#sidebar .input-group input[type=text]");
-        var newMenu = textBox.val();
-        if (newMenu.trim())
-        {
-            var parent = $("#sortable-list .menu-active");
-            if (parent.length > 0) {
-                if (parent.parent().find("ul").length > 0) {
-                    var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-                    parent.parent().find("ul").eq(0).append(html);
-                } else {
-                    var html = "<ul><li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
-                    console.log(html);
-                    parent.parent().append(html);
-                }
-            } else {
-                var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
-                $("ul.sortable").append(html);
-            }
+    from_server = false;
+    updateCSS();
+
+    toggleSaving();
+
+    $('.sortable').nestedSortable({
+        forcePlaceholderSize: true,
+        handle: 'div',
+        helper: 'clone',
+        items: 'li',
+        opacity: .6,
+        placeholder: 'placeholder',
+        revert: 250,
+        tabSize: 25,
+        tolerance: 'pointer',
+        toleranceElement: 'div',
+        maxLevels: 3,
+        listType: "ul",
+        stop: function () {
             updateHtml();
         }
-        textBox.val("");
     });
+});
 
-    $(".slider").slider({
-        range: "min",
-        slide: function(event, ui) {
-            $id = $(this).attr('id');
-            $id = $id.replace('slider_','');
-            $("#" + $id).text(ui.value);
-            //updatePreview();
-        },
-        change: function (event, ui) {
-            $id = $(this).attr('id');
-            $id = $id.replace('slider_','');
-            $("#" + $id).text(ui.value);
-            updatePreview();
-        }
-    });
+$("#sortable-list").on("click", "a", function () {
+    $(this).parent().parent().remove();
+    updateHtml();
+});
 
-    $("#item-title,#item-link").change(function()
-    {
-        var active_menu = $("#sortable-list .menu-active").first();
-        var textBox = $(this);
-        var id = textBox.attr("id");
-        var value = textBox.val().trim();
-        if (id === "item-title") {
-            if (value) {
-                active_menu.html(value + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
+$("#sortable-list").on("click", ".menu", function () {
+    $("#sortable-list .menu").not(this).removeClass("menu-active");
+    $(this).toggleClass("menu-active");
+
+    if ($(this).hasClass("menu-active")) {
+        $("#item-title").val($(this).text());
+        $("#item-link").val($(this).attr("href"));
+    }
+    else {
+        $("#item-title").val("");
+        $("#item-link").val("");
+    }
+});
+
+$("#sidebar .input-group button").click(function () {
+    var textBox = $("#sidebar .input-group input[type=text]");
+    var newMenu = textBox.val();
+    if (newMenu.trim()) {
+        var parent = $("#sortable-list .menu-active");
+        if (parent.length > 0) {
+            if (parent.parent().find("ul").length > 0) {
+                var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+                parent.parent().find("ul").eq(0).append(html);
+            } else {
+                var html = "<ul><li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li></ul>";
+                console.log(html);
+                parent.parent().append(html);
             }
-            textBox.val(value);
-        }else if (id === "item-link") {
-            if (value) {
-                active_menu.attr("href", value);
-                textBox.val(value);
-            }else {
-                active_menu.attr("href", "#");
-                textBox.val("#");
-            }
+        } else {
+            var html = "<li><div class='menu' href='#'>" + newMenu + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a></div></li>";
+            $("ul.sortable").append(html);
         }
         updateHtml();
-    });
-})();
+    }
+    textBox.val("");
+});
+
+$(".slider").slider({
+    range: "min",
+    slide: function (event, ui) {
+        $id = $(this).attr('id');
+        $id = $id.replace('slider_', '');
+        $("#" + $id).text(ui.value);
+        //updatePreview();
+    },
+    change: function (event, ui) {
+        $id = $(this).attr('id');
+        $id = $id.replace('slider_', '');
+        $("#" + $id).text(ui.value);
+        updatePreview();
+    }
+});
+
+$("#item-title,#item-link").change(function () {
+    var active_menu = $("#sortable-list .menu-active").first();
+    var textBox = $(this);
+    var id = textBox.attr("id");
+    var value = textBox.val().trim();
+    if (id === "item-title") {
+        if (value) {
+            active_menu.html(value + "<a href='#' class='pull-right'><i class='fa fa-times'></i></a>");
+        }
+        textBox.val(value);
+    } else if (id === "item-link") {
+        if (value) {
+            active_menu.attr("href", value);
+            textBox.val(value);
+        } else {
+            active_menu.attr("href", "#");
+            textBox.val("#");
+        }
+    }
+    updateHtml();
+});
+
+function save() {
+    var html = $("#sortable-list").html();
+    html = html.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
+    html = replace(html, "div", "a");
+    var style = JSON.stringify(menu_style);
+
+    $("#btn-save").html("<i class='fa fa-spinner fa-pulse'></i> Saving...");
+
+    $.post("menu",
+        {
+            "updated_html": html,
+            "updated_style": style
+        },
+        function (data, status) {
+            if (status == "success") {
+                last_saved_html = $("#demo-container").html();
+                last_saved_style = style;
+                new PNotify({
+                    title: "Saving Success",
+                    text: "Your menu is successfully saved to the database.",
+                    type: "success",
+                    animate_speed: "fast"
+                });
+            }
+            else {
+                new PNotify({
+                    title: "Saving Error",
+                    text: "Some errors occurred while we saving your menu. Please try again later.",
+                    type: "error",
+                    animate_speed: "fast"
+                });
+            }
+            $("#btn-save").html("<i class='fa fa-save'></i> Save");
+            toggleSaving();
+        }
+    );
+}
 
 function updateHtml() {
     $("ul:not(:has(li))").remove();
     $(".has-sub").removeClass("has-sub");
     $("li:has(ul)").addClass("has-sub");
-    var rawHtml = $("#sortable-list").html();
-    rawHtml = rawHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
-    var converted = replace(rawHtml, "div", "a");
-    updateEditor(converted);
 
-    $.post(
-        "menu/html",
-        {
-            "updated_html": converted
-        },
-        function (data, status) {
-            console.log(data);
-        });
+    var structHtml = $("#sortable-list").html();
+    structHtml = structHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
+    //var converted = replace(rawHtml, "div", "a");
+    //updateEditor(converted);
+
+    var previewHtml = toPreviewHtml(structHtml);
+    previewHtml = beautify(previewHtml);
+
+    var htmlCode = document.getElementById("html-code");
+    htmlCode.textContent = previewHtml;
+    $("#demo-container").html(previewHtml);
+    hljs.highlightBlock(htmlCode);
+
+    if (from_server) {
+        last_saved_html = previewHtml;
+    }
+    else {
+        toggleSaving();
+    }
 }
 
 function replace(html, raw, replace) {
@@ -159,33 +212,46 @@ function replace(html, raw, replace) {
 }
 
 function updatePreview() {
-    if (!first_run)
-    {
+    if (!from_server) {
         updateStyle();
         updateCSS();
-
-        $.post("menu/style",
-            {
-                "updated_style" : JSON.stringify(menu_style)
-            },
-            function (data, status) {
-               console.log(status);
-            });
     }
 }
 
 function updateEditor(html) {
-    $("#demo-container").html(html);
     var html_code = document.getElementById("html-code");
-    var formatted_html = html_beautify(html, {indent_size: 2, max_preserve_newlines: -1});
-    formatted_html = formatted_html.split(' class="menu"').join("");
+    var formatted_html = html.split(' class="menu"').join("");
     formatted_html = formatted_html.split(' class="sortable"').join("");
     formatted_html = formatted_html.split(' class=""').join("");
+    formatted_html = beautify(formatted_html);
+
     html_code.textContent = formatted_html;
+    $("#demo-container").html(formatted_html);
     hljs.highlightBlock(html_code);
+    toggleSaving();
+}
+
+function toPreviewHtml(structHtml) {
+    var previewHtml = replace(structHtml, "div", "a");
+    previewHtml = previewHtml.split(' class="menu"').join("");
+    previewHtml = previewHtml.split(' class="sortable"').join("");
+    previewHtml = previewHtml.split(' class=""').join("");
+    return previewHtml;
+}
+
+function toggleSaving() {
+    var html = $("#demo-container").html();
+    var savable = last_saved_html !== html || last_saved_style !== JSON.stringify(menu_style);
+    $("#btn-save").prop("disabled", !savable);
+}
+
+function beautify(html) {
+    return html_beautify(html, {indent_size: 2, max_preserve_newlines: -1});
 }
 
 function updateUI() {
+    if (!from_server) return;
+
     mbHeight = menu_style["menu-height"];
     //MENU BAR COLORS AND BORDERS
     borderWidth = menu_style["menu-border-width"];
@@ -418,16 +484,15 @@ function updateUI() {
     document.getElementById("solid-back-hover").checked = subHoverBgMode == "solid";
     document.getElementById("gradient-back-hover").checked = subHoverBgMode == "gradient";
 
-    first_run = false;
+    last_saved_style = JSON.stringify(menu_style);
 }
 
 function updateCSS() {
-
-    if (typeof menu_style == "undefined" || first_run)
+    if (typeof menu_style == "undefined" || from_server)
         return;
 
     mbHeight = menu_style["menu-height"] + "px";
-    //MENU BAR COLORS AND BORDERS	
+    //MENU BAR COLORS AND BORDERS
     borderWidth = menu_style["menu-border-width"] + "px";
     borderColor = menu_style["menu-border-color"];
     borderStyle = menu_style["menu-border-style"];
@@ -437,7 +502,7 @@ function updateCSS() {
     backgroundColor = menu_style["menu-solid-background"];
     gradientStart = menu_style["menu-gradient-start"];
     gradientEnd = menu_style["menu-gradient-end"];
-//MENU BAR BOX SHADOWS	
+//MENU BAR BOX SHADOWS
     shadowHOffset = menu_style["menu-shadow-h-length"] + "px";
     shadowVOffset = menu_style["menu-shadow-v-length"] + "px";
     shadowBlur = menu_style["menu-shadow-blur-radius"] + "px";
@@ -473,7 +538,7 @@ function updateCSS() {
     topPaddingright = menu_style["top-padding-right"] + "px";
     topPaddingbottom = menu_style["top-padding-bottom"] + "px";
     topPaddingleft = menu_style["top-padding-left"] + "px";
-//SUB MENU BORDERS	
+//SUB MENU BORDERS
     borderWidthsub = menu_style["sub-border-width"] + "px";
     borderColorsub = menu_style["sub-border-color"];
     borderStylesub = menu_style["sub-border-style"];
@@ -743,7 +808,7 @@ function updateCSS() {
 
 function updateStyle() {
 
-    if (typeof menu_style == "undefined" || first_run)
+    if (typeof menu_style == "undefined" || from_server)
         return;
 
     mbHeight = +document.getElementById("mb-height").innerHTML;
@@ -973,34 +1038,41 @@ function updateStyle() {
     menu_style["top-hover-background-mode"] = topHoverBgMode;
     menu_style["sub-background-mode"] = subBgMode;
     menu_style["sub-hover-background-mode"] = subHoverBgMode;
+
+    toggleSaving();
 }
-function resetMenu(){
-    $.get("defaultMenu", function(json, status){
+
+function resetMenu() {
+    $.get("menu/default", function (json, status) {
         var data = $.parseJSON(json);
         menu_style = $.parseJSON(data.style);
-        first_run = true;
-        updateEditor(data.html);
+        from_server = true;
+
+        var convertedHtml = replace(data.html, "a", "div");
+        $("#sortable-list").html(convertedHtml);
+
+        updateHtml();
         updateUI();
+
+        from_server = false;
         updateCSS();
 
-        var convertedHtml = replace(data.html,"a","div");
-        $("#sortable-list").html(convertedHtml);
         $('.sortable').nestedSortable({
-            forcePlaceholderSize: true,
-            handle: 'div',
-            helper: 'clone',
-            items: 'li',
-            opacity: .6,
-            placeholder: 'placeholder',
-            revert: 250,
-            tabSize: 25,
-            tolerance: 'pointer',
-            toleranceElement: 'div',
-            maxLevels: 3,
-            listType: "ul",
-            stop: function(){
-                updateHtml();
-            }
-        });
+             forcePlaceholderSize: true,
+             handle: 'div',
+             helper: 'clone',
+             items: 'li',
+             opacity: .6,
+             placeholder: 'placeholder',
+             revert: 250,
+             tabSize: 25,
+             tolerance: 'pointer',
+             toleranceElement: 'div',
+             maxLevels: 3,
+             listType: "ul",
+             stop: function(){
+             updateHtml();
+             }
+         });
     });
 }

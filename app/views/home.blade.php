@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/menu-editor/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu-editor/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('css/lib/highlight/github.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lib/pnotify.custom.min.css') }}">
     <style type="text/css">
         #demo-container #menu-bar {
             width: 95%;
@@ -194,7 +195,11 @@
                     </button>
                 </span>
             </div>
-            <!-- /input-group -->
+
+            <div id="save-buttons">
+                <button class="btn btn-primary" onclick="save()" id="btn-save" disabled><i class="fa fa-save"></i> Save</button>
+                <button class="btn btn-default" onclick="resetMenu()" id="btn-reset"><i class="fa fa-repeat"></i> Reset</button>
+            </div>
 
             <div id="sortable-list"></div>
         </div>
@@ -207,8 +212,6 @@
                     <div class="topic">Menu Preview</div>
                     <div id="demo-container"></div>
                 </div>
-
-                <button class="btn btn-danger" onclick="resetMenu()">RESET MENU</button>
 
                 <!--<div class="examples">
                     <div class="topic">Item Options</div>
@@ -1151,6 +1154,7 @@
 
 @section('custom-scripts')
     <script src="{{ asset('js/lib/jquery-1.11.3.min.js') }}"></script>
+    <!--<script src="{{ asset('js/lib/notify.min.js') }}"></script>-->
     <script src="{{ asset('js/lib/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/lib/modernizr.min.js') }}"></script>
@@ -1158,6 +1162,7 @@
     <script src="{{ asset('js/lib/beautify-html.js')}}"></script>
     <script src="{{ asset('js/lib/jquery.mjs.nestedSortable.js') }}"></script>
     <script src="{{ asset('js/lib/jscolor/jscolor.js') }}"></script>
+    <script src="{{ asset('js/lib/pnotify.custom.min.js') }}"></script>
 
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/values.js') }}"></script>>

@@ -1,13 +1,13 @@
 {
 	"menu-corner-radius" : 24,
     "menu-background-mode" : "gradient",
-    "menu-solid-background" : "#8b8b8b",
-    "menu-gradient-start" :  "#a9a9a9",
-    "menu-gradient-end" : "#7a7a7a",
+    "menu-solid-background" : "#8B8B8B",
+    "menu-gradient-start" :  "#A9A9A9",
+    "menu-gradient-end" : "#7A7A7A",
 
     "menu-border-width" : 1,
     "menu-border-style" : "solid",
-    "menu-border-color" : "#6d6d6d",
+    "menu-border-color" : "#6D6D6D",
     "menu-height" : 40,
 
     "menu-shadow-h-length" : 2,
@@ -25,11 +25,11 @@
     "menu-margin-bottom" : 0,
     "menu-margin-left" : 0,
 
-    "top-font" : "Arial",
-    "top-font-style" : "Normal",
-    "top-font-weight" : "Bold",
+    "top-font" : "arial",
+    "top-font-style" : "normal",
+    "top-font-weight" : "bold",
     "top-font-size" : 12,
-    "top-font-color" : "#e7e5e5",
+    "top-font-color" : "#E7E5E5",
 
     "top-font-shadow-h-length" : 2,
     "top-font-shadow-v-length" : 2,
@@ -50,40 +50,40 @@
 
     "top-hover-text-color" : "#444444",
     "top-hover-background-mode" : "gradient",
-    "top-hover-solid-color" : "#0399d4",
-    "top-hover-gradient-start" : "#ebebeb",
-    "top-hover-gradient-end" : "#a1a1a1",
+    "top-hover-solid-color" : "#0399D4",
+    "top-hover-gradient-start" : "#EBEBEB",
+    "top-hover-gradient-end" : "#A1A1A1",
 
     "top-hover-font-shadow-h-length" : 2,
     "top-hover-font-shadow-v-length" : 2,
     "top-hover-font-shadow-blur-radius" : 3,
-    "top-hover-font-shadow-color" : "#ffffff",
+    "top-hover-font-shadow-color" : "#FFFFFF",
 
     "top-hover-padding-top" : 6,
     "top-hover-padding-right" : 20,
     "top-hover-padding-bottom" : 6,
     "top-hover-padding-left" : 20,
 
-    "sub-font" : "Arial",
-    "sub-font-style" : "Normal",
-    "sub-font-weight" : "Bold",
+    "sub-font" : "arial",
+    "sub-font-style" : "normal",
+    "sub-font-weight" : "bold",
     "sub-font-size" : 12,
     "sub-font-color" : "#424242",
 
     "sub-font-shadow-v-length" : 2,
     "sub-font-shadow-h-length" : 2,
     "sub-font-shadow-blur-radius" : 3,
-    "sub-font-shadow-color" : "#ffffff",
+    "sub-font-shadow-color" : "#FFFFFF",
 
     "sub-corner-radius" : 10,
     "sub-background-mode" : "gradient",
-    "sub-solid-background" : "#dddddd",
-    "sub-gradient-start" : "#ffffff",
-    "sub-gradient-end" : "#cfcfcf",
+    "sub-solid-background" : "#DDDDDD",
+    "sub-gradient-start" : "#FFFFFF",
+    "sub-gradient-end" : "#CFCFCF",
 
     "sub-border-width" : 1,
     "sub-border-style" : "solid",
-    "sub-border-color" : "#b4b4b4",
+    "sub-border-color" : "#B4B4B4",
     "sub-menu-width" : 185,
 
     "sub-box-shadow-v-length" : 2,
@@ -96,14 +96,14 @@
     "sub-padding-bottom" : 10,
     "sub-padding-left" : 15,
 
-    "sub-hover-text-color" : "#ffffff",
+    "sub-hover-text-color" : "#FFFFFF",
     "sub-hover-background-mode" : "gradient",
-    "sub-hover-solid-background" : "#0399d4",
-    "sub-hover-gradient-start" : "#04acec",
-    "sub-hover-gradient-end" :  "#0186ba",
+    "sub-hover-solid-background" : "#0399D4",
+    "sub-hover-gradient-start" : "#04ACEC",
+    "sub-hover-gradient-end" :  "#0186BA",
 
     "sub-hover-font-shadow-h-length" : 2,
     "sub-hover-font-shadow-v-length" : 2,
     "sub-hover-font-shadow-blur-radius" : 3,
-    "sub-hover-font-shadow-color" : "#ffffff"
+    "sub-hover-font-shadow-color" : "#FFFFFF"
 }
