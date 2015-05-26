@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/menu-editor/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('css/lib/highlight/github.css') }}">
     <link rel="stylesheet" href="{{ asset('css/lib/pnotify.custom.min.css') }}">
-    <style type="text/css">
+    <!--<style type="text/css">
         #demo-container #menu-bar {
             width: 95%;
             margin: 0px 0px 0px 0px;
@@ -181,7 +181,7 @@
         * html #demo-container #menu-bar {
             height: 1%;
         }
-    </style>
+    </style>-->
 @stop
 
 @section('content')
@@ -316,7 +316,7 @@
                                         <h3>Colors and Border</h3>
 
                                         <p>
-                                            <label for="border-width">Bottom Width:</label>
+                                            <label for="border-width">Border Width:</label>
                                             <strong class="text-info"><span
                                                         id="border-width">1</span>px</strong>
                                         </p>
@@ -343,14 +343,14 @@
                                                    onchange="updatePreview()"/>
                                         </p>
 
-                                        <h3>Menu Bar Height</h3>
+                                        <!--<h3>Menu Bar Height</h3>
 
                                         <p>
                                             <label for="mb-height">Menu Bar Height : </label>
                                             <strong class="text-info"><span id="mb-height">40</span>px</strong>
                                         </p>
 
-                                        <div id="slider_mb-height" class="slider height"></div>
+                                        <div id="slider_mb-height" class="slider height"></div>-->
 
                                     </div>
                                     <div class="content-box">
@@ -477,6 +477,7 @@
                                                 <option value="impact">Impact</option>
                                                 <option value="'times new roman'">Times New Roman
                                                 </option>
+                                                <option value="'segoe ui'">Segoe UI</option>
                                                 <option value="'trebuchet ms'">Trebuchet MS</option>
                                                 <option value="verdana">Verdana</option>
                                             </select>
@@ -789,6 +790,7 @@
                                                 <option value="impact">Impact</option>
                                                 <option value="'times new roman'">Times New Roman
                                                 </option>
+                                                <option value="'segoe ui'">Segoe UI</option>
                                                 <option value="'trebuchet ms'">Trebuchet MS</option>
                                                 <option value="verdana">Verdana</option>
                                             </select>

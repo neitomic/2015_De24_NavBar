@@ -128,9 +128,8 @@ $("#item-title,#item-link").change(function () {
 });
 
 function save() {
-    var html = $("#sortable-list").html();
-    html = html.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
-    html = replace(html, "div", "a");
+    var structureHtml = $("#sortable-list").html();
+    var html = toPreviewHtml(structureHtml, true);
     var style = JSON.stringify(menu_style);
 
     $("#btn-save").html("<i class='fa fa-spinner fa-pulse'></i> Saving...");
@@ -142,10 +141,9 @@ function save() {
         },
         function (data, status) {
             if (status == "success") {
-                last_saved_html = $("#demo-container").html();
+                last_saved_html = toPreviewHtml(structureHtml);
                 last_saved_style = style;
                 new PNotify({
-                    title: "Saving Success",
                     text: "Your menu is successfully saved to the database.",
                     type: "success",
                     animate_speed: "fast"
@@ -153,7 +151,6 @@ function save() {
             }
             else {
                 new PNotify({
-                    title: "Saving Error",
                     text: "Some errors occurred while we saving your menu. Please try again later.",
                     type: "error",
                     animate_speed: "fast"
@@ -166,22 +163,26 @@ function save() {
 }
 
 function updateHtml() {
-    $("ul:not(:has(li))").remove();
-    $(".has-sub").removeClass("has-sub");
-    $("li:has(ul)").addClass("has-sub");
+    var structureHtml = $("#sortable-list");
+    structureHtml.find("ul:not(:has(li))").remove();
+    structureHtml.find(".has-sub").removeClass("has-sub");
+    structureHtml.find("li:has(ul)").addClass("has-sub");
 
-    var structHtml = $("#sortable-list").html();
-    structHtml = structHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
+    //var structHtml = $("#sortable-list").html();
+    //structHtml = structHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
     //var converted = replace(rawHtml, "div", "a");
     //updateEditor(converted);
 
-    var previewHtml = toPreviewHtml(structHtml);
-    previewHtml = beautify(previewHtml);
-
+    var previewHtml = toPreviewHtml(structureHtml.html());
+    //previewHtml = beautify(previewHtml);
     var htmlCode = document.getElementById("html-code");
     htmlCode.textContent = previewHtml;
-    $("#demo-container").html(previewHtml);
     hljs.highlightBlock(htmlCode);
+
+    var demoContainer = $("#demo-container");
+    demoContainer.html(previewHtml);
+    demoContainer.find("#menu-bar > li.has-sub > a").append("&nbsp;&nbsp;<i class='fa fa-caret-down'></i>");
+    demoContainer.find("#menu-bar ul > li.has-sub > a").append("<i class='fa fa-caret-right pull-right'></i>");
 
     if (from_server) {
         last_saved_html = previewHtml;
@@ -231,16 +232,24 @@ function updateEditor(html) {
     toggleSaving();
 }
 
-function toPreviewHtml(structHtml) {
-    var previewHtml = replace(structHtml, "div", "a");
+function toPreviewHtml(structureHtml, forSaving) {
+    if (forSaving === undefined)
+        forSaving = false;
+
+    var previewHtml = structureHtml.split(" ui-sortable").join("").split(' style="display: list-item;"').join('');
+    previewHtml = replace(previewHtml, "div", "a");
+    if (forSaving) {
+        return beautify(previewHtml);
+    }
+
     previewHtml = previewHtml.split(' class="menu"').join("");
     previewHtml = previewHtml.split(' class="sortable"').join("");
     previewHtml = previewHtml.split(' class=""').join("");
-    return previewHtml;
+    return beautify(previewHtml);
 }
 
 function toggleSaving() {
-    var html = $("#demo-container").html();
+    var html = toPreviewHtml($("#sortable-list").html());
     var savable = last_saved_html !== html || last_saved_style !== JSON.stringify(menu_style);
     $("#btn-save").prop("disabled", !savable);
 }
@@ -252,7 +261,7 @@ function beautify(html) {
 function updateUI() {
     if (!from_server) return;
 
-    mbHeight = menu_style["menu-height"];
+    //mbHeight = menu_style["menu-height"];
     //MENU BAR COLORS AND BORDERS
     borderWidth = menu_style["menu-border-width"];
     borderColor = menu_style["menu-border-color"];
@@ -369,7 +378,7 @@ function updateUI() {
     subBgMode = menu_style["sub-background-mode"];
     subHoverBgMode = menu_style["sub-hover-background-mode"];
 
-    $("#slider_mb-height").slider("value", mbHeight);
+    //$("#slider_mb-height").slider("value", mbHeight);
 //MENU BAR COLORS AND BORDERS
     $("#slider_border-width").slider("value", borderWidth);
     document.getElementById("bc-color").value = borderColor;
@@ -491,7 +500,7 @@ function updateCSS() {
     if (typeof menu_style == "undefined" || from_server)
         return;
 
-    mbHeight = menu_style["menu-height"] + "px";
+    //mbHeight = menu_style["menu-height"] + "px";
     //MENU BAR COLORS AND BORDERS
     borderWidth = menu_style["menu-border-width"] + "px";
     borderColor = menu_style["menu-border-color"];
@@ -612,7 +621,7 @@ function updateCSS() {
     this.css += '  width: 95%;\n';
     this.css += '  margin: ' + Margintop + ' ' + Marginright + ' ' + Marginbottom + ' ' + Marginleft + ';\n';
     this.css += '  padding: ' + Paddingtop + ' ' + Paddingright + ' ' + Paddingbottom + ' ' + Paddingleft + ';\n';
-    this.css += '  height: ' + mbHeight + ';\n';
+    //this.css += '  height: ' + mbHeight + ';\n';
     this.css += '  line-height: 100%;\n';
     this.css += '  border-radius: ' + allRadius + ';\n';
     this.css += '  -webkit-border-radius: ' + allRadius + ';\n';
@@ -676,7 +685,7 @@ function updateCSS() {
     this.css += '  color: ' + textColorhovertop + ';\n';
     this.css += '  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);\n';
     this.css += '  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .2);\n';
-    this.css += '  box-shadow: 0 1px 1px rgba(0, 0, 0, .2);\n';
+    //this.css += '  box-shadow: 0 1px 1px rgba(0, 0, 0, .2);\n';
     this.css += '  text-shadow: ' + fontHhovertop + ' ' + fontVhovertop + ' ' + fontBhovertop + ' ' + fontShadowhovertop + ';\n';
     this.css += '}\n';
 // sub levels link hover
@@ -811,7 +820,7 @@ function updateStyle() {
     if (typeof menu_style == "undefined" || from_server)
         return;
 
-    mbHeight = +document.getElementById("mb-height").innerHTML;
+    //mbHeight = +document.getElementById("mb-height").innerHTML;
 //MENU BAR COLORS AND BORDERS
     borderWidth = +document.getElementById("border-width").innerHTML;
     borderColor = document.getElementById("bc-color").value;
@@ -925,7 +934,7 @@ function updateStyle() {
     subBgMode = document.getElementById("solid-back-sub").checked ? "solid" : "gradient";
     subHoverBgMode = document.getElementById("solid-back-hover").checked ? "solid" : "gradient";
 
-    menu_style["menu-height"] = mbHeight;
+    //menu_style["menu-height"] = mbHeight;
     //MENU BAR COLORS AND BORDERS
     menu_style["menu-border-width"] = borderWidth;
     menu_style["menu-border-color"] = borderColor;

@@ -92,7 +92,7 @@
     "sub-box-shadow-color" : "#222222",
 
     "sub-padding-top" : 10,
-    "sub-padding-right" : 0,
+    "sub-padding-right" : 15,
     "sub-padding-bottom" : 10,
     "sub-padding-left" : 15,
 

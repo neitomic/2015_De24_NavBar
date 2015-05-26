@@ -71,6 +71,7 @@
 #item-options {
     padding-left: 0;
     margin-bottom: 20px;
+    margin-left: 0;
 }
 #item-options .col-md-8 {
     padding-left: 0;
@@ -86,6 +87,9 @@
 }
 #save-buttons {
     margin-top: 10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 #btn-save {
     width: 49%;
