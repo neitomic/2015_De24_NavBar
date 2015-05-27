@@ -1,4 +1,12 @@
 $(function() {
+    $(".slider").slider({
+        range: "min",
+        slide: function (event, ui) {
+            $id = $(this).attr('id');
+            $id = $id.replace('slider_', '');
+            $("#" + $id).text(ui.value);
+        }
+    });
 	$(".radius").slider({
 		min: 0,
 		max: 50

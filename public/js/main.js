@@ -90,17 +90,12 @@ $("#sidebar .input-group button").click(function () {
 });
 
 $(".slider").slider({
-    range: "min",
-    slide: function (event, ui) {
-        $id = $(this).attr('id');
-        $id = $id.replace('slider_', '');
-        $("#" + $id).text(ui.value);
-        //updatePreview();
-    },
     change: function (event, ui) {
-        $id = $(this).attr('id');
-        $id = $id.replace('slider_', '');
-        $("#" + $id).text(ui.value);
+        if (from_server) {
+            var id = $(this).attr('id');
+            id = id.replace('slider_', '');
+            $("#" + id).text(ui.value);
+        }
         updatePreview();
     }
 });
@@ -430,6 +425,8 @@ function updateUI() {
     document.getElementById("bc-color-sub").value = borderColorsub;
     document.getElementById("border-style-sub").value = borderStylesub;
     $("#slider_width-sub").slider("value", submenuWidth);
+    console.log($("#slider_width-sub").slider("value"));
+    console.log(submenuWidth);
 //SUB BAR CORNERS
     $("#slider_radius-sub").slider("value", allRadiussub);
 //SUB MENU BACKGROUND
@@ -805,14 +802,11 @@ function updateCSS() {
     } else {
         css_code.textContent = this.css.replace(new RegExp('#demo-container', 'g'), '');
     }
-    //css_code.className = css_code.className.replace('\bprettyprinted\b', '');
-    //prettyPrint();
     hljs.highlightBlock(css_code);
 
     $('style').remove();
     $('head').append('<style type="text/css">' + this.css + '</style>');
     return this.css;
-
 }
 
 function updateStyle() {
