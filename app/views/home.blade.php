@@ -187,6 +187,18 @@
 @section('content')
     <div class="row">
         <div class="col-sm-2" id="sidebar">
+            <div id="save-buttons">
+                <button class="btn btn-primary" onclick="save()" id="btn-save" disabled><i class="fa fa-save"></i> Save</button>
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <button class="btn btn-default" onclick="discard()" id="btn-discard">Discard</button>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-default" onclick="resetDefault()" id="btn-reset">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Add item">
                 <span class="input-group-btn">
@@ -194,11 +206,6 @@
                         <i class="fa fa-plus"></i>
                     </button>
                 </span>
-            </div>
-
-            <div id="save-buttons">
-                <button class="btn btn-primary" onclick="save()" id="btn-save" disabled><i class="fa fa-save"></i> Save</button>
-                <button class="btn btn-default" onclick="resetMenu()" id="btn-reset"><i class="fa fa-repeat"></i> Reset</button>
             </div>
 
             <div id="sortable-list"></div>
@@ -1165,6 +1172,7 @@
     <script src="{{ asset('js/lib/jquery.mjs.nestedSortable.js') }}"></script>
     <script src="{{ asset('js/lib/jscolor/jscolor.js') }}"></script>
     <script src="{{ asset('js/lib/pnotify.custom.min.js') }}"></script>
+    <script src="{{ asset('js/lib/bootbox.min.js') }}"></script>
 
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/values.js') }}"></script>>

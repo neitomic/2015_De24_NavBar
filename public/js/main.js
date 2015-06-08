@@ -91,10 +91,14 @@ $("#sidebar .input-group button").click(function () {
 
 $(".slider").slider({
     change: function (event, ui) {
+        var id = $(this).attr('id');
         if (from_server) {
-            var id = $(this).attr('id');
             id = id.replace('slider_', '');
             $("#" + id).text(ui.value);
+        }
+        if (id == "width-sub") {
+            console.log(event);
+            console.log(ui);
         }
         updatePreview();
     }
@@ -176,8 +180,8 @@ function updateHtml() {
 
     var demoContainer = $("#demo-container");
     demoContainer.html(previewHtml);
-    demoContainer.find("#menu-bar > li.has-sub > a").append("&nbsp;&nbsp;<i class='fa fa-caret-down'></i>");
-    demoContainer.find("#menu-bar ul > li.has-sub > a").append("<i class='fa fa-caret-right pull-right'></i>");
+    //demoContainer.find("#menu-bar > li.has-sub > a").append("&nbsp;&nbsp;<i class='fa fa-caret-down'></i>");
+    //demoContainer.find("#menu-bar ul > li.has-sub > a").append("<i class='fa fa-caret-right pull-right'></i>");
 
     if (from_server) {
         last_saved_html = previewHtml;
@@ -247,6 +251,81 @@ function toggleSaving() {
     var html = toPreviewHtml($("#sortable-list").html());
     var savable = last_saved_html !== html || last_saved_style !== JSON.stringify(menu_style);
     $("#btn-save").prop("disabled", !savable);
+    $("#btn-discard").prop("disabled", !savable);
+}
+
+function discard() {
+    $.get("menu", function (json, status) {
+        var data = $.parseJSON(json);
+        menu_style = $.parseJSON(data.style);
+        from_server = true;
+
+        var convertedHtml = replace(data.html, "a", "div");
+        $("#sortable-list").html(convertedHtml);
+
+        updateHtml();
+        updateUI();
+
+        from_server = false;
+        updateCSS();
+
+        toggleSaving();
+
+        $('.sortable').nestedSortable({
+             forcePlaceholderSize: true,
+             handle: 'div',
+             helper: 'clone',
+             items: 'li',
+             opacity: .6,
+             placeholder: 'placeholder',
+             revert: 250,
+             tabSize: 25,
+             tolerance: 'pointer',
+             toleranceElement: 'div',
+             maxLevels: 3,
+             listType: "ul",
+             stop: function(){
+             updateHtml();
+             }
+         });
+    });
+}
+
+function resetDefault() {
+    $.get("menu/default", function (json, status) {
+        var data = $.parseJSON(json);
+        menu_style = $.parseJSON(data.style);
+        from_server = true;
+
+        var convertedHtml = replace(data.html, "a", "div");
+        $("#sortable-list").html(convertedHtml);
+
+        updateHtml();
+        updateUI();
+
+        from_server = false;
+        updateCSS();
+
+        toggleSaving();
+
+        $('.sortable').nestedSortable({
+             forcePlaceholderSize: true,
+             handle: 'div',
+             helper: 'clone',
+             items: 'li',
+             opacity: .6,
+             placeholder: 'placeholder',
+             revert: 250,
+             tabSize: 25,
+             tolerance: 'pointer',
+             toleranceElement: 'div',
+             maxLevels: 3,
+             listType: "ul",
+             stop: function(){
+             updateHtml();
+             }
+         });
+    });
 }
 
 function beautify(html) {
@@ -424,9 +503,11 @@ function updateUI() {
     $("#slider_border-width-sub").slider("value", borderWidthsub);
     document.getElementById("bc-color-sub").value = borderColorsub;
     document.getElementById("border-style-sub").value = borderStylesub;
-    $("#slider_width-sub").slider("value", submenuWidth);
-    console.log($("#slider_width-sub").slider("value"));
     console.log(submenuWidth);
+    console.log($("#slider_width-sub").slider("value"));
+    $("#slider_width-sub").slider("value", submenuWidth);
+    console.log(submenuWidth);
+    console.log($("#slider_width-sub").slider("value"));
 //SUB BAR CORNERS
     $("#slider_radius-sub").slider("value", allRadiussub);
 //SUB MENU BACKGROUND
@@ -777,6 +858,21 @@ function updateCSS() {
     this.css += '  left: 99.5%;\n';
     this.css += '  z-index: 999;\n';
     this.css += '}\n';
+// add icon to has-sub top level items
+    this.css += '#demo-container #menu-bar > li.has-sub > a:after {\n';
+    this.css += '  font-family: FontAwesome;\n';
+    this.css += '  content: "\\f0d7";\n';
+    this.css += '  font-size: 12px;\n';
+    this.css += '  margin-left: 5px;\n';
+    this.css += '}\n';
+// add icon to has-sub sub items
+    this.css += '#demo-container #menu-bar ul > li.has-sub > a:after {\n';
+    this.css += '  content: "\\f0da";\n';
+    this.css += '  font-family: FontAwesome;\n';
+    this.css += '  font-size: 12px;\n';
+    this.css += '  right: 15px;\n';
+    this.css += '  position: absolute;\n';
+    this.css += '}\n';
 // clearfix
     this.css += '#demo-container #menu-bar:after {\n';
     this.css += '  content: ".";\n';
@@ -1043,39 +1139,4 @@ function updateStyle() {
     menu_style["sub-hover-background-mode"] = subHoverBgMode;
 
     toggleSaving();
-}
-
-function resetMenu() {
-    $.get("menu/default", function (json, status) {
-        var data = $.parseJSON(json);
-        menu_style = $.parseJSON(data.style);
-        from_server = true;
-
-        var convertedHtml = replace(data.html, "a", "div");
-        $("#sortable-list").html(convertedHtml);
-
-        updateHtml();
-        updateUI();
-
-        from_server = false;
-        updateCSS();
-
-        $('.sortable').nestedSortable({
-             forcePlaceholderSize: true,
-             handle: 'div',
-             helper: 'clone',
-             items: 'li',
-             opacity: .6,
-             placeholder: 'placeholder',
-             revert: 250,
-             tabSize: 25,
-             tolerance: 'pointer',
-             toleranceElement: 'div',
-             maxLevels: 3,
-             listType: "ul",
-             stop: function(){
-             updateHtml();
-             }
-         });
-    });
 }

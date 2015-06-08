@@ -13,7 +13,7 @@
 	background-image: url("../img/grid.gif");
 	background-repeat: repeat;
 	min-height: 100vh;
-	padding: 20px;
+	padding: 0 20px;
 }
 #editable{
 	background-color: #FFFFFF;
@@ -40,7 +40,7 @@
 	margin-top: 40px;
 }*/
 #sortable-list{
-	margin-top: 20px;
+	margin-top: 10px;
     padding-left: 0px ;
 }
 #sortable-list ul{
@@ -86,16 +86,17 @@
     font-weight: bold;
 }
 #save-buttons {
-    margin-top: 10px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 20px;
 }
 #btn-save {
+	width: 100%;
+	margin-bottom: 5px;
+}
+/*#btn-save {
     width: 49%;
     position: relative;
 }
-#btn-reset {
+#btn-discard {
     width: 49%;
     position: relative;
-}
+}*/

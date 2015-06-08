@@ -43,7 +43,7 @@
 
     "top-margin-top" : 0,
     "top-margin-right" : 0,
-    "top-margin-bottom" : 6,
+    "top-margin-bottom" : 0,
     "top-margin-left" : 0,
 
     "top-corner-radius" : 10,
